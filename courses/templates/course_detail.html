@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Detail</title>
+</head>
+<body>
+    <h1>Course Detail - {{ course.title }}</h1>
+    <p>Description: {{ course.description }}</p>
+    <p>Price: ${{ course.price }}</p>
+    <a href="{% url 'course_list' %}">Back to Course List</a>
+    <a href="{% url 'logout' %}">Logout</a>
+</body>
+</html>

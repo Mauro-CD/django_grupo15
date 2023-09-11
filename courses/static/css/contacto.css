@@ -1,0 +1,30 @@
+#map-container,
+#social-container {
+    position: relative;
+    width: 100%;
+    margin: 20px 0 40px 0;
+    height: 400px;
+    padding: 0 0 40px 0;
+}
+
+#social-container {
+    height: auto;
+}
+
+#map-container>iframe {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+}
+
+.social-media-list {
+    font-size: 2em;
+    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.social-media-list li {
+    padding: 0 10px;
+}

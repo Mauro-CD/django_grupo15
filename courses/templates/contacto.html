@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    {% include 'navigation.html' %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/principal.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/contacto.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'favicon/boock.ico' %}">
+    <script src="https://kit.fontawesome.com/4a51b8871d.js" crossorigin="anonymous"></script>
+    <title>Contactanos</title>
+
+</head>
+
+<body>
+    <header>
+        <menu-ao id="menu-ao"></menu-ao>
+        <h1>Contactanos</h1>
+    </header>
+
+    <main>
+        <form action="" name="contacto">
+            <label for="name">Nombre:</label>
+            <input class="formInput" type="text" id="name" name="name" placeholder="Nombre" minlength="2" />
+            <p id="invalidName"></p>
+
+
+            <label for="email">Email:</label>
+            <input class="formInput" type="email" id="email" name="email" placeholder="abc@gmail.com"
+                pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-zA-Z]{2,4}" />
+            <p id="invalidMail"></p>
+
+            <label for="telefono">Teléfono:</label>
+            <input class="formInput" type="text" id="telefono" name="telefono" placeholder="Ingrese su nro de celular"
+                minlength="2" />
+            <p id="invalidPhone"></p>
+
+            <label for="message">Mensaje:</label>
+            <textarea id="message" name="message" placeholder=""></textarea>
+            <p id="invalidMessage"></p>
+            <div>
+                <input type="button" class="button" id="btn" value="Enviar" onclick="valida()">
+            </div>
+
+        </form>
+        
+        <aside>
+            <div id="map-container">
+                <h2>Donde Encontrarnos</h2>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13390.992811901342!2d-60.6588955!3d-32.9576567!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b7ab11d0eb49c3%3A0x11f1d3d54f950dd0!2sUniversidad%20Tecnol%C3%B3gica%20Nacional%20%7C%20Facultad%20Regional%20Rosario!5e0!3m2!1ses!2sar!4v1685331428822!5m2!1ses!2sar"
+                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div id="social-container">
+                <h2>Social Media</h2>
+                <ul class="social-media-list">
+                    <li><a href="https://www.facebook.com"><i class="fab fa-facebook-f"></i> Facebook</a></li>
+                    <li><a href="https://www.twitter.com"><i class="fab fa-twitter"></i> Twitter</a></li>
+                    <li><a href="https://www.instagram.com"><i class="fab fa-instagram"></i> Instagram</a></li>
+                  </ul>
+            </div>
+        </aside>
+    </main>
+    <footer>
+    </footer>
+    <script src="{% static 'js/menu.js' %}"></script>
+    <script src="{% static 'js/contacto.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    {% include 'navigation.html' %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/principal.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/foro.css' %}">
+    <link rel="icon" type="text/css" href="{% static 'favicon/boock.ico' %}">
+    <title>Foro</title>
+</head>
+
+<body>
+
+    <header>
+        <menu-ao id="menu-ao"></menu-ao>
+        <h1>Foro</h1>
+        <p class="menuSuperior">¿Tenes dudas?</p>
+    </header>
+
+    <main>
+        <div class="foro"><foro id="foro"></foro></div>
+    </main>
+    <footer>
+    </footer>
+    <script src="{% static 'js/menu.js' %}"></script>
+    <script src="{% static 'js/foro.js' %}"></script>
+</body>
+
+</html>
