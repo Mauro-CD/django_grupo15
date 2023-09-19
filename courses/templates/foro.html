@@ -3,7 +3,7 @@
 
 <head>
     {% load static %}
-    {% include 'navigation.html' %}
+    
     <link rel="stylesheet" type="text/css" href="{% static 'css/principal.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/foro.css' %}">
     <link rel="icon" type="text/css" href="{% static 'favicon/boock.ico' %}">
@@ -13,9 +13,11 @@
 <body>
 
     <header>
-        <menu-ao id="menu-ao"></menu-ao>
+        {% include 'menu.html' %}
+       
         <h1>Foro</h1>
-        <p class="menuSuperior">¿Tenes dudas?</p>
+        {% include 'navigation.html' %}
+        <p class="menuSuperior">¿Tenes dudasaa?</p>
     </header>
 
     <main>

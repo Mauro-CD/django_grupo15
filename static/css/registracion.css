@@ -1,0 +1,95 @@
+@import "./principal.css";
+
+/* Estilos Default */
+body, h1, form {
+    margin: 0;
+    padding: 0;
+}
+
+/* Aplico color del bg y tipo fuente */
+body {
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+}
+
+/* Estilizo el header */
+/* h1 {
+    text-align: center;
+    padding: 20px;
+    background-color: #3498db;
+    color: #fff;
+} */
+
+/* Doy estilo al container */
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo de elementos del form */
+form button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+/* Hover en el botón */
+
+form button:hover {
+    background-color: #2980b9;
+}
+
+/* Estilo inputs del form*/
+form input[type="text"],
+form input[type="password"] {
+    width: 100%;
+    
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Bordes y foco */
+form input[type="text"]:focus,
+form input[type="password"]:focus {
+    border-color: #3498db;
+    transition: border-color 0.3s ease-in-out;
+}
+
+/* Estilo a label*/
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Para los espacios entre elementos*/
+form p {
+    margin-bottom: 10px;
+}
+
+/* Centrar el form*/
+form {
+    text-align: center;
+}
+
+/* Animacion para el contenedor del form */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Animacion del fade */
+form {
+    animation: fadeIn 0.5s;
+}

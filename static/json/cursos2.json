@@ -1,0 +1,64 @@
+[
+  {
+    "title": "Curso moldes 3D",
+    "imagePath": "/static/img/3d.jpg"
+  },
+  {
+    "title": "Negocios Digitales",
+    "imagePath": "/static/img/emprendimiento.jpg"
+  },
+  {
+    "title": "Cloud computing",
+    "imagePath": "/static/img/cloud.jpg"
+  },
+  {
+    "title": "Curso de Dibujo tecnico 1",
+    "imagePath": "/static/img/dibujo-tecnico.jpg"
+  },
+  {
+    "title": "Fisica",
+    "imagePath": "/static/img/fisica.jpg"
+  },
+  {
+    "title": "Matematica II",
+    "imagePath": "/static/img/matematica.jpg"
+  },
+  {
+    "title": "Química",
+    "imagePath": "/static/img/quimica.jpg"
+  },
+  {
+    "title": "Algebra",
+    "imagePath":"/static/img/cursos-de-algebra.jpg"
+  },
+  {
+    "title": "Estructura de datos",
+    "imagePath": "/static/img/estructura.jpg"
+  },
+  {
+    "title": "Finanzas I",
+    "imagePath": "/static/img/finanzas.jpg"
+  },
+  {
+    "title": "Seguridad informática",
+    "imagePath": "/static/img/seguridad.jpg"
+  },
+  {
+    "title": "Java I",
+    "imagePath":"/static/img/java-curso.jpg"
+  },
+  {
+    "title": "Arduino",
+    "imagePath": "/static/img/arduino.jpg"
+  },
+  {
+    "title": "Alimentación saludable",
+    "imagePath": "/static/img/Alimentacion-saludable.jpg"
+  },
+  {
+    "title": "Python",
+    "imagePath":"/static/img/python.jpg"
+  }
+
+]
+

@@ -1,0 +1,28 @@
+{% load static %}
+
+    <nav id="login">
+        <a href="{% url 'login' %}"><img class="iconLogin" src="{% static 'icons/user-profile-icon.png' %}" alt="menu"></a>
+    </nav>
+<div class="menu-ao">
+    <nav id="menuC">
+        <ul>
+            <a class="Burger" onclick="showMenu(true)"><img class="iconMenu" src="{% static 'icons/icon-menu-w.png' %}" alt="menu"></a>
+            <!-- <a class="menuBoock" href="/"> <img class="iconMenu" src="{% static 'favicon/boock.ico' %}" alt="Pagina principal"></a> -->
+        </ul>
+    </nav>
+    <nav id="menuG">
+        <ul  class="grid-menu">
+            <a class="menuBoock" href="/"> <img class="iconMenu" src="{% static 'favicon/boock.ico' %}" alt="Pagina principal"></a>
+            <a class="Burger" onclick="showMenu(false)"><img class="iconMenu" src="{% static 'icons/icon-menu-w.png' %}" alt="menu"></a>
+            <li><a class="menuList" href="/"><img class="iconMenuGrid" src="{% static 'favicon/boock.ico' %}" alt="Pagina principal">Pagina principal</a></li>
+            <li><a class="menuList" href="{% url 'foro' %}"><img class="iconMenuGrid" src="{% static 'favicon/partners.ico' %}" alt="Pagina principal">Foro</a></li>
+            <li><a class="menuList" href="{% url 'signup' %}"><img class="iconMenuGrid" src="{% static 'favicon/registro.ico' %}" alt="Pagina principal">Registrese</a></li>
+            <li><a class="menuList" href="{% url 'contact' %}"><img class="iconMenuGrid" src="{% static 'favicon/operator.ico' %}" alt="Pagina principal">Contáctenos</a></li>
+        </ul>
+        <!-- <ul id="loginOpen">
+            <li><a href="">Login</a></li>
+            <li><a href="">Logout</a></li>
+        </ul> -->
+
+    </nav>
+</div>

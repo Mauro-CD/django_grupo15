@@ -5,7 +5,9 @@ from django.contrib.auth.decorators import login_required
 from .models import Course, UserCourse
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth.forms import AuthenticationForm  # Import the AuthenticationForm
-
+import json
+from django.shortcuts import render
+from .forms import CourseFilterForm
 
 def index(request):
     return render(request, 'index.html')

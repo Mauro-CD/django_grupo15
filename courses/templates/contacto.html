@@ -3,7 +3,6 @@
 
 <head>
     {% load static %}
-    {% include 'navigation.html' %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/principal.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/contacto.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'favicon/boock.ico' %}">
@@ -14,7 +13,7 @@
 
 <body>
     <header>
-        <menu-ao id="menu-ao"></menu-ao>
+        {% include 'menu.html' %}
         <h1>Contactanos</h1>
     </header>
 

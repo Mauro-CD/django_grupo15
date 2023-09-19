@@ -1,0 +1,95 @@
+/* Reset some default styles */
+@import "./principal.css";
+body, h1, form {
+    margin: 0;
+    padding: 0;
+}
+
+/* Apply a background color and set font styles */
+body {
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+}
+
+/* Style the header */
+/* h1 {
+    text-align: center;
+    padding: 20px;
+    background-color: #3498db;
+    color: #fff;
+} */
+
+/* Style the form container */
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style form elements */
+form button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+/* Add a hover effect for the button */
+form button:hover {
+    background-color: #2980b9;
+}
+
+/* Style form input fields and labels */
+form input[type="text"],
+form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Add a subtle border animation on input focus */
+form input[type="text"]:focus,
+form input[type="password"]:focus {
+    border-color: #3498db;
+    transition: border-color 0.3s ease-in-out;
+}
+
+/* Style form labels */
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Add some spacing between form elements */
+form p {
+    margin-bottom: 10px;
+}
+
+/* Center the form horizontally */
+form {
+    text-align: center;
+}
+
+/* Add a little animation to the form container */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Apply the animation */
+form {
+    animation: fadeIn 0.5s;
+}
+

@@ -1,15 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
+
+
 <head>
+    {% load static %}
     <meta charset="UTF-8">
-    <title>Sign Up</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/registracion.css' %}">
+    <script src="js/registro.js"></script>
+    <title>Registrate</title>
 </head>
+
 <body>
-    <h1>Sign Up</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Sign Up</button>
-    </form>
+
+    <header>
+        {% include 'menu.html' %}
+        <h1>Registrate</h1>
+        <p class="menuSuperior">¿Ya tienes una cuenta? <a href="/">Ingresar aqui</a>.</p>
+    </header>
+
+    <main>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Registrame</button>
+        </form>
+    </main>
 </body>
 </html>

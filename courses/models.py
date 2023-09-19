@@ -11,3 +11,10 @@ class UserCourse(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     purchased_at = models.DateTimeField(auto_now_add=True)
+
+class Item(models.Model):
+    name=models.CharField(max_length=100,null=False,default='name')
+    views=models.IntegerField(default=0,null=False)
+    
+    def __str__(self):
+        return self.name

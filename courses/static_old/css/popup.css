@@ -1,0 +1,99 @@
+ .modalbg {
+	 position: fixed;
+	 top: 0;
+	 right: 0;
+	 bottom: 0;
+	 left: 0;
+	 background: rgba(0,0,0,0);
+	 z-index: 99999;
+	 -moz-transition: all 2s ease-out;
+	 -webkit-transition: all 2s ease-out;
+	 -o-transition: all 2s ease-out;
+	 transition: all 2s ease-out;
+	 -transition-delay: .2s;
+	 display: block;
+	 pointer-events: none;
+}
+ .modalbg .dialog {
+	 width: 400px;
+	 position: relative;
+	 top: -1000px;
+	 margin: 10% auto;
+	 padding: 5px 20px 13px 20px;
+	 -moz-border-radius: 10px;
+	 -webkit-border-radius: 10px;
+	 border-radius: 10px;
+	 background: #fff;
+	 background: -moz-linear-gradient(#fff,#ccc);
+	 background: -webkit-linear-gradient(#fff,#ccc);
+	 background: -o-linear-gradient(#fff,#ccc);
+	 box-shadow: 0 0 10px #000;
+	 -moz-box-shadow: 0 0 10px #000;
+	 -webkit-box-shadow: 0 0 10px #000;
+}
+
+@media screen and (max-width: 600px) {
+    .modalbg .dialog {
+        width: 70%;
+        max-width: 400px;
+    }
+}
+
+
+ .modalbg .dialog .ie7 {
+	 filter: progid:DXImageTransform.Microsoft.Shadow(color='#000000', Direction=135, Strength=3);
+}
+ .modalbg:target {
+	 display: block;
+	 pointer-events: auto;
+	 background: rgba(4,10,30,0.8);
+	 -moz-transition: all .5s ease-out;
+	 -webkit-transition: all .5s ease-out;
+	 -o-transition: all .5s ease-out;
+	 transition: all .5s ease-out;
+}
+ .modalbg:target .dialog {
+	 top: -20px;
+	 -moz-transition: all .8s ease-out;
+	 -webkit-transition: all .8s ease-out;
+	 -o-transition: all .8s ease-out;
+	 transition: all .8s ease-out;
+	 -transition-delay: .4s;
+}
+ .close {
+	 background: #606061;
+	 color: #FFFFFF;
+	 line-height: 25px;
+	 position: absolute;
+	 right: -12px;
+	 text-align: center;
+	 top: -10px;
+	 width: 24px;
+	 text-decoration: none;
+	 font-weight: bold;
+	 -webkit-border-radius: 12px;
+	 -moz-border-radius: 12px;
+	 border-radius: 12px;
+	 box-shadow: 0 0 10px #000;
+	 -moz-box-shadow: 0 0 10px #000;
+	 -webkit-box-shadow: 0 0 10px #000;
+	 -moz-transition: all .5s ease-out;
+	 -webkit-transition: all .5s ease-out;
+	 -o-transition: all .5s ease-out;
+	 transition: all .5s ease-out;
+	 -transition-delay: .2s;
+}
+ .close .ie7 {
+	 filter: progid:DXImageTransform.Microsoft.Shadow(color='#000000', Direction=135, Strength=3);
+}
+ .close:hover {
+	 background: #0ba4e6;
+	 -moz-transition: all .5s ease-out;
+	 -webkit-transition: all .5s ease-out;
+	 -o-transition: all .5s ease-out;
+	 transition: all .5s ease-out;
+}
+
+.button:hover{
+    background: #0ba4e6;
+}

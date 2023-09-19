@@ -1,20 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
+    {% load static %}
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Logueate</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
 </head>
+
 <body>
-    <h1>Login</h1>
-    {% if user.is_authenticated %}
-        <p>Welcome, {{ user.username }}!</p>
-        <a href="{% url 'logout' %}">Logout</a>
-    {% else %}
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Login</button>
-        </form>
-    {% endif %}
+
+    <header>
+        {% include 'menu.html' %}
+        <h1>Login</h1>
+    </header>
+    <main>
+            {% if user.is_authenticated %}
+            <p>Bienvenido, {{ user.username }}!</p>
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Login</button>
+            </form>
+        {% endif %}
+    </mian>
+
 </body>
+
+
 </html>
