@@ -1,0 +1,786 @@
+[
+    {
+        "id": 1,
+        "name": "Curso de Dibujo tecnico 1",
+        "image": "/static/img/dibujo-tecnico.jpg",
+        "description": "Introduccion a dibujo tecnico",
+        "instructor": "Juan Perez",
+        "duracion": "6 semanas",
+        "views": 6,
+        "modulos" : [
+            {
+                "titulo" : "Introduccion",
+                "contenido" : [
+                    "Introduccion al curso",
+                    "Objetivos del curso",
+                    "Lo que aprenderas del curso"
+                ]
+            },
+            {
+                "titulo" : "Tematica 1",
+                "contenido" : [
+                    "Introduccion a la tematica 1",
+                    "Introduccion a la tematica 1",
+                    "Introduccion a la tematica 1"
+                ]
+            },
+            {
+                "titulo" : "Tematica 2",
+                "contenido" : [
+                    "Curso de Dibujo tecnico 2",
+                    "Dibujo avanzado 2",
+                    "Introduccion a la tematica 2"
+                ]
+            },
+            {
+                "titulo" : "Proyecto final",
+                "contenido" : [
+                    "Descripcion del Proyecto",
+                    "Descripcion del Proyecto",
+                    "Descripcion del Proyecto"
+                ]
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Fisica",
+        "image": "/static/img/fisica.jpg",
+        "description": "Introduccion Fisica",
+        "instructor": "Soledad Ruiz",
+        "duracion": "10 semanas",
+        "views": 5,
+        "modulos" : [
+            {
+                "titulo" : "Introduccion",
+                "contenido" : [
+                    "Introduccion al curso",
+                    "Objetivos del curso",
+                    "Lo que aprenderas del curso"
+                ]
+            },
+            {
+                "titulo" : "Tematica 1",
+                "contenido" : [
+                    "Introduccion a la tematica 1",
+                    "Introduccion a la tematica 1",
+                    "Introduccion a la tematica 1"
+                ]
+            },
+            {
+                "titulo" : "Tematica 2",
+                "contenido" : [
+                    "Introduccion a la tematica 2",
+                    "Introduccion a la tematica 2",
+                    "Introduccion a la tematica 2"
+                ]
+            },
+            {
+                "titulo" : "Proyecto final",
+                "contenido" : [
+                    "Descripcion del Proyecto",
+                    "Descripcion del Proyecto",
+                    "Descripcion del Proyecto"
+                ]
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Matematica II",
+        "image": "/static/img/matematica.jpg",
+        "description": "Introduccion Matematica",
+        "instructor": "Pedro Rodriguez",
+        "duracion": "4 semanas",
+        "views": 10,
+        "modulos" : [
+            {
+                "titulo" : "Introduccion a matematica",
+                "contenido" : [
+                    "Introduccion a Matematica",
+                    "Objetivos del curso"
+                ]
+            },
+            {
+                "titulo" : "Conceptos basicos",
+                "contenido" : [
+                    "Introduccion a la tematica 1",
+                    "Introduccion a la tematica 2",
+                    "Introduccion a la tematica 3",
+                    "Revision final"
+                ]
+            },
+            {
+                "titulo" : "Tematica 2",
+                "contenido" : [
+                    "Introduccion a la tematica 2",
+                    "Introduccion a la tematica 2",
+                    "Introduccion a la tematica 2"
+                ]
+            },
+            {
+                "titulo" : "Tematica 3",
+                "contenido" : [
+                    "Introduccion a la tematica 3",
+                    "Introduccion a la tematica 3",
+                    "Introduccion a la tematica 3"
+                ]
+            },
+            {
+                "titulo" : "Proyecto final",
+                "contenido" : [
+                    "Descripcion del Proyecto"
+                ]
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Quimica",
+        "image": "/static/img/quimica.jpg",
+        "description": "Introduccion Quimica",
+        "instructor": "Lidia Bosco",
+        "duracion": "5 semanas",
+        "views": 3,
+        "modulos" : [
+            {
+                "titulo" : "Introduccion",
+                "contenido" : [
+                    "Introduccion al curso",
+                    "Objetivos del curso",
+                    "Lo que aprenderas del curso"
+                ]
+            },
+            {
+                "titulo" : "Tematica 1",
+                "contenido" : [
+                    "Introduccion a la Quimica 1",
+                    "Introduccion a la Quimica 1",
+                    "Introduccion a la Quimica 1"
+                ]
+            },
+            {
+                "titulo" : "Proyecto final",
+                "contenido" : [
+                    "Descripcion del Proyecto",
+                    "Descripcion del Proyecto",
+                    "Descripcion del Proyecto"
+                ]
+            }
+        ]
+    }, 
+    {
+        "id": 5,
+        "name": "Algebra",
+        "image": "/static/img/cursos-de-algebra.jpg",
+        "description": "Introduccion algebra",
+        "instructor": "Lidia Bosco",
+        "duracion": "5 semanas",
+        "views": 3,
+        "modulos" : [
+            {
+                "titulo" : "Introduccion",
+                "contenido" : [
+                    "Introduccion al curso",
+                    "Objetivos del curso",
+                    "Lo que aprenderas del curso"
+                ]
+            },
+            {
+                "titulo" : "Tematica 1",
+                "contenido" : [
+                    "Introduccion a la algebra 1",
+                    "Introduccion a la algebra 2"
+                ]
+            },
+            {
+                "titulo" : "Proyecto final",
+                "contenido" : [
+                    "Descripcion del Algebra"
+                ]
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "name": "Algoritmos",
+        "image": "/static/img/algoritmo.jpg",
+        "description": "Introduccion Algoritmos",
+        "instructor": "Roberto Rodriguez",
+        "duracion": "4 semanas",
+        "views": 10,
+        "modulos" : [
+            {
+                "titulo" : "Introduccion Algoritmos",
+                "contenido" : [
+                    "Introduccion a Algoritmos",
+                    "Objetivos del curso"
+                ]
+            },
+            {
+                "titulo" : "Introduccion Estructura de Datos",
+                "contenido" : [
+                    "Programacion basica",
+                    "Algotitmos"
+                ]
+            },
+            {
+                "titulo" : "Algoritmos 2",
+                "contenido" : [
+                    "Introduccion a la tematica 2",
+                    "Introduccion a la tematica 2",
+                    "Introduccion a la tematica 2"
+                ]
+            },
+            {
+                "titulo" : "Algoritmos 3",
+                "contenido" : [
+                    "Introduccion a la tematica 3",
+                    "Introduccion a la tematica 3",
+                    "Introduccion a la tematica 3"
+                ]
+            },
+            {
+                "titulo" : "Estructura de Datos 2",
+                "contenido" : [
+                    "Introduccion a la tematica 3",
+                    "Introduccion a la tematica 2"
+                ]
+            },
+            {
+                "titulo" : "Estructura de Datos 3",
+                "contenido" : [
+                    "Introduccion a la tematica 3",
+                    "Introduccion a la tematica 3",
+                    "Introduccion a la tematica 3"
+                ]
+            },
+            {
+                "titulo" : "Proyecto final",
+                "contenido" : [
+                    "Descripcion del Proyecto"
+                ]
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "name": "Estructura de Datos",
+        "image": "/static/img/estructura.jpg",
+        "description": "Introduccion Estructura de Datos",
+        "instructor": "Mariana Perez",
+        "duracion": "4 semanas",
+        "views": 10,
+        "modulos" : [
+            {
+                "titulo" : "Introduccion Estructura de Datos",
+                "contenido" : [
+                    "Introduccion a Estructura de Datos",
+                    "Objetivos del curso"
+                ]
+            },
+            {
+                "titulo" : "Introduccion Estructura de Datos",
+                "contenido" : [
+                    "Programacion basica",
+                    "Algotitmos"
+                ]
+            },
+            {
+                "titulo" : "Estructura de Datos 2",
+                "contenido" : [
+                    "Introduccion a la tematica 2",
+                    "Introduccion a la tematica 2",
+                    "Introduccion a la tematica 2"
+                ]
+            },
+            {
+                "titulo" : "Estructura de Datos 3",
+                "contenido" : [
+                    "Introduccion a la tematica 3",
+                    "Introduccion a la tematica 3"
+                ]
+            },
+            {
+                "titulo" : "Proyecto final",
+                "contenido" : [
+                    "Descripcion del Proyecto"
+                ]
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "name": "Finanzas I",
+        "image": "/static/img/finanzas.jpg",
+        "description": "Introduccion Finanzas",
+        "instructor": "Mariana Lopez",
+        "duracion": "6 semanas",
+        "views": 5,
+        "modulos" : [
+            {
+                "titulo" : "Introduccion",
+                "contenido" : [
+                    "Introduccion al curso",
+                    "Objetivos del curso",
+                    "Lo que aprenderas del curso sw Finanzas"
+                ]
+            },
+            {
+                "titulo" : "Tematica 1",
+                "contenido" : [
+                    "Introduccion a la tematica 1",
+                    "Introduccion a la Finanzas 1",
+                    "Introduccion a la tematica 1"
+                ]
+            },
+            {
+                "titulo" : "Tematica 2",
+                "contenido" : [
+                    "Introduccion a la tematica 2"
+                ]
+            },
+            {
+                "titulo" : "Proyecto final",
+                "contenido" : [
+                    "Descripcion del Proyecto",
+                    "Descripcion del Proyecto"
+                ]
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "name": "Seguridad Informatica I",
+        "image": "/static/img/seguridad.jpg",
+        "description": "Introduccion Seguridad Informatica",
+        "instructor": "Marcelo Merlo",
+        "duracion": "3 semanas",
+        "views": 2,
+        "modulos" : [
+            {
+                "titulo" : "Introduccion",
+                "contenido" : [
+                    "Introduccion al curso",
+                    "Objetivos del curso",
+                    "Lo que aprenderas del curso"
+                ]
+            },
+            {
+                "titulo" : "Tematica 1",
+                "contenido" : [
+                    "Introduccion a la Seguridad Informatica 1",
+                    "Introduccion a la Seguridad Informatica 2"
+                ]
+            },
+            {
+                "titulo" : "Proyecto final",
+                "contenido" : [
+                    "Descripcion Seguridad Informatica"
+                ]
+            }
+        ]
+    },    
+    {
+        "id": 10,
+        "name": "Java I",
+        "image": "/static/img/java-curso.jpg",
+        "description": "Introduccion Java",
+        "instructor": "Pedro Bosco",
+        "duracion": "5 semanas",
+        "views": 3,
+        "modulos" : [
+            {
+                "titulo" : "Introduccion",
+                "contenido" : [
+                    "Introduccion al curso",
+                    "Objetivos del curso",
+                    "Lo que aprenderas del curso"
+                ]
+            },
+            {
+                "titulo" : "Tematica 1",
+                "contenido" : [
+                    "Programacion Java 1",
+                    "Programacion a la Java 2"
+                ]
+            },
+            {
+                "titulo" : "Proyecto final",
+                "contenido" : [
+                    "Descripcion del Java"
+                ]
+            }
+        ]
+    },    
+    {
+        "id": 11,
+        "name": "Negocio I",
+        "image": "/static/img/concepto-negocio.jpg",
+        "description": "Introduccion al Negocio",
+        "instructor": "Florencia Martin",
+        "duracion": "2 semanas",
+        "views": 5,
+        "modulos" : [
+            {
+                "titulo" : "Introduccion",
+                "contenido" : [
+                    "Introduccion al curso",
+                    "Objetivos del curso",
+                    "Lo que aprenderas del curso"
+                ]
+            },
+            {
+                "titulo" : "Tematica 1",
+                "contenido" : [
+                    "Programacion Negocio 1",
+                    "Programacion a la Negocio 2"
+                ]
+            },
+            {
+                "titulo" : "Proyecto final",
+                "contenido" : [
+                    "Descripcion del Negocio"
+                ]
+            }
+        ]
+    },    
+    {
+        "id": 12,
+        "name": "Ardunio",
+        "image": "/static/img/arduino.jpg",
+        "description": "Ardunio avanzado",
+        "instructor": "Ramiro Bertucci",
+        "duracion": "3 semanas",
+        "views": 3,
+        "modulos" : [
+            {
+                "titulo" : "Introduccion",
+                "contenido" : [
+                    "Introduccion al curso",
+                    "Objetivos del curso",
+                    "Mejoras en la programacion",
+                    "Automatizacion",
+                    "Lo que aprenderas del curso"
+                ]
+            },
+            {
+                "titulo" : "Tematica 1",
+                "contenido" : [
+                    "Programacion Ardunio 1",
+                    "Programacion a la Ardunio 2"
+                ]
+            },
+            {
+                "titulo" : "Proyecto final",
+                "contenido" : [
+                    "Descripcion del Negocio"
+                ]
+            }
+        ]
+    },    
+    {
+        "id": 13,
+        "name": "Alimentación saludable",
+        "image": "/static/img/Alimentacion-saludable.jpg",
+        "description": "Curso de Alimentación saludable",
+        "instructor": "Camila Bertucci",
+        "duracion": "2 semanas",
+        "views": 6,
+        "modulos" : [
+            {
+                "titulo" : "Introduccion",
+                "contenido" : [
+                    "Introduccion al curso",
+                    "Lo que aprenderas del curso"
+                ]
+            },
+            {
+                "titulo" : "Tematica 1",
+                "contenido" : [
+                    "limentación saludable I",
+                    "limentación saludable II"
+                ]
+            },
+            {
+                "titulo" : "Proyecto final",
+                "contenido" : [
+                    "Descripcion del Negocio"
+                ]
+            }
+        ]
+    },    
+    {
+        "id": 14,
+        "name": "Python I",
+        "image": "/static/img/python.jpg",
+        "description": "Introduccion Python",
+        "instructor": "Pedro Bosco",
+        "duracion": "5 semanas",
+        "views": 3,
+        "modulos" : [
+            {
+                "titulo" : "Introduccion",
+                "contenido" : [
+                    "Introduccion al curso",
+                    "Objetivos del curso",
+                    "Lo que aprenderas del curso"
+                ]
+            },
+            {
+                "titulo" : "Tematica 1",
+                "contenido" : [
+                    "Programacion Python 1",
+                    "Programacion a la Python 2"
+                ]
+            },
+            {
+                "titulo" : "Proyecto final",
+                "contenido" : [
+                    "Descripcion del Python"
+                ]
+            }
+        ]
+    },    
+    {
+        "id": 15,
+        "name": "Hacking Etico",
+        "image": "/static/img/hacking-etico.png",
+        "description": "Introduccion Hacking Etico",
+        "instructor": "Mario Gonzalez",
+        "duracion": "5 semanas",
+        "views": 3,
+        "modulos" : [
+            {
+                "titulo" : "Introduccion",
+                "contenido" : [
+                    "Introduccion al curso",
+                    "Objetivos del curso",
+                    "Lo que aprenderas del curso"
+                ]
+            },
+            {
+                "titulo" : "Tematica 1",
+                "contenido" : [
+                    "Programacion Hacking Etico 1",
+                    "Programacion a la Hacking Etico 2"
+                ]
+            },
+            {
+                "titulo" : "Proyecto final",
+                "contenido" : [
+                    "Proyecto final Hacking Etico"
+                ]
+            }
+        ]
+    },    
+    {
+        "id": 16,
+        "name": "Cloud Computing",
+        "image": "/static/img/cloud.jpg",
+        "description": "Computacion en la nube",
+        "instructor": "Mario Gonzalez",
+        "duracion": "5 semanas",
+        "views": 7,
+        "modulos" : [
+            {
+                "titulo" : "Introduccion",
+                "contenido" : [
+                    "Introduccion al curso",
+                    "Objetivos del curso",
+                    "Lo que aprenderas del curso"
+                ]
+            },
+            {
+                "titulo" : "Tematica 1",
+                "contenido" : [
+                    "Programacion Cloud Computing 1",
+                    "Programacion a la Cloud Computing I",
+                    "Programacion a la Cloud Computing II",
+                    "Programacion a la Cloud Computing III",
+                    "Programacion a la Cloud Computing IV",
+                    "Programacion a la Cloud Computing V"              
+                ]
+            },
+            {
+                "titulo" : "Proyecto final",
+                "contenido" : [
+                    "Proyecto final Cloud Computing"
+                ]
+            }
+        ]
+    },    
+    {
+        "id": 17,
+        "name": "Mecanica Automotriz",
+        "image": "/static/img/mecanica.jpg",
+        "description": "Conceptos Mecanica Automotriz",
+        "instructor": "Carlos Rios",
+        "duracion": "5 semanas",
+        "views": 2,
+        "modulos" : [
+            {
+                "titulo" : "Introduccion",
+                "contenido" : [
+                    "Introduccion al curso",
+                    "Objetivos del curso",
+                    "Lo que aprenderas del curso"
+                ]
+            },
+            {
+                "titulo" : "Tematica 1",
+                "contenido" : [
+                    "Mecanica Automotriz 1",
+                    "Mecanica Automotriz II",
+                    "Mecanica Automotriz III"           
+                ]
+            },
+            {
+                "titulo" : "Proyecto final",
+                "contenido" : [
+                    "Proyecto final Mecanica Automotriz"
+                ]
+            }
+        ]
+    },    
+    {
+        "id": 18,
+        "name": "Emprendimiento",
+        "image": "/static/img/emprendimiento.jpg",
+        "description": "Claves para Emprendimientos",
+        "instructor": "Marisa Rios",
+        "duracion": "5 semanas",
+        "views": 7,
+        "modulos" : [
+            {
+                "titulo" : "Introduccion",
+                "contenido" : [
+                    "Introduccion al curso",
+                    "Objetivos del curso",
+                    "Lo que aprenderas del curso"
+                ]
+            },
+            {
+                "titulo" : "Tematica 1",
+                "contenido" : [
+                    "Emprendimiento  1",
+                    "Emprendimiento  II",
+                    "Emprendimiento  III"           
+                ]
+            },
+            {
+                "titulo" : "Tematica 2",
+                "contenido" : [
+                    "Emprendimiento  IV",
+                    "Emprendimiento  V",
+                    "Emprendimiento  VI"           
+                ]
+            },
+            {
+                "titulo" : "Tematica 3",
+                "contenido" : [
+                    "Emprendimiento Avanzado"           
+                ]
+            },
+            {
+                "titulo" : "Proyecto final",
+                "contenido" : [
+                    "Proyecto final emprendimiento"
+                ]
+            }
+        ]
+    },    
+    {
+        "id": 19,
+        "name": "Fotografia",
+        "image": "/static/img/fotografia.jpg",
+        "description": "Buenas practicas en Fotografia",
+        "instructor": "Lorena Rios",
+        "duracion": "5 semanas",
+        "views": 4,
+        "modulos" : [
+            {
+                "titulo" : "Introduccion",
+                "contenido" : [
+                    "Introduccion al curso",
+                    "Objetivos del curso",
+                    "Lo que aprenderas del curso"
+                ]
+            },
+            {
+                "titulo" : "Tematica 1",
+                "contenido" : [
+                    "Fotografia  1",
+                    "Fotografia  II"          
+                ]
+            },
+            {
+                "titulo" : "Tematica 2",
+                "contenido" : [
+                    "Fotografia avanzada I",
+                    "Fotografia avanzada II",
+                    "Fotografia avanzada III"           
+                ]
+            },
+            {
+                "titulo" : "Tematica 3",
+                "contenido" : [
+                    "Fotografia Avanzado"           
+                ]
+            },
+            {
+                "titulo" : "Proyecto final",
+                "contenido" : [
+                    "Fotografia"
+                ]
+            }
+        ]
+    },    
+    {
+        "id": 19,
+        "name": "Diseño 3D",
+        "image": "/static/img/3d.jpg",
+        "description": "Diseños 3D para expertos",
+        "instructor": "Camilo Sanchez",
+        "duracion": "5 semanas",
+        "views": 3,
+        "modulos" : [
+            {
+                "titulo" : "Introduccion",
+                "contenido" : [
+                    "Introduccion al curso",
+                    "Objetivos del curso",
+                    "Lo que aprenderas del curso"
+                ]
+            },
+            {
+                "titulo" : "Tematica 1",
+                "contenido" : [
+                    "Diseño i",
+                    "Diseño  II"          
+                ]
+            },
+            {
+                "titulo" : "Tematica 2",
+                "contenido" : [
+                    "Diseño avanzada I",
+                    "Diseño avanzada II",
+                    "Diseño avanzada III"           
+                ]
+            },
+            {
+                "titulo" : "Tematica 3",
+                "contenido" : [
+                    "Diseño"           
+                ]
+            },
+            {
+                "titulo" : "Proyecto final",
+                "contenido" : [
+                    "Diseño"
+                ]
+            }
+        ]
+    }
+]
+

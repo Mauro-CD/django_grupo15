@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/edit-course.css">
+    <link rel="icon" href="favicon/boock.ico">
+    <title>Edit</title>
+</head>
+
+<body>
+
+    <header>
+        <menu-ao id="menu-ao"></menu-ao>
+        <h1>Editar</h1>
+
+    </header>
+    <main>
+        <div id="app" class="">
+            <br>
+            <a class="btn btn-primary" href="./edit-course-nuevo.html">Nuevo</a>
+            <br><br>
+            <div v-if="error">
+                <p>Lo sentimos , ........</p>
+            </div>
+            <div v-else>
+                <section v-if="cargando">
+                    <div class="spinner-border"></div>
+                    <p>Cargando .....</p>
+                </section>
+                <section v-else>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Curso</th>
+                                    <th scope="col">Descripción</th>
+                                    <th scope="col">Instructor</th>
+                                    <th scope="col">Duracion</th>
+                                    <th scope="col">Imagen</th>
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="" v-for="course in courses">
+                                    <td>{{course.name}}</td>
+                                    <td>{{course.description}}</td>
+                                    <td>{{course.instructor}}</td>
+                                    <td scope="row">{{course.duracion}}</td>
+                                    <td>
+                                        <img width="60" :src="course.image" :alt="course.name">
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-primary"
+                                            :href="'./edit-course-edit.html?id='+ course.id">Editar</a>
+                                        <button type="button" class="btn btn-danger"
+                                            v-on:click="eliminar(course.id)">Eliminar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+    <footer>
+    </footer>
+    <!-- <script>
+        //Link de Bootstrap
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"</script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+        crossorigin="anonymous"></script> -->
+    <script src="js/edit-course-main.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script><!--Link de VUE-->
+    <script src="js/edit-course.js"></script>
+    <script src="js/menu.js"></script>
+</body>
+
+</html>

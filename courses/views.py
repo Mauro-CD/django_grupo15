@@ -36,7 +36,7 @@ def user_login(request):
             user = form.get_user()
             login(request, user)
             # Redirect to a success page, e.g., course list
-            return redirect('course_list')
+            return redirect('courseAvailable')
     else:
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
@@ -67,4 +67,10 @@ def course_contact(request):
     # Retrieve course details
     contact = Course.objects.all()
     return render(request, 'contacto.html', {'contact': contact})
+
+@login_required
+def course_available(request):
+    # Retrieve course details
+    courseAvailable = Course.objects.all()
+    return render(request, 'cursos.html', {'courseAvailable': courseAvailable})
 

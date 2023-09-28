@@ -1,7 +1,7 @@
 let listado = document.getElementById('cursos-lista');
 
-fetch('/static/json/cursos.json', {
-// fetch('https://maurocd.pythonanywhere.com/courses', {
+//fetch('/static/json/cursos.json', {
+fetch('https://maurocd.pythonanywhere.com/courses', {
     method: 'GET',
     headers: {
         'Accept': 'application/json',

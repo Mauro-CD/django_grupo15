@@ -12,5 +12,6 @@ urlpatterns = [
     path('foro/', views.course_foro, name='foro'),
     path('register/', views.signup, name='signup'),
     path('contact/', views.course_contact, name='contact'),
+    path('courseAvailable/', views.course_available, name='courseAvailable'),
     path('', views.index, name='index'),
 ]
