@@ -8,9 +8,14 @@ from django.contrib.auth.forms import AuthenticationForm  # Import the Authentic
 import json
 from django.shortcuts import render
 from .forms import CourseFilterForm
+from datetime import datetime
 
 def index(request):
-    return render(request, 'index.html')
+    current_date = datetime.now()
+    text_date = 'Fecha actual:'
+    text_hour = 'Hora:'
+
+    return render(request, 'index.html', {'date': current_date, 'text_date': text_date, 'text_hour': text_hour})
 
 
 
