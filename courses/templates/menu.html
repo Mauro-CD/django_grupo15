@@ -25,7 +25,8 @@
             <li><a class="menuList" href="{% url 'contact' %}"><img class="iconMenuGrid" src="{% static 'favicon/operator.ico' %}" alt="Pagina principal">Contáctenos</a></li> -->
             <li><a class="menuList" href="/"><img class="iconMenuGrid" src="{% static 'favicon/boock.ico' %}" alt="Pagina principal">Pagina principal</a></li>
             {% if not user.is_authenticated %}
-            <li><a class="menuList" href="{% url 'signup' %}"><img class="iconMenuGrid" src="{% static 'favicon/registro.ico' %}" alt="Pagina principal">Registrese</a></li>
+            <!-- <li><a class="menuList" href="{% url 'signup' %}"><img class="iconMenuGrid" src="{% static 'favicon/registro.ico' %}" alt="Pagina principal">Registrese</a></li> -->
+            <li><a class="menuList" href="{% url 'registro_form' %}"><img class="iconMenuGrid" src="{% static 'favicon/registro.ico' %}" alt="Pagina principal">Registrese</a></li>
             {% else %}
             <li><a class="menuList" href="{% url 'courseAvailable' %}"><img class="iconMenuGrid" src="{% static 'favicon/book.ico' %}" alt="Pagina principal">Cursos Disponibles</a></li>
             <li><a class="menuList" href="{% url 'foro' %}"><img class="iconMenuGrid" src="{% static 'favicon/partners.ico' %}" alt="Pagina principal">Foro</a></li>

@@ -7,8 +7,9 @@ from django.contrib.auth.views import LogoutView
 from django.contrib.auth.forms import AuthenticationForm  # Import the AuthenticationForm
 import json
 from django.shortcuts import render
-from .forms import CourseFilterForm
+from .forms import CourseFilterForm, RegistrarForm
 from datetime import datetime
+# from forms import ContactoForm
 
 def index(request):
     current_date = datetime.now()
@@ -17,7 +18,21 @@ def index(request):
 
     return render(request, 'index.html', {'date': current_date, 'text_date': text_date, 'text_hour': text_hour})
 
+def registro_form(request):
+    print(request.POST)
 
+    
+    if request.method == 'POST':
+       formulario = RegistrarForm(request.POST)
+       if formulario.is_valid():
+           return redirect('index')
+    else:
+        formulario = RegistrarForm()
+        
+    contexto = {
+        'registrar_form': formulario
+    }
+    return render(request, "registrar_form.html", contexto)
 
 def signup(request):
     # Handle user registration logic here
