@@ -7,7 +7,7 @@ from django.contrib.auth.views import LogoutView
 from django.contrib.auth.forms import AuthenticationForm  # Import the AuthenticationForm
 import json
 from django.shortcuts import render
-from .forms import CourseFilterForm, RegistrarForm
+from .forms import CourseFilterForm, RegistrarForm, ContactoForm
 from datetime import datetime
 # from forms import ContactoForm
 
@@ -33,6 +33,22 @@ def registro_form(request):
         'registrar_form': formulario
     }
     return render(request, "registrar_form.html", contexto)
+
+def contacto_form(request):
+    print(request.POST)
+
+    
+    if request.method == 'POST':
+       formulario = ContactoForm(request.POST)
+       if formulario.is_valid():
+           return redirect('index')
+    else:
+        formulario = ContactoForm()
+        
+    contexto = {
+        'contacto_form': formulario
+    }
+    return render(request, "contacto.html", contexto)
 
 def signup(request):
     # Handle user registration logic here

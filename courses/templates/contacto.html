@@ -3,12 +3,11 @@
 
 <head>
     {% load static %}
+    <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="{% static 'css/principal.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/contacto.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'favicon/boock.ico' %}">
     <script src="https://kit.fontawesome.com/4a51b8871d.js" crossorigin="anonymous"></script>
     <title>Contactanos</title>
-
 </head>
 
 <body>
@@ -18,29 +17,11 @@
     </header>
 
     <main>
-        <form action="" name="contacto">
-            <label for="name">Nombre:</label>
-            <input class="formInput" type="text" id="name" name="name" placeholder="Nombre" minlength="2" />
-            <p id="invalidName"></p>
 
-
-            <label for="email">Email:</label>
-            <input class="formInput" type="email" id="email" name="email" placeholder="abc@gmail.com"
-                pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-zA-Z]{2,4}" />
-            <p id="invalidMail"></p>
-
-            <label for="telefono">Teléfono:</label>
-            <input class="formInput" type="text" id="telefono" name="telefono" placeholder="Ingrese su nro de celular"
-                minlength="2" />
-            <p id="invalidPhone"></p>
-
-            <label for="message">Mensaje:</label>
-            <textarea id="message" name="message" placeholder=""></textarea>
-            <p id="invalidMessage"></p>
-            <div>
-                <input type="button" class="button" id="btn" value="Enviar" onclick="valida()">
-            </div>
-
+        <form method="post" action="{% url 'contact' %}">
+            {% csrf_token %}
+            {{ contacto_form.as_p }}
+            <button type="submit">Enviar</button>
         </form>
         
         <aside>

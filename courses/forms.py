@@ -15,7 +15,6 @@ class EstilosInput():
     attrs={'class': 'formInput'}
 
 class RegistrarForm(forms.Form):
-    #nombre = forms.CharField(label='Nombre:', required=True)
     user = forms.CharField(label='Usuario',  required=True)
     nombre = forms.CharField(label='Nombre',  required=True)
     apellido = forms.CharField(label='Apellido:',  required=True)
@@ -40,4 +39,4 @@ class ContactoForm(forms.Form):
     nombre = forms.CharField(label='Nombre',  required=True)
     email = forms.EmailField(label='Correo Electrónico',  required=True)
     telefono = forms.CharField(label='Telefono:', required=True)
-    mensaje = forms.CharField(label='mensaje:', widget=forms.TextInput,  required=True)
+    mensaje = forms.CharField(label='mensaje:', widget=forms.TextInput(attrs={'class': 'mensaje_form'}),  required=True)
