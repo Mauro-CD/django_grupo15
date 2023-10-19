@@ -1,28 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    {% load static %}
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/principal.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/popup.css' %}">
-    <link rel="icon" type="text/css" href="{% static 'favicon/boock.ico' %}">
-    <script src="{% static 'js/cursos.js' %}" type="module"></script>
-    <title>Foro</title>
-</head>
+{% block titulo %}Cursos{% endblock%}
 
-<body>
+{% load static %}
 
-    <header>
-        {% include 'menu.html' %}
-        <h1>Cursos disponibles</h1>
-        <!-- <label for="Buscar" class="menuSuperior" >Buscar:</label> -->
-        <input type="text" id="buscar" name="buscar" placeholder="buscar cursos..." >
-        <button  onclick="search()">Buscar </button>
-    </header>
 
+{% block class %} 
+<script src="{% static 'js/cursos.js' %}" type="module"></script>
+{% endblock %}
+
+
+{% block encabezado %}
+
+<h1>Cursos disponibles</h1>
+<input type="text" id="buscar" name="buscar" placeholder="buscar cursos..." >
+<button  onclick="search()">Buscar </button>
+
+{% endblock %}
+
+
+{% block contenido %}
     <main>
         <div  id="principal">
             <section>
@@ -45,10 +42,5 @@
             <cursos-selecionado id="cursos-selecionado"></cursos-selecionado>
           </div>
     </main>
-
-    <footer>
-    </footer>
     <script src="{% static 'js/funciones.js' %}"></script>
-</body>
-
-</html>
+{% endblock %}

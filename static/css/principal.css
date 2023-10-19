@@ -148,9 +148,9 @@ footer p {
   margin-bottom: 0;
 }
 
-footer:before {
+/* footer:before {
   content: "© 2023 Plataforma de aprendizaje en linea. Todos derechos reservados.";
-}
+} */
 
 img {
   height: 300px;

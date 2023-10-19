@@ -1,13 +1,31 @@
-<!-- base.html -->
-
 <!DOCTYPE html>
 <html lang="es">
 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}{% endblock %}</title>
+    {% block class %} {% endblock %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/principal.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/popup.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'favicon/boock.ico' %}">
+</head>
 
-
-    <footer>
-        {% include 'footer_content.html' %}
-    </footer>
-
+<body>
+    <header>
+        {% include 'menu.html' %}
+        {% block encabezado %} {% endblock %}
+    </header>
+    <div>
+        <main>
+            {% block contenido %} {% endblock %}
+        </main>
+        <footer>
+            {% include 'footer_content.html' %}
+        </footer>
+    </div>
+</body>
 
 </html>

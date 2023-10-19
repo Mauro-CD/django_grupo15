@@ -1,28 +1,26 @@
-<!DOCTYPE html>
-<html lang="es">
+{% extends 'base.html' %}
+
+{% block titulo %}Registrate{% endblock%}
+
+{% load static %}
+
+{% block encabezado %}
+
+<h1>Registrate</h1>
+<p class="menuSuperior">¿Ya tienes una cuenta? <a href="/">Ingresar aqui</a>.</p>
+{% endblock %}
+
+
+{% block contenido %}
 
 <head>
-    {% load static %}
-    <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="{% static 'css/registracion.css' %}">
     <script src="js/registro.js"></script>
-    <title>Registrate</title>
 </head>
 
 <body>
 
-    <header>
-        {% include 'menu.html' %}
-        <h1>Registrate</h1>
-        <p class="menuSuperior">¿Ya tienes una cuenta? <a href="/">Ingresar aqui</a>.</p>
-    </header>
-
     <main>
-        <!-- <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Registrame</button>
-        </form> -->
         <form method="post" action="{% url 'registro_form' %}">
             {% csrf_token %}
             {{ registrar_form.as_p }}
@@ -33,3 +31,4 @@
     </main>
 </body>
 </html>
+{% endblock %}
