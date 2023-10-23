@@ -10,6 +10,10 @@ from django.shortcuts import render
 from .forms import CourseFilterForm, RegistrarForm, ContactoForm
 from datetime import datetime
 # from forms import ContactoForm
+from .forms import ContactoForm  
+from django.contrib import messages 
+from .models import Persona 
+from django.urls import reverse
 
 def index(request):
     current_date = datetime.now()
@@ -110,3 +114,31 @@ def course_available(request):
     courseAvailable = Course.objects.all()
     return render(request, 'cursos.html', {'courseAvailable': courseAvailable})
 
+def contacto(request):
+    formulario =None
+    if request.method == "POST":
+        # Instanciamos
+        formulario = ContactoForm(request.POST)
+        # Validamos
+        if formulario.is_valid():
+                       # dar alta la info
+            messages.success(request, 'Hemos recibido tus datos')            
+        #  messages.info(request, "Consulta enviada con éxito")
+            p1 = Persona(
+                nombre=formulario.cleaned_data['nombre'],
+                apellido=formulario.cleaned_data['apellido'],
+                edad=formulario.cleaned_data['edad'],
+                email=formulario.cleaned_data['mail'])
+                # dni=formulario.cleaned_data['dni'])
+            p1.save()
+            return redirect(reverse("contact"))
+        
+    
+    else: # si es un GET
+        formulario = ContactoForm()
+
+    context = {
+        'contacto_form': formulario
+    }
+
+    return render(request, "contacto.html", context)

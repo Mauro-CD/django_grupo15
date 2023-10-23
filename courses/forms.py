@@ -1,5 +1,7 @@
 # forms.py
 
+import re 
+#from typing import Any
 from django import forms
 from django.core.exceptions import ValidationError
 
@@ -35,8 +37,29 @@ class RegistrarForm(forms.Form):
         return self.cleaned_data
 
 
+# class ContactoForm(forms.Form):
+#     nombre = forms.CharField(label='Nombre',  required=True)
+#     email = forms.EmailField(label='Correo Electrónico',  required=True)
+#     telefono = forms.CharField(label='Telefono:', required=True)
+#     mensaje = forms.CharField(label='mensaje:', widget=forms.TextInput(attrs={'class': 'mensaje_form'}),  required=True)
+
+
 class ContactoForm(forms.Form):
-    nombre = forms.CharField(label='Nombre',  required=True)
-    email = forms.EmailField(label='Correo Electrónico',  required=True)
-    telefono = forms.CharField(label='Telefono:', required=True)
-    mensaje = forms.CharField(label='mensaje:', widget=forms.TextInput(attrs={'class': 'mensaje_form'}),  required=True)
+    nombre = forms.CharField(label="Nombre de contacto",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
+    apellido =forms.CharField(label="Apellido de contacto",widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ), required=True)
+    edad = forms.IntegerField(label="Edad",widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo números'}  ), max_value=80)
+    # mail = forms.EmailField(label="E-Mail", widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'ejemplo@email.com'}),required=True)
+    mail = forms.EmailField(label='E-mail',max_length=100,required=True,error_messages={'required': 'Por favor completa el campo'},widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'ejemplo@email.com'}))
+    mensaje =  forms.CharField(widget=forms.Textarea)
+
+    def clean_edad(self): # Eje implementacion basica 
+        if self.cleaned_data["edad"] < 5 and self.cleaned_data["edad"] <80:
+            raise ValidationError("El usuario no puede tener menos de 5 años")
+        
+        return self.cleaned_data["edad"]
+    
+    def custom_validate_email(mail):
+        email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+        if not re.match(email_regex, mail):
+          raise ValidationError('Correo electrónico no válido')
+

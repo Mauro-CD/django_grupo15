@@ -2,6 +2,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+class Persona(models.Model): # formulario contacto
+    nombre = models.CharField(max_length=30, verbose_name="Nombre")
+    apellido = models.CharField(max_length=30, verbose_name="Apellido")
+    email = models.EmailField(max_length=150, verbose_name="E-mail") 
+    edad = models.CharField(verbose_name="Edad")
+    # dni = models.CharField(verbose_name="DNI")
+
 class Course(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()

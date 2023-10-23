@@ -1,6 +1,6 @@
 # courses/urls.py
 from django.urls import path
-from . import views
+from .import views
 
 
 
@@ -15,4 +15,5 @@ urlpatterns = [
     path('contact/', views.contacto_form, name='contact'),
     path('courseAvailable/', views.course_available, name='courseAvailable'),
     path('', views.index, name='index'),
+    path('contacto', views.contacto, name="contacto"),
 ]
