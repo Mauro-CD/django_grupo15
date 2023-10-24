@@ -1,67 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    {% load static %}
-    {% include 'navigation.html' %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/principal.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/formularios.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'favicon/boock.ico' %}">
-    <!--<script src="js/registro.js"></script>-->
-    <title>Registro</title>
-</head>
+{% block titulo %}Registro{% endblock%}
 
-<body>
+{% load static %}
 
-    <header>
-        <menu-ao id="menu-ao"></menu-ao>
-        <h1>Registrarse para una cuenta</h1>
-        <p class="menuSuperior">¿Ya tienes una cuenta? <a href="/login/" style="color: coral;">Ingresar aqui</a>.</p>
-    </header>    
-<!--Inicio de lo agregado 22 octubre-->
-    <main style="display: flex;justify-content: center;align-items: center;height: 70vh;">
-        <form class="form2" method="post" style=" width: 300px;">
-            <style>
-                form p 
-                {
-                    display: flex;
-                    flex-direction: column;
-                }
-                form p label
-                {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 1ch;
-                }
+{% block class %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/formularios.css' %}">
+{% endblock %}
 
-                form input[type="text"],
-                form input[type="email"],
-                form input[type="password"] {
-                    margin-bottom: 10px;
-                    padding: 10px;
-                    border-radius: 5px;
-                    border: 1px solid #ccc;
-                }
-            </style>
-            {% csrf_token %}
-            {{ form.as_p }}
-            <div style="width: 90px;margin-left: auto;margin-right: auto;">
-                <button type="submit" style="background-color: #4CAF50;color: white;padding: 10px 15px;border: none;
-                    border-radius: 5px;cursor: pointer;transition: background-color 0.3s">
-                Registrame
-                </button>
-            </div>
-            
-        </form>
-    </main>
-<!--Fin de lo agregado 22 octubre-->
-    <footer>
-        <p>&copy; 2023 Plataforma de aprendizaje en linea. GRUPO 15CAC</p>
-    </footer>
-    <script src="{% static 'js/menu.js' %}"></script>
-    
-</body>
+{% block encabezado %}
+<h1>Registrarse para una cuenta</h1>
+<p class="menuSuperior">¿Ya tienes una cuenta? <a href="/login/" style="color: coral;">Ingresar aqui</a>.</p>
+{% endblock %}
 
-</html>
+
+{% block contenido %}
+<main style="display: flex;justify-content: center;align-items: center;height: 70vh;">
+    <form class="form2" method="post" style=" width: 300px;">
+        <style>
+            form p 
+            {
+                display: flex;
+                flex-direction: column;
+            }
+            form p label
+            {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 1ch;
+            }
+
+            form input[type="text"],
+            form input[type="email"],
+            form input[type="password"] {
+                margin-bottom: 10px;
+                padding: 10px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+            }
+        </style>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div style="width: 90px;margin-left: auto;margin-right: auto;">
+            <button type="submit" style="background-color: #4CAF50;color: white;padding: 10px 15px;border: none;
+                border-radius: 5px;cursor: pointer;transition: background-color 0.3s">
+            Registrame
+            </button>
+        </div>
+        
+    </form>
+</main>
+<script src="{% static 'js/menu.js' %}"></script>
+{% endblock %}
