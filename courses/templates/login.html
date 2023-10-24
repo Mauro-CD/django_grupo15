@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     {% load static %}
     <meta charset="UTF-8">
@@ -9,12 +8,12 @@
 </head>
 
 <body>
-
     <header>
         {% include 'menu.html' %}
         <h1>Login</h1>
     </header>
     <main>
+        <!--viejo login
             {% if user.is_authenticated %}
             <p>Bienvenido, {{ user.username }}!</p>
             <a href="{% url 'logout' %}">Logout</a>
@@ -22,12 +21,36 @@
             <form method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button type="submit">Login</button>
+                <button type="submit" style="background-color: #4CAF50;color: white;padding: 10px 15px;border: none;
+                border-radius: 5px;cursor: pointer;transition: background-color 0.3s">Login</button>
             </form>
         {% endif %}
-    </mian>
+        -->
+        <!--Nuevo login-->
+        {% if user.is_authenticated %}
+            <p>Bienvenido, {{ user.username }}!</p>
+            <a href="{% url 'logout' %}">Logout</a>
+            {% else %}
+            <form method="post">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
 
+                <div class="fieldWrapper">
+                    {{ form.username.errors }}
+                    <label for="{{ form.username.id_for_label }}">Email registrado:</label>
+                    {{ form.username }}
+                </div>
+
+                <div class="fieldWrapper">
+                    {{ form.password.errors }}
+                    <label for="{{ form.password.id_for_label }}">Password:</label>
+                    {{ form.password }}
+                </div>
+
+                <button type="submit" style="background-color: #4CAF50;color: white;padding: 10px 15px;border: none;
+                border-radius: 5px;cursor: pointer;transition: background-color 0.3s">Login</button>
+            </form>
+        {% endif %}
+    </main>
 </body>
-
-
 </html>

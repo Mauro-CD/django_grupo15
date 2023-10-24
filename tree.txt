@@ -1,0 +1,219 @@
+grupo15
+|   .gitignore
+|   elenco.txt
+|   manage.py
+|   requirements.txt
+|   tree.txt
+|   
++---courses
+|   |   admin.py
+|   |   apps.py
+|   |   forms.py
+|   |   models.py
+|   |   tests.py
+|   |   urls.py
+|   |   views.py
+|   |   __init__.py
+|   |   
+|   +---migrations
+|   |   |   0001_initial.py
+|   |   |   0002_item.py
+|   |   |   __init__.py
+|   |   
+|   |           
+|   +---templates
+|   |       base.html
+|   |       contacto.html
+|   |       course_detail.html
+|   |       course_list.html
+|   |       cursos.html
+|   |       edit-course-edit.html
+|   |       edit-course-nuevo.html
+|   |       edit-course.html
+|   |       footer_content.html
+|   |       foro.html
+|   |       index.html
+|   |       login.html
+|   |       menu.html
+|   |       navigation.html
+|   |       registrar_form.html
+|   |       registro.html
+|   |       signup.html
+|  
+|   
+|           
++---elearning
+|   |   asgi.py
+|   |   settings.py
+|   |   urls.py
+|   |   wsgi.py
+|   |   __init__.py
+|   |   
+|   \---__pycache__
+|   
+|           
++---myenv
+|   |   pyvenv.cfg
+|   |   
+|   +---Include
+|   +---Lib
+|   |              
+|   \---Scripts
+|           activate
+|           activate.bat
+|           Activate.ps1
+|           deactivate.bat
+|           django-admin.exe
+|           pip.exe
+|           pip3.11.exe
+|           pip3.exe
+|           python.exe
+|           pythonw.exe
+|           sqlformat.exe
+|           
+\---static
+    +---admin
+    |   +---css
+    |   |   |   autocomplete.css
+    |   |   |   base.css
+    |   |   |   changelists.css
+    |   |   |   dark_mode.css
+    |   |   |   dashboard.css
+    |   |   |   forms.css
+    |   |   |   login.css
+    |   |   |   nav_sidebar.css
+    |   |   |   responsive.css
+    |   |   |   responsive_rtl.css
+    |   |   |   rtl.css
+    |   |   |   widgets.css
+    |   |   |   
+    |   |   \---vendor
+    |   |       \---select2
+    |   |               LICENSE-SELECT2.md
+    |   |               select2.css
+    |   |               select2.min.css
+    |   |               
+    |   +---img
+    |   |   |   calendar-icons.svg
+    |   |   |   icon-addlink.svg
+    |   |   |   icon-alert.svg
+    |   |   |   icon-calendar.svg
+    |   |   |   icon-changelink.svg
+    |   |   |   icon-clock.svg
+    |   |   |   icon-deletelink.svg
+    |   |   |   icon-no.svg
+    |   |   |   icon-unknown-alt.svg
+    |   |   |   icon-unknown.svg
+    |   |   |   icon-viewlink.svg
+    |   |   |   icon-yes.svg
+    |   |   |   inline-delete.svg
+    |   |   |   LICENSE
+    |   |   |   README.txt
+    |   |   |   search.svg
+    |   |   |   selector-icons.svg
+    |   |   |   sorting-icons.svg
+    |   |   |   tooltag-add.svg
+    |   |   |   tooltag-arrowright.svg
+    |   |   |   
+    |   |   \---gis
+    |   |           move_vertex_off.svg
+    |   |           move_vertex_on.svg
+    |   |           
+    |   \---js
+    |       |   actions.js
+    |       |   autocomplete.js
+    |       |   calendar.js
+    |       |   cancel.js
+    |       |   change_form.js
+    |       |   collapse.js
+    |       |   core.js
+    |       |   filters.js
+    |       |   inlines.js
+    |       |   jquery.init.js
+    |       |   nav_sidebar.js
+    |       |   popup_response.js
+    |       |   prepopulate.js
+    |       |   prepopulate_init.js
+    |       |   SelectBox.js
+    |       |   SelectFilter2.js
+    |       |   theme.js
+    |       |   urlify.js
+    |       |   
+    |       +---admin
+    |       |       DateTimeShortcuts.js
+    |       |       RelatedObjectLookups.js
+    |       |       
+    |       \---vendor
+    |                   
+    +---css
+    |       contacto.css
+    |       edit-course-edit.css
+    |       edit-course.css
+    |       formularios.css
+    |       foro.css
+    |       libreria_busqueda.css
+    |       login.css
+    |       popup.css
+    |       principal.css
+    |       registracion.css
+    |       
+    +---favicon
+    |       boock.ico
+    |       book.ico
+    |       edit.ico
+    |       operator.ico
+    |       partners.ico
+    |       registro.ico
+    |       teams.ico
+    |       
+    +---icons
+    |       deslogueo.ico
+    |       deslogueo.png
+    |       deslogueo2.ico
+    |       deslogueo2.png
+    |       icon-menu-w.png
+    |       icon-menu.png
+    |       user-profile-icon.ico
+    |       user-profile-icon.png
+    |       
+    +---img
+    |       3d.jpg
+    |       algoritmo.jpg
+    |       Alimentacion-saludable.jpg
+    |       arduino.jpg
+    |       cloud.jpg
+    |       concepto-negocio.jpg
+    |       cursos-de-algebra.jpg
+    |       dibujo-tecnico.jpg
+    |       emprendimiento.jpg
+    |       estructura-de-datos.jpg
+    |       estructura.jpg
+    |       finanzas.jpg
+    |       fisica.jpg
+    |       fotografia.jpg
+    |       hacking-etico.png
+    |       java-curso.jpg
+    |       login-logout-white-icon-11642597802btccm3uuci.png
+    |       matematica.jpg
+    |       mecanica.jpg
+    |       python.jpg
+    |       quimica.jpg
+    |       seguridad.jpg
+    |       
+    +---js
+    |       carouselcursos.js
+    |       contacto.js
+    |       cursos.js
+    |       foro.js
+    |       funciones.js
+    |       menu.js
+    |       paginas_integradas.js
+    |       registro.js
+    |       
+    +---json
+    |       cursos.json
+    |       cursos2.json
+    |       
+    \---sub-pages
+            menu.html
+            

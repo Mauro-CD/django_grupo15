@@ -748,3 +748,7 @@ iframe{
   max-width: 420px;
   height: 240px;
 }
+
+.user-nav{
+  visibility: hidden;
+}
