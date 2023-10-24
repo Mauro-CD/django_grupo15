@@ -45,10 +45,10 @@ class UserRegistrationForm(forms.Form):
     password = forms.CharField(label='Contraseña', widget=forms.PasswordInput, min_length=6)
     password2 = forms.CharField(label='Confirmar Contraseña', widget=forms.PasswordInput, min_length=6)
     
-    # def clean_email(self):
-    #     if self.cleaned_data['email'] == "email":
-    #         raise ValidationError("El usuario ya existe")
-    #     return self.cleaned_data['email']
+    def clean_email(self):
+        if User.objects.filter(username=self.cleaned_data['email']).exists():
+            raise ValidationError("El usuario ya existe")
+        return self.cleaned_data['email']
     
     def clean(self):
         if self.cleaned_data['password'] !=  self.cleaned_data['password2']:
