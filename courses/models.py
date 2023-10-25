@@ -63,14 +63,14 @@ class UserList(User):
     def __str__(self):
         return f"{self.username} {self.email} {self.is_active} {self.first_name} {self.last_name}"
 
-#### relacion uno a mucho: User -> Foro
+#### relacion uno a mucho: Estudiante -> Foro
 class Foro(models.Model):
     titulo = models.CharField(max_length=100)
     contenido = models.TextField()
     fecha = models.DateField()
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
 
-#### relacion uno a uno: User -> Direccion
+#### relacion uno a uno: Estudiante -> Direccion
 class Direccion(models.Model):
     calle = models.CharField(default="Completar")
     altura = models.IntegerField(null=True)
