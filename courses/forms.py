@@ -85,7 +85,7 @@ class DireccionForm(forms.Form):
 
 ################################################# Estudiante ###################################################################
 
-class EstudianteForm(forms.Form):
+class EstudianteForm(forms.ModelForm):
 
     class Meta:
         model = Estudiante
