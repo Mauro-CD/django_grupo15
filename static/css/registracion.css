@@ -95,3 +95,37 @@ form {
 form {
     animation: fadeIn 0.5s;
 }
+
+
+form p 
+{
+    display: flex;
+    flex-direction: column;
+}
+form p label
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1ch;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"] {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+form button {
+    width: 90px;
+    margin-left: auto;
+    margin-right: auto;
+    /* background-color: #4CAF50;color: white;padding: 10px 15px;border: none; */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s
+}

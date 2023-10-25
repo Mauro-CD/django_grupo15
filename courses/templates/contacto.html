@@ -5,7 +5,6 @@
 {% load static %}
 
 {% block encabezado %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/principal.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'css/contacto.css' %}">
 <script src="https://kit.fontawesome.com/4a51b8871d.js" crossorigin="anonymous"></script>
 <h1>Contactanos</h1>
@@ -15,31 +14,25 @@
 {% block contenido %}
 
     <main>
+        <div class="div_formulario"></div>
 
-        {% comment %} <form method="post" action="{% url 'contact' %}">
+        <form class="formulario" method="post" action="{% url 'contact' %}">
             {% csrf_token %}
-            {{ contacto_form.as_p }}
-            <button type="submit">Enviar</button>
-        </form> {% endcomment %}
-        
-<div class="div_formulario">
-        <form class="formulario" method="post" action="{% url 'contacto' %}">
-            {% csrf_token %}
-        <table class="table_formulario"> 
-            {{ contacto_form.as_table }}
-        </table> 
-            <button  type="submit">Contáctanos</button>
-        </form>
-        
-        {% if messages %} 
-        <ul class="messages"> 
-            {% for message in messages %} 
-                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li> 
-            {% endfor %}  
-        </ul> 
-        {% endif %} 
-    </div>
+            <table class="table_formulario"> 
+                {{ contacto_form.as_table }}
+            </table> 
+                <button  type="submit">Contáctanos</button>
+            </form>
 
+            {% if messages %} 
+            <ul class="messages"> 
+                {% for message in messages %} 
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li> 
+                {% endfor %}  
+            </ul> 
+            {% endif %} 
+        </div>
+        
         <aside>
             <div id="map-container">
                 <h2>Donde Encontrarnos</h2>
