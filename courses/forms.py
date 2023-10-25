@@ -2,7 +2,8 @@
 
 from django import forms
 from django.core.exceptions import ValidationError
-from django.contrib.auth.models import User #agregado 22 octubre
+from django.contrib.auth.models import User
+from courses.models import Estudiante
 
 
 class CourseFilterForm(forms.Form):
@@ -84,6 +85,21 @@ class DireccionForm(forms.Form):
 
 ################################################# Estudiante ###################################################################
 
+class EstudianteForm(forms.Form):
+
+    class Meta:
+        model = Estudiante
+        fields = ["matricula", "first_name",'last_name']
+        widgets = {
+            'matricula': forms.TextInput(attrs={'class':'form-control'}),
+            'first_name': forms.TextInput(attrs={'class':'form-control'}),
+            'last_name': forms.TextInput(attrs={'class':'form-control'}),
+        }
+
+    # username = forms.CharField(label="Usuario",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
+    # first_name = forms.IntegerField(label="Nombre",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
+    # last_name = forms.CharField(label="Apellido",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
+    # activo = forms.BooleanField(label="activo")
 
 
 ################################################# Docente ################################################################### 

@@ -5,7 +5,7 @@
 {% load static %}
 
 {% block class %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/formularios.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/registracion.css' %}">
 {% endblock %}
 
 {% block encabezado %}
@@ -15,41 +15,15 @@
 
 
 {% block contenido %}
-<main style="display: flex;justify-content: center;align-items: center;height: 70vh;">
-    <form class="form2" method="post" style=" width: 300px;">
-        <style>
-            form p 
-            {
-                display: flex;
-                flex-direction: column;
-            }
-            form p label
-            {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                gap: 1ch;
-            }
-
-            form input[type="text"],
-            form input[type="email"],
-            form input[type="password"] {
-                margin-bottom: 10px;
-                padding: 10px;
-                border-radius: 5px;
-                border: 1px solid #ccc;
-            }
-        </style>
+<main>
+    <form class="form2" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <div style="width: 90px;margin-left: auto;margin-right: auto;">
-            <button type="submit" style="background-color: #4CAF50;color: white;padding: 10px 15px;border: none;
-                border-radius: 5px;cursor: pointer;transition: background-color 0.3s">
+        <div>
+            <button type="submit">
             Registrame
             </button>
         </div>
-        
     </form>
 </main>
 <script src="{% static 'js/menu.js' %}"></script>

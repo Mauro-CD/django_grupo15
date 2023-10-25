@@ -2,6 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth.models import User #agregado 22 octubre
+from django.urls import reverse_lazy
 
 
 class Docente(User):
@@ -18,12 +19,19 @@ class Course(models.Model):
 
 #### relacion mucho a mucho mediante inscripcion: Estudiante -> CursoInscripto 
 class CursoInscripto(Course):
-    habilitado =  bool()
+    habilitado = models.BooleanField()
 
 class Estudiante(User):
     matricula = models.IntegerField()
-    Activo = bool()
+    activo = models.BooleanField()
     cursoInscripto = models.ManyToManyField(CursoInscripto, through="inscripcion")
+
+    def baja_estudiante(self):
+        return reverse_lazy('baja_estudiante', args=[self.id])
+
+    def modificar_estudiante(self):
+        return reverse_lazy('modificar_estudiante', args=[self.id])
+
 
 class inscripcion(models.Model):
     estudiante = models.ForeignKey(Estudiante, on_delete=models.CASCADE)
@@ -48,6 +56,13 @@ class ContactMessage(models.Model):
     telefono = models.CharField(max_length=20)
     mensaje = models.TextField()
 
+    def __str__(self):
+        return f"{self.nombre} {self.email} {self.telefono} {self.mensaje}"
+    
+class UserList(User):
+    def __str__(self):
+        return f"{self.username} {self.email} {self.is_active} {self.first_name} {self.last_name}"
+
 #### relacion uno a mucho: User -> Foro
 class Foro(models.Model):
     titulo = models.CharField(max_length=100)
@@ -57,10 +72,12 @@ class Foro(models.Model):
 
 #### relacion uno a uno: User -> Direccion
 class Direccion(models.Model):
-    calle = models.CharField(max_length=100)
-    altura = models.IntegerField()
-    ciudad = models.CharField(max_length=100)
-    pais = models.CharField(max_length=100)
+    calle = models.CharField(default="Completar")
+    altura = models.IntegerField(null=True)
+    ciudad = models.CharField(max_length=100, default="Completar")
+    pais = models.CharField(max_length=100, default="Completar")
     usuario = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    def __str__(self):
+        return f"{self.calle} {self.altura} {self.ciudad} {self.pais} {self.usuario}"
  
 

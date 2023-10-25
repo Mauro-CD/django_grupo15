@@ -13,6 +13,9 @@ urlpatterns = [
     path('foro/', views.course_foro, name='foro'),    
     path('contact/', views.contact, name='contact'),
     path('registro/', views.registro, name='registro'),
+    path('abm/', views.estudianteListView.as_view(), name='abm_user'),
+    path('abm/baja/<int:pk>', views.estudianteDelete.as_view(), name='baja_estudiante'),
+    path('abm/modificar/<int:pk>', views.estudianteUpdate.as_view(), name='modificar_estudiante'),
     path('courseAvailable/', views.course_available, name='courseAvailable'),
     path('', views.index, name='index'),
 ]
