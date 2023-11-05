@@ -1,7 +1,21 @@
 <!-- footer_content.html -->
-
+<!--
 <div>
     <p>&copy; GRUPO 15 CAC Todos los derechos reservados.</p>
+    <a href="/admin" >admin</a>
     <p align="right"><b>{{text_date}} {{date|date:"l d \d\e F \d\e Y" }}</b></p>
     <p align="right"><b>{{text_hour}} {{date|date:"H:i:s" }}</b></p>
 </div>
+-->
+{% load static %}
+
+<div style="display: flex; justify-content: space-between; align-items: center;">
+    <a href="/admin" style="flex: 1;"><img src="{% static 'icons/redinterna.png' %}" alt="admin" style="height: 24px;width: 24px;"></a>
+    <p style="flex: 1; text-align: center;">&copy; GRUPO 15 CAC Todos los derechos reservados.</p>
+    <div style="flex: 1; text-align: right;">
+        <p><b>{{text_date}} {{date|date:"l d \d\e F \d\e Y" }}</b></p>
+        <p><b>{{text_hour}} {{date|date:"H:i:s" }}</b></p>
+    </div>
+</div>
+
+

@@ -10,9 +10,8 @@ fetch('/static/json/cursos2.json')
     function updateCarousel() {
       const currentItem = data[currentIndex];
       carouselDiv.innerHTML = `
-        
-        <img src="${currentItem.imagePath}" alt="${currentItem.title}">
-        <h2 id="cardbox">${currentItem.title}</h2>
+        <img src="${currentItem.imagePath}" alt="${currentItem.title}" style="border-radius: 10px;">
+        <h2 id="cardbox"style="border-radius: 7px;">${currentItem.title}</h2>
       `;
     }
 
