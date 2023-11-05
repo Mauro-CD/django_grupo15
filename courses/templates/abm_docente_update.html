@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block titulo %}Nuevo Curso{% endblock%}
+{% block titulo %}ABM{% endblock%}
 
 {% load static %}
 
@@ -10,20 +10,28 @@
 {% endblock %}
 
 {% block encabezado %}
-<h1>Nuevo Curso</h1>
+<h1>Modificacion de usuario</h1>
 {% endblock %}
 
 
 {% block contenido %}
-
-    <form class="form2" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <div>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for campo in form %}
+        <div class="form-group">
+            <label for="">{{campo.label}}</label>
+            {{campo}}
+        </div>
+        <div>{{campo.errors}}</div>
+    {% endfor %}
+    <div class="row mt-3">
+        <div class="col-12">
+            <!-- <a class="btn btn-secondary" onclick="javascript:window.history.go(-1);">Cancelar</a>        -->
             <input type="submit" value="Guardar" class="btn btn-primary">
             <a type="button" onclick="javascript:window.history.go(-1)" value="Cancalar" class="btn btn-danger">Cancelar</a> 
         </div>
-    </form>
+    </div>
+</form>
 
 
 {% endblock %}

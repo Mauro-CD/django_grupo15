@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Foro{% endblock%}
+
+{% load static %}
+
+{% block class %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/foro.css' %}">
+{% endblock %}
+
+
+{% block encabezado %}
+
+<h1>Foro</h1>
+{% include 'navigation.html' %}
+<p class="menuSuperior">¿Tenes dudas?</p>
+{% endblock %}
+
+
+{% block contenido %}
+
+
+<div class="foro">
+    <foro id="foro"></foro>
+</div>
+</main>
+<footer>
+</footer>
+<script src="{% static 'js/menu.js' %}"></script>
+<script src="{% static 'js/foro.js' %}"></script>
+
+
+{% endblock %}
