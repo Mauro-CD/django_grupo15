@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block titulo %}ABM{% endblock%}
+
+{% load static %}
+
+{% block class %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/registracion.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/edit-course.css' %}">
+{% endblock %}
+
+{% block encabezado %}
+<h1>Borrar Curso</h1>
+{% endblock %}
+
+
+{% block contenido %}
+<form method="post">{% csrf_token %}
+    <p>Se dara la baja el curso: {{ object.titulo }} docente: {{ object.docente.first_name }} {{ object.docente.last_name }} </p>
+    <input type="submit" value="Confirmar" class="btn btn-danger">
+    <a type="button" onclick="javascript:window.history.go(-1)" value="Cancalar" class="btn btn-primary">Cancelar</a>  
+</form>
+
+
+{% endblock %}

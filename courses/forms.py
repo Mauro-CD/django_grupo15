@@ -3,7 +3,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
-from courses.models import Estudiante
+from courses.models import Estudiante, Course, Docente
 
 
 class CourseFilterForm(forms.Form):
@@ -103,9 +103,68 @@ class EstudianteForm(forms.ModelForm):
 
 
 ################################################# Docente ################################################################### 
+class DocenteForm(forms.ModelForm):
+    legajo =  forms.IntegerField(label="Legajo",   widget=forms.NumberInput(attrs={'class': 'formulario'}  ),required=True)
+    first_name = forms.CharField(label="Apellido",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
+    last_name = forms.CharField(label="Apellido",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
+    email = forms.EmailField(label='Correo Electrónico',  required=True)
+
+    class Meta:
+        model=Docente
+        fields=['legajo','last_name','first_name', 'email']
+        widgets = {
+            'legajo': forms.NumberInput(attrs={'class':'form-control'}),
+            'first_name': forms.TextInput(attrs={'class':'form-control'}),
+            'last_name': forms.TextInput(attrs={'class':'form-control'}),
+            'email': forms.TextInput(attrs={'class':'form-control'}),
+        }
+
+    def clean_legajo(self):
+        if User.objects.filter(legajo=self.cleaned_data['legajo']).exists():
+            raise ValidationError("El legajo ya existe")
+        return self.cleaned_data['legajo']
 
 
 ################################################# Curso ################################################################### 
+class CursosForm(forms.ModelForm):
+    # DOCENTES_CHOICES = (
+    #     ('1', 'Docente 1'),
+    #     ('2', 'Docente 2'),
+    #     ('3', 'Docente 3'),
+    # )
+    habilitado_choices = (
+        (True, 'Habilitado'),
+        (False, 'Deshabilitado')
+    )
+    titulo = forms.CharField(label="Titulo",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
+    duracion = forms.CharField(label="Duracion",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
+    descripcion = forms.CharField(label="Descripcion",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
+    # docente = forms.CharField(label="Docente",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
+    precio = forms.IntegerField(label="Precio",   widget=forms.NumberInput(attrs={'class': 'formulario'}  ),required=True)
+    habilitado = forms.ChoiceField(label="Estado",  choices=habilitado_choices )
+    docente = forms.ChoiceField(label="Docente", choices=[(docente.id, docente ) for docente in Docente.objects.all()], widget=forms.Select, required=True)
+
+    class Meta:
+        model=Course
+        fields=['titulo','duracion','descripcion','precio']
+        widgets = {
+            'titulo': forms.TextInput(attrs={'class':'form-control'}),
+            'duracion': forms.TextInput(attrs={'class':'form-control'}),
+            'descripcion': forms.TextInput(attrs={'class':'form-control'}),
+            #'docente': forms.TextInput(attrs={'class':'form-control'}),
+            'precio': forms.NumberInput(attrs={'class':'form-control'}),
+        }
 
 
-################################################# CursoInscripto ################################################################### 
+
+    # def clean_docente(self):
+    #     if not Docente.objects.filter(id=self.cleaned_data['docente']).exists():
+    #         raise ValidationError("El docente no existe")
+    #     return self.cleaned_data['docente']
+    
+    # def clean_email(self):
+    #     if User.objects.filter(username=self.cleaned_data['email']).exists():
+    #         raise ValidationError("El usuario ya existe")
+    #     return self.cleaned_data['email']
+
+

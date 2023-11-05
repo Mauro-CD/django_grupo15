@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Curos-ABM{% endblock%}
+
+{% load static %}
+
+{% block class %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/registracion.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/edit-course.css' %}">
+{% endblock %}
+
+{% block encabezado %}
+<h1>Modificacion de Cursos</h1>
+{% endblock %}
+
+
+{% block contenido %}
+<a name="" id="" class="btn btn-primary" href="{% url 'course_nuevo' %}" role="button"> <i class="fa-solid fa-circle-plus"></i> Nuevo</a>
+        <table >
+            <thead>
+                <tr>
+                    <th scope="col">Titulo</th>
+                    <th scope="col">Docente</th>
+                    <th scope="col">Duracion</th>
+                    <th scope="col">Habilitado</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for curso in object_list  %}
+                    <tr>
+                        <td>{{curso.titulo}}</td>
+                        <td>{{curso.docente.first_name}} {{curso.docente.last_name}}</td>
+                        <td>{{curso.duracion}}</td>
+                        <td>{{curso.habilitado}}</td>
+                        <td>
+                        <a class="btn btn-primary" href="{{curso.modificar_curso}}" title="Editar">Editar</a>
+                        <!-- <a type="button" class="btn btn-danger">Eliminar</a> -->
+                        <a type="button" class="btn btn-danger" href="{{curso.baja_curso}}" title="Eliminar">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+{% endblock %}
