@@ -120,18 +120,13 @@ class DocenteForm(forms.ModelForm):
         }
 
     def clean_legajo(self):
-        if User.objects.filter(legajo=self.cleaned_data['legajo']).exists():
+        if Docente.objects.filter(legajo=self.cleaned_data['legajo']).exists():
             raise ValidationError("El legajo ya existe")
         return self.cleaned_data['legajo']
 
 
 ################################################# Curso ################################################################### 
 class CursosForm(forms.ModelForm):
-    # DOCENTES_CHOICES = (
-    #     ('1', 'Docente 1'),
-    #     ('2', 'Docente 2'),
-    #     ('3', 'Docente 3'),
-    # )
     habilitado_choices = (
         (True, 'Habilitado'),
         (False, 'Deshabilitado')

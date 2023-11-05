@@ -167,6 +167,9 @@ def course_available(request):
     courseAvailable = Course.objects.all()
     return render(request, 'cursos.html', {'courseAvailable': courseAvailable})
 
+def admin(request):
+    #  Devuelve detalles del curso
+    return redirect('admin')
 
 class estudianteListView(ListView):
     model = Estudiante
@@ -266,6 +269,7 @@ class docenteCreateView(CreateView):
             email = form.cleaned_data['email']
             docente = Docente.objects.create_user(legajo=legajo, first_name=nombre, last_name=apellido, email=email, username=email)
             docente.save()                                   
+            # direccion = Direccion(usuario_id=docente.id, pais=form.cleaned_data['pais'], ciudad=form.cleaned_data['ciudad'], altura=form.cleaned_data['altura'])
             direccion = Direccion(usuario_id=docente.id)
             direccion.save()
         return redirect('abm_docente')
