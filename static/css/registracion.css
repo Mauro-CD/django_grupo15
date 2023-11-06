@@ -139,3 +139,6 @@ form button {
 }
 
 
+.disabled{
+    background: #ccc;
+}

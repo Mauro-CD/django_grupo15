@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% block titulo %}ABM{% endblock%}
+
+{% load static %}
+
+{% block class %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/registracion.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/edit-course.css' %}">
+{% endblock %}
+
+{% block encabezado %}
+<h1>Modificacion de usuario</h1>
+{% endblock %}
+
+
+{% block contenido %}
+<!-- <form>
+    <select id="docente-select">
+        <option value="">Selecciona un docente</option>
+        {% for docente in object_list %}
+            <option value="{{ docente.id }}">{{ docente.titulo }}</option>
+        {% endfor %}
+    </select>
+</form>
+
+<ul id="estudiantes-list">
+
+</ul>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    $("#docente-select").change(function() {
+        var selectedDocenteId = $(this).val();
+        if (selectedDocenteId) {
+            $.ajax({
+                url: '/ruta-de-tu-vista-ajax/' + selectedDocenteId + '/',
+                type: 'GET',
+                success: function(data) {
+                    // Borra la lista actual de estudiantes
+                    $("#estudiantes-list").empty();
+                    // Agrega los estudiantes relacionados al docente seleccionado
+                    $.each(data.estudiantes, function(index, estudiante) {
+                        var studentInfo = `
+                            <li>${estudiante.first_name}</li>
+                            <li>${estudiante.last_name}</li>
+                            <li>${estudiante.email}</li>
+                        `;
+                        $("#estudiantes-list").append(studentInfo);
+                    });
+                }
+            });
+        } else {
+            $("#estudiantes-list").empty(); // Borra la lista si no se ha seleccionado un docente
+        }
+    });
+});
+</script> -->
+
+
+<!-- 
+<a href="">otro</a>
+
+<form method="get">
+    {{ form.as_p }}
+    <button type="submit">Filtrar</button>
+</form>
+<ul>
+    {% for curso in object_list.estudiantesInscripto.all %}
+        <li>{{ curso.titulo }} - {{ curso.last_name }} - {{ curso.email }}</li>
+    {% endfor %}
+</ul>
+
+
+
+<ul>
+    {% for curso in object_list %}
+        <li>{{ curso.titulo }}</li>
+        <ul>
+            {% for estudiante in curso.estudiantesInscripto.all %}
+                <li>{{ estudiante.first_name }}</li>
+                <li>{{ estudiante.last_name }}</li>
+                <li>{{ estudiante.email }}</li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+</ul> -->
+
+
+
+<form method="get">
+    {{ form.as_p }}
+    <button type="submit">Filtrar</button>
+</form>
+<!-- <ul>
+    {% for estudiante in estudiantes %}
+        <li>{{ estudiante.first_name }} - {{ estudiante.last_name }} - {{ estudiante.email }}</li>
+    {% endfor %}
+</ul> -->
+
+
+<table >
+    <thead>
+        <tr>
+            <th scope="col">Matricula</th>
+            <th scope="col">Usuario</th>
+            <th scope="col">Alumno</th>
+            <!-- <th scope="col">Habilitado</th>
+            <th scope="col">Acciones</th> -->
+        </tr>
+    </thead>
+    <tbody>
+        {% for estudiante in estudiantes %}
+            <tr>
+                <td>{{estudiante.matricula}}</td>
+                <td>{{ estudiante.first_name }} {{ estudiante.last_name }}</td>
+                <td>{{estudiante.username}}</td>
+                <!-- <td>{{curso.docente.first_name}} {{curso.docente.last_name}}</td>
+                
+                <td>{{curso.habilitado}}</td> -->
+                <td>
+                <a class="btn btn-primary" href="{{curso.modificar_curso}}" title="Editar">Editar</a>
+                <!-- <a type="button" class="btn btn-danger">Eliminar</a> -->
+                <a type="button" class="btn btn-danger" href="{{curso.baja_curso}}" title="Eliminar">Eliminar</a>
+                </td>
+            </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+
+
+
+
+{% endblock %}
+
+<!-- 
+<ul>
+    {% for docente in object_list %}
+        <li>{{ docente.titulo }}</li>
+        <ul>
+            {% for estudiante in docente.estudiantesInscripto.all %}
+                <li>{{ estudiante.first_name }}</li>
+                <li>{{ estudiante.last_name }}</li>
+                <li>{{ estudiante.email }}</li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+</ul> -->

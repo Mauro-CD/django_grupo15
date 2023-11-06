@@ -87,13 +87,23 @@ class DireccionForm(forms.Form):
 
 class EstudianteForm(forms.ModelForm):
 
+    habilitado_choices = (
+            (True, 'Habilitado'),
+            (False, 'Deshabilitado')
+        )
+    # username = forms.CharField(label="Usuario",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
+    first_name = forms.CharField(label="Nombre",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
+    last_name = forms.CharField(label="Apellido",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
+    activo = forms.ChoiceField(label="Estado",  choices=habilitado_choices )
+
     class Meta:
         model = Estudiante
-        fields = ["matricula", "first_name",'last_name']
+        fields = ["matricula", "first_name",'last_name','activo']
         widgets = {
             'matricula': forms.TextInput(attrs={'class':'form-control'}),
             'first_name': forms.TextInput(attrs={'class':'form-control'}),
             'last_name': forms.TextInput(attrs={'class':'form-control'}),
+            'activo': forms.TextInput(attrs={'class':'form-control'})
         }
 
     # username = forms.CharField(label="Usuario",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
@@ -101,13 +111,38 @@ class EstudianteForm(forms.ModelForm):
     # last_name = forms.CharField(label="Apellido",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
     # activo = forms.BooleanField(label="activo")
 
+    #     habilitado_choices = (
+    #     (True, 'Habilitado'),
+    #     (False, 'Deshabilitado')
+    # )
+
+    # username = forms.CharField(label="Usuario",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
+    # first_name = forms.IntegerField(label="Nombre",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
+    # last_name = forms.CharField(label="Apellido",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
+    # # activo = forms.ChoiceField(label="Estado",  choices=habilitado_choices )
+
+
+    # class Meta:
+    #     model = Estudiante
+    #     fields = ["matricula", "first_name",'last_name' ],
+    #     widgets = {
+    #         'matricula': forms.TextInput(attrs={'class':'form-control'}),
+    #         'first_name': forms.TextInput(attrs={'class':'form-control'}),
+    #         'last_name': forms.TextInput(attrs={'class':'form-control'}),
+    #         # 'activo' : forms.TextInput(attrs={'class':'form-control'})
+    #     }
+
 
 ################################################# Docente ################################################################### 
-class DocenteForm(forms.ModelForm):
-    legajo =  forms.IntegerField(label="Legajo",   widget=forms.NumberInput(attrs={'class': 'formulario'}  ),required=True)
-    first_name = forms.CharField(label="Apellido",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
+class DocenteAltaForm(forms.ModelForm):
+    legajo =  forms.IntegerField(label="Legajo",   widget=forms.NumberInput(attrs={'class': 'formulario','placeholder': 'Solo numeros'}  ),required=True)
+    first_name = forms.CharField(label="Nombre",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
     last_name = forms.CharField(label="Apellido",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
-    email = forms.EmailField(label='Correo Electrónico',  required=True)
+    email = forms.EmailField(label='Correo Electrónico', widget=forms.EmailInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
+    pais = forms.CharField(label="Pais",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
+    ciudad = forms.CharField(label="Ciudad",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
+    calle = forms.CharField(label="Calle",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
+    altura = forms.IntegerField(label="Altura",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True, max_value=100000)
 
     class Meta:
         model=Docente
@@ -123,6 +158,32 @@ class DocenteForm(forms.ModelForm):
         if Docente.objects.filter(legajo=self.cleaned_data['legajo']).exists():
             raise ValidationError("El legajo ya existe")
         return self.cleaned_data['legajo']
+    
+    def clean_email(self):
+        if Docente.objects.filter(email=self.cleaned_data['email']).exists():
+            raise ValidationError("El mail ya existe")
+        return self.cleaned_data['email']
+
+class DocenteForm(forms.ModelForm):
+    legajo =  forms.IntegerField(label="Legajo",   widget=forms.NumberInput(attrs={'class': 'formulario disabled', 'readonly': 'readonly'}  ),required=True)
+    first_name = forms.CharField(label="Nombre",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
+    last_name = forms.CharField(label="Apellido",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
+    email = forms.EmailField(label='Correo Electrónico',  required=True)
+
+    class Meta:
+        model=Docente
+        fields=['legajo','last_name','first_name', 'email']
+        widgets = {
+            'legajo': forms.NumberInput(attrs={'class':'form-control'}),
+            'first_name': forms.TextInput(attrs={'class':'form-control'}),
+            'last_name': forms.TextInput(attrs={'class':'form-control'}),
+            'email': forms.TextInput(attrs={'class':'form-control'}),
+        }
+
+    # def clean_legajo(self):
+    #     if Docente.objects.filter(legajo=self.cleaned_data['legajo']).exists():
+    #         raise ValidationError("El legajo ya existe")
+    #     return self.cleaned_data['legajo']
 
 
 ################################################# Curso ################################################################### 
@@ -137,17 +198,18 @@ class CursosForm(forms.ModelForm):
     # docente = forms.CharField(label="Docente",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
     precio = forms.IntegerField(label="Precio",   widget=forms.NumberInput(attrs={'class': 'formulario'}  ),required=True)
     habilitado = forms.ChoiceField(label="Estado",  choices=habilitado_choices )
-    docente = forms.ChoiceField(label="Docente", choices=[(docente.id, docente ) for docente in Docente.objects.all()], widget=forms.Select, required=True)
+    # docente = forms.ChoiceField(label="Docente", choices=[(docente.id, docente ) for docente in Docente.objects.all()], widget=forms.Select, required=True)
 
     class Meta:
         model=Course
-        fields=['titulo','duracion','descripcion','precio']
+        fields=['titulo','duracion','descripcion','precio','habilitado']
         widgets = {
             'titulo': forms.TextInput(attrs={'class':'form-control'}),
             'duracion': forms.TextInput(attrs={'class':'form-control'}),
             'descripcion': forms.TextInput(attrs={'class':'form-control'}),
             #'docente': forms.TextInput(attrs={'class':'form-control'}),
             'precio': forms.NumberInput(attrs={'class':'form-control'}),
+            'habilitado': forms.NumberInput(attrs={'class':'form-control'})
         }
 
 
@@ -163,3 +225,8 @@ class CursosForm(forms.ModelForm):
     #     return self.cleaned_data['email']
 
 
+class CursoFiltroForm(forms.Form):
+    curso = forms.ModelChoiceField(
+        queryset=Course.objects.all(),
+        empty_label="Selecciona un curso",
+    )

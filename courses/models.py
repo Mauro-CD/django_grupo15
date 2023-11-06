@@ -33,6 +33,8 @@ class Estudiante(User):
     matricula = models.IntegerField()
     activo = models.BooleanField()
     # Course = models.ManyToManyField(Course, through="Comision")
+    def __str__(self):
+        return f"{self.matricula} - {self.first_name} {self.last_name}"
 
     def baja_estudiante(self):
         return reverse_lazy('baja_estudiante', args=[self.id])
@@ -55,7 +57,7 @@ class Course(models.Model):
     estudiantesInscripto = models.ManyToManyField(Estudiante, through='Inscripcion')
 
     def __str__(self):
-        return f"{self.titulo} - {self.duracion} {self.docente}"
+        return f"{self.titulo} - Docente: {self.docente.first_name}  {self.docente.last_name}"
 
     def baja_curso(self):
         return reverse_lazy('baja_curso', args=[self.id])
@@ -69,11 +71,16 @@ class Course(models.Model):
 
 #### relacion mucho a mucho mediante inscripcion: Estudiante -> Course 
 class Inscripcion(models.Model):
-    nombre = models.CharField(max_length=100, verbose_name="Nombre")
     estudiante = models.ForeignKey(Estudiante, on_delete=models.CASCADE)
     curso = models.ForeignKey(Course, on_delete=models.CASCADE)
     fecha = models.DateField()
-    
+
+    def __str__(self):
+        return f"{self.estudiante.matricula} {self.estudiante.username}- {self.curso.titulo} "
+
+    class Meta():
+        verbose_name_plural = 'Inscripciones'
+
 
 class UserCourse(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

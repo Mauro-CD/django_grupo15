@@ -12,8 +12,8 @@ from datetime import datetime
 from django.contrib.auth.models import User #agregado 22 octubre
 from django.contrib import messages #AGREGADO 22 OCTUBRE
 from .forms import UserRegistrationForm#agregado 22 octubre
-from .models import ContactMessage, Direccion, Estudiante, Direccion, Docente
-from .forms import ContactoForm, EstudianteForm, CursosForm, DocenteForm
+from .models import ContactMessage, Direccion, Estudiante, Direccion, Docente, Inscripcion
+from .forms import ContactoForm, EstudianteForm, CursosForm, DocenteForm, DocenteAltaForm, CursoFiltroForm
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 # from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
@@ -231,7 +231,7 @@ class docenteUpdate(UpdateView):
 
 class docenteCreateView(CreateView):
     model = Docente
-    form_class = DocenteForm
+    form_class = DocenteAltaForm
     template_name = 'abm_docente_update.html'
    
 
@@ -268,9 +268,9 @@ class docenteCreateView(CreateView):
             apellido = form.cleaned_data['last_name']
             email = form.cleaned_data['email']
             docente = Docente.objects.create_user(legajo=legajo, first_name=nombre, last_name=apellido, email=email, username=email)
-            docente.save()                                   
-            # direccion = Direccion(usuario_id=docente.id, pais=form.cleaned_data['pais'], ciudad=form.cleaned_data['ciudad'], altura=form.cleaned_data['altura'])
-            direccion = Direccion(usuario_id=docente.id)
+            # docente.save()                                   
+            direccion = Direccion(usuario_id=docente.id, pais=form.cleaned_data['pais'], ciudad=form.cleaned_data['ciudad'], altura=form.cleaned_data['altura'], calle=form.cleaned_data['calle'])
+            # direccion = Direccion(usuario_id=docente.id)
             direccion.save()
         return redirect('abm_docente')
 
@@ -328,4 +328,21 @@ class cursoUpdate(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['titulo'] = "Actualizar Curso"
+        return context
+    
+class inscripcionesListView(ListView):
+    model = Course
+    template_name = 'abm_estudiante_curso.html'
+    ordering = ['titulo']
+    
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = "Usuarios"
+        # Agrega el formulario al contexto
+        context['form'] = CursoFiltroForm(self.request.GET)
+        # Filtra los estudiantes si se ha enviado el formulario
+        if context['form'].is_valid():
+            curso_seleccionado = context['form'].cleaned_data['curso'].estudiantesInscripto.all()
+            context['estudiantes'] = curso_seleccionado
         return context
