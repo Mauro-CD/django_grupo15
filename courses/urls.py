@@ -10,13 +10,22 @@ urlpatterns = [
     path('register/', views.registro, name="registro"),
     path('signup/', views.signup, name='signup'),
     path('login/', views.user_login, name='login'),
+    
     path('courses/', views.course_list, name='course_list'),
     path('courses/edit', views.course_edit.as_view(), name='course_edit'),
     path('courses/edit/nuevo', views.courseCreateView.as_view(), name='course_nuevo'),
     path('courses/edit/baja/<int:pk>', views.cursoDelete.as_view(), name='baja_curso'),
     path('courses/edit/<int:pk>', views.cursoUpdate.as_view(), name='modificar_curso'),
+
     path('courses/inscripciones', views.inscripcionesListView.as_view(), name='curso_estudiante'),
+    path('courses/inscripciones/nuevo', views.inscripcionesCreateView.as_view(), name='curso_estudiante_alta'),
+    # path('courses/inscripciones/nuevo/<int:estudiante_id>/<int:curso_id>/', views.alta_inscripcion, name='alta_inscripcion'),
+    path('courses/inscripciones/baja/<int:pk>', views.inscripcionesDelete.as_view(), name='curso_estudiante_delete'),
+    path('courses/inscripciones/baja/<int:estudiante_id>/<int:curso_id>/', views.eliminar_inscripcion, name='eliminar_inscripcion'),
+
+
     path('courses/<int:course_id>/', views.course_detail, name='course_detail'),
+
     path('foro/', views.course_foro, name='foro'),    
     path('contact/', views.contact, name='contact'),
     path('registro/', views.registro, name='registro'),

@@ -16,13 +16,14 @@
 
 {% block contenido %}
 
-
 <form method="get">
     {{ form.as_p }}
     <button type="submit">Filtrar</button>
 </form>
 
+<a name="" id="" class="btn btn-primary" href="{% url 'curso_estudiante_alta' %}" role="button"> <i class="fa-solid fa-circle-plus"></i> Nuevo</a>
 
+{% if estudiantes %}
 <table >
     <thead>
         <tr>
@@ -38,15 +39,18 @@
                 <td>{{ estudiante.first_name }} {{ estudiante.last_name }}</td>
                 <td>{{estudiante.username}}</td>
                 <td>
-                <a class="btn btn-primary" title="Editar">Editar</a>
-                <a type="button" class="btn btn-danger" title="Eliminar">Eliminar</a>
+                <a type="button" class="btn btn-danger" href="{% url 'eliminar_inscripcion' estudiante.id curso_actual %}" title="Eliminar">Eliminar</a>
+
+
                 </td>
             </tr>
         {% endfor %}
 
     </tbody>
 </table>
-
+{% else %}
+<p>No hay estudiantes disponibles.</p>
+{% endif %}
 
 
 

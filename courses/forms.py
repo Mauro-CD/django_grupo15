@@ -3,8 +3,8 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
-from courses.models import Estudiante, Course, Docente
-
+from courses.models import Estudiante, Course, Docente, Inscripcion
+from datetime import date
 
 class CourseFilterForm(forms.Form):
     search = forms.CharField(label='Search', required=False)
@@ -235,3 +235,48 @@ class CursoFiltroForm(forms.Form):
         queryset=Course.objects.all(),
         empty_label="Selecciona un curso",
     )
+
+
+################################################# Inscripcion ################################################################### 
+
+class InscripcionForm(forms.ModelForm):
+    # habilitado_choices = (
+    #     (True, 'Habilitado'),
+    #     (False, 'Deshabilitado')
+    # )
+    fecha = forms.DateField (label="Fecha", initial=date.today(), widget=forms.DateInput(attrs={'class': 'formulario disabled', 'readonly': 'readonly'}   ))
+    # estudiante = forms.CharField(label="Estudiante",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
+    # curso = forms.CharField(label="Curso",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
+    # estudiantes = forms.CharField(label="Estudiantes",   choices=[(cursos.id, cursos ) for cursos in Course.objects.all()], widget=forms.Select, required=True)
+    estudiante = forms.ChoiceField(label="Estudiantes", choices=[(estudiante.id, estudiante ) for estudiante in Estudiante.objects.all()], widget=forms.Select, required=True)
+    curso = forms.ChoiceField(label="Curso", choices=[(curso.id, curso ) for curso in Course.objects.all()], widget=forms.Select, required=True)
+    
+
+    class Meta:
+        model=Inscripcion
+        fields=['fecha','curso','estudiante']
+        widgets = {
+            'fecha': forms.TextInput(attrs={'class':'form-control'}),
+            'curso': forms.TextInput(attrs={'class':'form-control'}),
+            'estudiante': forms.TextInput(attrs={'class':'form-control'}),
+        }
+
+    def clean_estudiante(self):
+        if Estudiante.objects.filter(id=self.cleaned_data['estudiante']).exists():
+            self.cleaned_data['estudiante']=Estudiante.objects.filter(id=self.cleaned_data['estudiante'])[0]
+        else:
+            raise ValidationError("El estudiante no existe")
+        return self.cleaned_data['estudiante']
+    
+    def clean_curso(self):
+        if Course.objects.filter(id=self.cleaned_data['curso']).exists():
+            self.cleaned_data['curso']=Course.objects.filter(id=self.cleaned_data['curso'])[0]
+        else:
+            raise ValidationError("El curso no existe")
+        return self.cleaned_data['curso']
+
+    def clean(self):
+        if Inscripcion.objects.filter(estudiante_id=self.cleaned_data['estudiante'].id,curso_id=self.cleaned_data['curso'].id).exists():
+            print("El estudiante ya se encuentra inscripto")
+            raise ValidationError("El estudiante ya se encuentra inscripto")
+        return self.cleaned_data

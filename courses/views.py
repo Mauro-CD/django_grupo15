@@ -13,10 +13,10 @@ from django.contrib.auth.models import User #agregado 22 octubre
 from django.contrib import messages #AGREGADO 22 OCTUBRE
 from .forms import UserRegistrationForm#agregado 22 octubre
 from .models import ContactMessage, Direccion, Estudiante, Direccion, Docente, Inscripcion
-from .forms import ContactoForm, EstudianteForm, CursosForm, DocenteForm, DocenteAltaForm, CursoFiltroForm
+from .forms import ContactoForm, EstudianteForm, CursosForm, DocenteForm, DocenteAltaForm, CursoFiltroForm, InscripcionForm
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 # from django.views.generic.edit import UpdateView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 
 def index(request):
     current_date = datetime.now()
@@ -283,7 +283,6 @@ class course_edit(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['titulo'] = "Usuarios"
-        # context['url_alta'] = reverse_lazy('estudiante_alta')
         return context
 
 
@@ -299,8 +298,6 @@ class courseCreateView(CreateView):
         return context
 
     def form_valid(self, form):
-        # Agregar lógica de validación adicional aquí
-        # Por ejemplo, puedes verificar si el formulario cumple con ciertas condiciones
         if form.is_valid():
             duracion = form.cleaned_data['duracion']
             descripcion = form.cleaned_data['descripcion']
@@ -339,10 +336,52 @@ class inscripcionesListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['titulo'] = "Usuarios"
-        # Agrega el formulario al contexto
         context['form'] = CursoFiltroForm(self.request.GET)
-        # Filtra los estudiantes si se ha enviado el formulario
         if context['form'].is_valid():
+            context['curso_actual']=context['form'].cleaned_data['curso'].id
             curso_seleccionado = context['form'].cleaned_data['curso'].estudiantesInscripto.all()
             context['estudiantes'] = curso_seleccionado
         return context
+    
+
+class inscripcionesDelete(DeleteView):
+    model = Inscripcion
+    template_name = 'abm_estudiante_curso_delete.html'
+    success_url = reverse_lazy('curso_estudiante')
+    
+    
+def eliminar_inscripcion(request, estudiante_id, curso_id):
+    if Inscripcion.objects.filter(estudiante_id=estudiante_id,curso_id=curso_id).exists():
+        id_inscripcion=Inscripcion.objects.filter(estudiante_id=estudiante_id,curso_id=curso_id)[0].id
+    else:
+        return redirect('curso_estudiante')
+    url = reverse('curso_estudiante_delete', args=[id_inscripcion])
+    return redirect(url)
+
+
+class inscripcionesCreateView(CreateView):
+    model = Inscripcion
+    form_class = InscripcionForm
+    template_name = 'abm_estudiante_cursonUpdate.html'
+   
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = "Nuevo Curso"
+        return context
+
+    def form_valid(self, form):
+        if form.is_valid():
+            inscripcion = Inscripcion(fecha=form.cleaned_data['fecha'], curso_id=form.cleaned_data['curso'].id, estudiante_id=form.cleaned_data['estudiante'].id)
+            inscripcion.save()
+        return redirect('curso_estudiante')
+
+
+def alta_inscripcion(request, estudiante_id, curso_id):
+    if Inscripcion.objects.filter(estudiante_id=estudiante_id,curso_id=curso_id).exists():
+        id_inscripcion=Inscripcion.objects.filter(estudiante_id=estudiante_id,curso_id=curso_id)[0].id
+    else:
+        return redirect('curso_estudiante')
+    url = reverse('curso_estudiante_alta', args=[id_inscripcion])
+    return redirect(url)
+
