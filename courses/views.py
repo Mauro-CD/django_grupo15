@@ -306,7 +306,7 @@ class courseCreateView(CreateView):
             descripcion = form.cleaned_data['descripcion']
             precio = form.cleaned_data['precio']
             titulo = form.cleaned_data['titulo']
-            docente = Docente.objects.get(id=form.cleaned_data['docente'])
+            docente = form.cleaned_data['docente']
             habilitado = form.cleaned_data['habilitado']
             curso = Course(duracion=duracion, descripcion=descripcion, precio=precio, titulo=titulo, docente_id=docente.id,habilitado=habilitado)
             curso.save()

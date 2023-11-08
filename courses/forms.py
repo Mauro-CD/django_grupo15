@@ -198,21 +198,26 @@ class CursosForm(forms.ModelForm):
     # docente = forms.CharField(label="Docente",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
     precio = forms.IntegerField(label="Precio",   widget=forms.NumberInput(attrs={'class': 'formulario'}  ),required=True)
     habilitado = forms.ChoiceField(label="Estado",  choices=habilitado_choices )
-    # docente = forms.ChoiceField(label="Docente", choices=[(docente.id, docente ) for docente in Docente.objects.all()], widget=forms.Select, required=True)
+    docente = forms.ChoiceField(label="Docente", choices=[(docente.id, docente ) for docente in Docente.objects.all()], widget=forms.Select, required=True)
 
     class Meta:
         model=Course
-        fields=['titulo','duracion','descripcion','precio','habilitado']
+        fields=['titulo','duracion','descripcion','precio','habilitado','docente']
         widgets = {
             'titulo': forms.TextInput(attrs={'class':'form-control'}),
             'duracion': forms.TextInput(attrs={'class':'form-control'}),
             'descripcion': forms.TextInput(attrs={'class':'form-control'}),
-            #'docente': forms.TextInput(attrs={'class':'form-control'}),
+            'docente': forms.TextInput(attrs={'class':'form-control'}),
             'precio': forms.NumberInput(attrs={'class':'form-control'}),
             'habilitado': forms.NumberInput(attrs={'class':'form-control'})
         }
 
-
+    def clean_docente(self):
+        if Docente.objects.filter(id=self.cleaned_data['docente']).exists():
+            self.cleaned_data['docente']=Docente.objects.filter(id=self.cleaned_data['docente'])[0]
+        else:
+            raise ValidationError("El docente no existe")
+        return self.cleaned_data['docente']
 
     # def clean_docente(self):
     #     if not Docente.objects.filter(id=self.cleaned_data['docente']).exists():
