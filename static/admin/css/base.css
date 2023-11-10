@@ -58,6 +58,7 @@ html[data-theme="light"],
     --font-family-primary:
         -apple-system,
         BlinkMacSystemFont,
+        "Montserrat"
         "Segoe UI",
         system-ui,
         Roboto,
@@ -1136,3 +1137,5 @@ a.deletelink:focus, a.deletelink:hover {
 .base-svgs {
     display: none;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');

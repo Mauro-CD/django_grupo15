@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block titulo %}ABM{% endblock%}
+
+{% load static %}
+
+{% block class %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/registracion.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/edit-course.css' %}">
+{% endblock %}
+
+{% block encabezado %}
+<h1>Modificacion de usuario</h1>
+{% endblock %}
+
+
+{% block contenido %}
+<a name="" id="" class="btn btn-primary" href="{% url 'docente_nuevo' %}" role="button"> <i class="fa-solid fa-circle-plus"></i> Nuevo</a>
+        <table >
+            <thead>
+                <tr>
+                    <th scope="col">Legajo</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">mail</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for docente in object_list  %}
+                    <tr>
+                        <td>{{docente.legajo}}</td>
+                        <td>{{docente.first_name}}</td>
+                        <td>{{docente.last_name}}</td>
+                        <td>{{docente.email}}</td>
+                        <td>
+                        <a class="btn btn-primary" href="{{docente.modificar_docente}}" title="Editar">Editar</a>
+                        <!-- <a type="button" class="btn btn-danger">Eliminar</a> -->
+                        <a type="button" class="btn btn-danger" href="{{docente.baja_docente}}" title="Eliminar">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+{% endblock %}

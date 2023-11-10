@@ -21,12 +21,14 @@ body {
 } */
 
 /* Doy estilo al container */
+/*form de registración*/
 form {
     max-width: 400px;
     margin: 0 auto;
     padding: 20px;
+    border-radius: 12px;
     background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 5px 5px 10px 0 rgba(72, 72, 72, 0.7);
 }
 
 /* Estilo de elementos del form */
@@ -48,7 +50,9 @@ form button:hover {
 /* Estilo inputs del form*/
 form input[type="text"],
 form input[type="email"],
-form input[type="password"] {
+form input[type="password"],
+form input[type="number"],
+form select {
     width: 100%;
     
     margin-bottom: 15px;
@@ -93,7 +97,7 @@ form {
 
 /* Animacion del fade */
 form {
-    animation: fadeIn 0.5s;
+    animation: fadeIn 0.5s;    
 }
 
 
@@ -109,11 +113,15 @@ form p label
     align-items: center;
     justify-content: center;
     gap: 1ch;
+    color: black;
 }
 
 form input[type="text"],
 form input[type="email"],
-form input[type="password"] {
+form input[type="password"],
+form input[type="number"],
+form select 
+{
     margin-bottom: 10px;
     padding: 10px;
     border-radius: 5px;
@@ -128,4 +136,9 @@ form button {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s
+}
+
+
+.disabled{
+    background: #ccc;
 }
