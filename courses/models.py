@@ -27,6 +27,11 @@ class Docente(User):
     def modificar_docente(self):
         return reverse_lazy('modificar_docente', args=[self.id])
     
+    @staticmethod
+    def obtener_docentes():
+        docentes = Docente.objects.all()
+        lista_docentes = [(docente.id, docente) for docente in docentes]
+        return lista_docentes
 
 
 class Estudiante(User):

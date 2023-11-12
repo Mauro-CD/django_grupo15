@@ -5,6 +5,13 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from courses.models import Estudiante, Course, Docente, Inscripcion
 from datetime import date
+from django.db import connection
+
+
+def table_exists(table_name):
+    with connection.cursor() as cursor:
+        cursor.execute(f"SELECT to_regclass('{table_name}')")
+        return cursor.fetchone()[0] is not None
 
 class CourseFilterForm(forms.Form):
     search = forms.CharField(label='Search', required=False)
@@ -132,6 +139,13 @@ class EstudianteForm(forms.ModelForm):
     #         # 'activo' : forms.TextInput(attrs={'class':'form-control'})
     #     }
 
+def obtener_estudiantes():
+    lista_estudiante=[None,None]
+    if table_exists('courses_estudiante'):
+        estudiantes = Estudiante.objects.all()
+        lista_estudiante = [(estudiante.id, estudiante) for estudiante in estudiantes]
+    return lista_estudiante
+
 
 ################################################# Docente ################################################################### 
 class DocenteAltaForm(forms.ModelForm):
@@ -185,6 +199,12 @@ class DocenteForm(forms.ModelForm):
     #         raise ValidationError("El legajo ya existe")
     #     return self.cleaned_data['legajo']
 
+def obtener_docentes():
+    lista_docentes=[None,None]
+    if table_exists('courses_docente'):
+        docentes = Docente.objects.all()
+        lista_docentes = [(docente.id, docente) for docente in docentes]
+    return lista_docentes
 
 ################################################# Curso ################################################################### 
 class CursosForm(forms.ModelForm):
@@ -192,13 +212,15 @@ class CursosForm(forms.ModelForm):
         (True, 'Habilitado'),
         (False, 'Deshabilitado')
     )
+
     titulo = forms.CharField(label="Titulo",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
     duracion = forms.CharField(label="Duracion",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
     descripcion = forms.CharField(label="Descripcion",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
     # docente = forms.CharField(label="Docente",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
     precio = forms.IntegerField(label="Precio",   widget=forms.NumberInput(attrs={'class': 'formulario'}  ),required=True)
     habilitado = forms.ChoiceField(label="Estado",  choices=habilitado_choices )
-    docente = forms.ChoiceField(label="Docente", choices=[(docente.id, docente ) for docente in Docente.objects.all()], widget=forms.Select, required=True)
+    # docente = forms.ChoiceField(label="Docente", choices=[(docente.id, docente ) for docente in Docente.objects.all()], widget=forms.Select, required=True)
+    docente = forms.ChoiceField(label="Docente", choices=obtener_docentes(), widget=forms.Select, required=True)
 
     class Meta:
         model=Course
@@ -219,6 +241,10 @@ class CursosForm(forms.ModelForm):
             raise ValidationError("El docente no existe")
         return self.cleaned_data['docente']
 
+    def __init__(self, *args, **kwargs):
+        super(CursosForm, self).__init__(*args, **kwargs)
+        self.fields['docente'].choices = obtener_docentes()
+
     # def clean_docente(self):
     #     if not Docente.objects.filter(id=self.cleaned_data['docente']).exists():
     #         raise ValidationError("El docente no existe")
@@ -229,6 +255,12 @@ class CursosForm(forms.ModelForm):
     #         raise ValidationError("El usuario ya existe")
     #     return self.cleaned_data['email']
 
+def obtener_cursos():
+    lista_cursos=[None,None]
+    if table_exists('courses_course'):
+        cursos = Course.objects.all()
+        lista_cursos = [(curso.id, curso) for curso in cursos]
+    return lista_cursos
 
 class CursoFiltroForm(forms.Form):
     curso = forms.ModelChoiceField(
@@ -244,12 +276,16 @@ class InscripcionForm(forms.ModelForm):
     #     (True, 'Habilitado'),
     #     (False, 'Deshabilitado')
     # )
+
     fecha = forms.DateField (label="Fecha", initial=date.today(), widget=forms.DateInput(attrs={'class': 'formulario disabled', 'readonly': 'readonly'}   ))
     # estudiante = forms.CharField(label="Estudiante",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
     # curso = forms.CharField(label="Curso",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
     # estudiantes = forms.CharField(label="Estudiantes",   choices=[(cursos.id, cursos ) for cursos in Course.objects.all()], widget=forms.Select, required=True)
-    estudiante = forms.ChoiceField(label="Estudiantes", choices=[(estudiante.id, estudiante ) for estudiante in Estudiante.objects.all()], widget=forms.Select, required=True)
-    curso = forms.ChoiceField(label="Curso", choices=[(curso.id, curso ) for curso in Course.objects.all()], widget=forms.Select, required=True)
+    # estudiante = forms.ChoiceField(label="Estudiantes", choices=[(estudiante.id, estudiante ) for estudiante in Estudiante.objects.all()], widget=forms.Select, required=True)
+    # curso = forms.ChoiceField(label="Curso", choices=[(curso.id, curso ) for curso in Course.objects.all()], widget=forms.Select, required=True)
+    estudiante = forms.ChoiceField(label="Estudiantes", choices=obtener_estudiantes(), widget=forms.Select, required=True)
+    curso = forms.ChoiceField(label="Curso", choices=obtener_cursos(), widget=forms.Select, required=True)
+
     
 
     class Meta:
@@ -280,3 +316,8 @@ class InscripcionForm(forms.ModelForm):
             print("El estudiante ya se encuentra inscripto")
             raise ValidationError("El estudiante ya se encuentra inscripto")
         return self.cleaned_data
+
+    def __init__(self, *args, **kwargs):
+        super(InscripcionForm, self).__init__(*args, **kwargs)
+        self.fields['estudiante'].choices = obtener_estudiantes()
+        self.fields['curso'].choices = obtener_cursos()
