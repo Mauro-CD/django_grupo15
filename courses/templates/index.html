@@ -16,25 +16,24 @@
     <div id="principal">
       <h2 id="cardboxTittle">Cursos y Novedades</h2>  
 
-      <div class="slideshow-container">
-        {% for i in "12345678" %}
+      <div class="slideshow-container" style="width: 100vh; height: 80vh;">
+        {% for char in "abcdefghijklmno" %}
           <div class="mySlides">
-            <img src="{% static 'img/'|add:i|add:'.jpg' %}" alt="Slide {{ i }}">
+            <img style="border-radius: 20px;" src="{% static 'img/'|add:char|add:'.jpg' %}" alt="Slide {{ char }}">
           </div>
         {% endfor %}
       
-        <!-- Navegacion puntos -->
+        <!-- Navigation dots -->
         <div class="dot-container">
-          {% for i in "12345678" %}
-            <span class="dot" onclick="currentSlide({n})"></span>
+          {% for char in "abcdefghijklmno" %}
+            <span class="dot" onclick="currentSlide('{{ char }}')"></span>
           {% endfor %}
         </div>
       </div>
       
-     <br>
-     <br>
       
-
+     <br>
+     <br>  
 
       <nav width="100%" height="100%" src="pages/cursos.html" scrolling="no" frameborder="no"></nav>
       <div class="video" style="margin-bottom: 60px;">
