@@ -57,7 +57,7 @@
             <a class="Burger" onclick="showMenu(false)">
                 <img class="iconMenu" src="{% static 'icons/icon-menu-w.png' %}" alt="menu">
             </a>
-            <li><a class="menuList" href="/"><img class="iconMenuGrid" src="{% static 'favicon/boock.ico' %}" alt="Pagina principal">Página principal</a></li>
+            <li><a class="menuList" href="/"><img class="iconMenuGrid" src="{% static 'favicon/boock.ico' %}" alt="Pagina principal">Inicio</a></li>
             {% if not user.is_authenticated %}
             <li><a class="menuList" href="{% url 'registro' %}"><img class="iconMenuGrid" src="{% static 'favicon/registro.ico' %}" alt="Pagina principal">Registrese</a></li>
             {% else %}

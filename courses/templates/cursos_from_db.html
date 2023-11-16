@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% block titulo %}Cursos{% endblock%}
+{% load static %}
+{% block class %} 
+<link rel="stylesheet" type="text/css" href="{% static 'css/cards-cursos.css' %}">
+<script src="{% static 'js/filtrobusqueda.js' %}"></script>
+{% endblock %}
+{% block encabezado %}
+<h1 style="font-size: 8vh;">Cursos disponibles</h1>
+<input type="text" id="buscar" name="buscar" placeholder="Buscar cursos..." >
+<button  onclick="search()" type="button" class="btn btn-primary btn-sm" >Buscar </button>
+{% endblock %}
+
+{% block contenido %}
+<h1>Lista de cursos</h1>
+
+<!--
+{% if cursos %}
+    <ul>
+        {% for curso_id, curso in cursos %}
+            <li>
+                ID Curso: {{ curso_id }}<br>
+                Título: {{ curso.titulo }}<br>
+                Duración: {{ curso.duracion }}<br>
+                Descripción: {{ curso.descripcion }}<br>
+                Imagen: <img src="{{ curso.imagen }}" alt="Curso Image"><br>
+                Precio: {{ curso.precio }}<br>
+                Habilitado: {{ curso.habilitado }}<br>
+                Docente ID: {{ curso.docente_id }}<br>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No courses available.</p>
+{% endif %}
+-->
+
+{% if cursos %}
+<div class="card-deck">
+    {% for curso_id, curso in cursos %}
+        {% if curso.habilitado %}
+            <div class="card">
+                <img src="{{ curso.imagen }}" class="card-img-top" alt="Curso Image">
+                <div class="card-body">
+                    <h5 class="card-title">{{ curso.titulo }}</h5>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#cursoModal{{ curso_id }}">Ver detalles</button>
+                    <button href="{% url 'pago' %}" class="btn btn-success"><a href="{% url 'pago' %}" style="color: white;">Comprar</a></button>
+                    
+                </div>
+            </div>
+
+            <!-- Modal para detalles-->
+            <div class="modal fade" id="cursoModal{{ curso_id }}" tabindex="-1" role="dialog" aria-labelledby="cursoModalLabel{{ curso_id }}" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="cursoModalLabel{{ curso_id }}">Detalles del Curso</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>ID Curso: {{ curso_id }}</p>
+                            <p>{{ curso.titulo }}</p>
+                            <p>Duración: {{ curso.duracion }}</p>
+                            <p>Descripción: {{ curso.descripcion }}</p>
+                            <p><img src="{{ curso.imagen }}" alt="Curso Image"></p>
+                            <p>Precio: $AR {{ curso.precio }}</p>
+                            <p>Docente ID: {{ curso.docente_id }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+{% else %}
+<p>No courses available.</p>
+{% endif %}
+
+
+
+
+<br><br><br><br>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+crossorigin="anonymous"></script>
+
+
+
+{% endblock %}
+

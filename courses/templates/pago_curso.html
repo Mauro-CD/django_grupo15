@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Pago{% endblock %}
+{% load static %}
+{% block class %} 
+<link rel="stylesheet" type="text/css" href="{% static 'css/pagoform.css' %}">
+<script src="{% static 'js/pagocurso.js' %}"></script>
+{% endblock %}
+
+{% block encabezado %}
+<h1 style="font-size: 8vh;">Informaciòn de pago</h1>
+{% endblock %}
+
+{% block contenido %}
+<body>
+    <form id="paymentForm">
+        <!-- Numero tarjeta -->
+        <label for="creditCardNumber">Nùmero Tarjeta de Crèdito</label>
+        <input type="text" id="creditCardNumber" maxlength="16" required>
+        <br>
+        <!-- Vencimiento (MM/YYYY) -->
+        <label for="expiryDate">Vencimiento (MM/YYYY):</label>
+        <input type="text" id="expiryDate" pattern="^(0[1-9]|1[0-2])\/[0-9]{4}$" placeholder="MM/YYYY" required>
+        <br>
+        <!-- CVV -->
+        <label for="cvv">CVV:</label>
+        <input type="text" id="cvv" pattern="[0-9]{3}" maxlength="3" required>
+        <br>
+        <div class="boxbuttons">
+            <button type="button" onclick="cancelPayment()" style="background-color: red;">Anular pago</button>
+            <button type="button" onclick="confirmPayment()" style="background-color: green;">Confirmar Pago</button>
+        </div>
+        
+    </form>
+    <div id="paymentMessage"></div>
+
+    
+</body>
+{% endblock %}

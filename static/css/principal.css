@@ -423,7 +423,7 @@ label {
 } */
 
 /*Titulo neon*/
-.neonText {
+.neonText {  
   color: #fff;
   animation: changeTitle 5s infinite;
   text-shadow:

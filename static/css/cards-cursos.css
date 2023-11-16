@@ -1,0 +1,12 @@
+.card-deck {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -15px; /* Adjust margin to remove default spacing */
+}
+
+.card {
+    flex: 0 0 calc(50% - 30px); /* 30px to account for margins */
+    margin: 15px;
+    max-width: calc(50% - 30px); /* 30px to account for margins */
+    box-sizing: border-box;
+}

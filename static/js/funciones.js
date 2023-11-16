@@ -113,7 +113,9 @@ function load(curso) {
                   }
                   cursoHTML = cursoHTML + `</ul></section>`;
                   let pie = `<section><h2>Detalles del curso</h2><ul><li><strong>Instructor:</strong> ${curso.instructor}</li><li><strong>Duracion:</strong> ${curso.duracion}</li></ul><button class="button" name="Inscribirme" onclick="inscripcion(true)">Inscribirme en el curso</button><button class="button bottonCancel" name="cancelar" onclick="inscripcion(false)">Cancelar</button></section>`
+                  
                   cursoSelecionado.innerHTML = cursoHTML + pie
+                  
                   document.getElementById("secundario").style.display = "block";
                   cursoHTML = cursoHTML + `</ul></li>`
                })

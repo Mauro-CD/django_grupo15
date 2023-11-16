@@ -56,6 +56,7 @@ class Course(models.Model):
     titulo = models.CharField(max_length=255)
     duracion = models.CharField(max_length=255)
     descripcion = models.TextField()
+    imagen = models.CharField(max_length=255)#13nov agregado
     precio = models.DecimalField(max_digits=10, decimal_places=2)
     docente = models.ForeignKey(Docente, on_delete=models.CASCADE)
     habilitado = models.BooleanField(default=False)

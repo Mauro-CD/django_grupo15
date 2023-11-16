@@ -17,6 +17,7 @@ from .forms import ContactoForm, EstudianteForm, CursosForm, DocenteForm, Docent
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 # from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy, reverse
+from .forms import obtener_cursos#agregado14nov
 
 def index(request):
     current_date = datetime.now()
@@ -301,11 +302,12 @@ class courseCreateView(CreateView):
         if form.is_valid():
             duracion = form.cleaned_data['duracion']
             descripcion = form.cleaned_data['descripcion']
+            imagen=form.cleaned_data['imagen']#13nov
             precio = form.cleaned_data['precio']
             titulo = form.cleaned_data['titulo']
             docente = form.cleaned_data['docente']
             habilitado = form.cleaned_data['habilitado']
-            curso = Course(duracion=duracion, descripcion=descripcion, precio=precio, titulo=titulo, docente_id=docente.id,habilitado=habilitado)
+            curso = Course(duracion=duracion, descripcion=descripcion,imagen=imagen, precio=precio, titulo=titulo, docente_id=docente.id,habilitado=habilitado)
             curso.save()
         return redirect('course_edit')
 
@@ -385,3 +387,15 @@ def alta_inscripcion(request, estudiante_id, curso_id):
     url = reverse('curso_estudiante_alta', args=[id_inscripcion])
     return redirect(url)
 
+def cursos_from_db(request):
+    cursos = obtener_cursos()
+    return render(request, 'cursos_from_db.html', {'cursos': cursos})
+
+def pago(request):
+    # Your payment logic goes here
+    # You can access form data using request.POST
+
+    # For example, check if payment is successful
+    payment_successful = True  # You need to replace this with your actual payment logic
+
+    return render(request, 'pago_curso.html', {'payment_successful': payment_successful})
