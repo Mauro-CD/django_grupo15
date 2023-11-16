@@ -19,6 +19,10 @@ from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy, reverse
 from .forms import obtener_cursos#agregado14nov
 
+from .models import Foro
+from .forms import ForoForm
+from django.utils import timezone
+
 def index(request):
     current_date = datetime.now()
     text_date = 'Fecha actual:'
@@ -146,11 +150,28 @@ def course_detail(request, course_id):
     # Devuelve detalles del curso
     course = Course.objects.get(pk=course_id)
     return render(request, 'course_detail.html', {'course': course})
-
+'''
 def course_foro(request):
     #  Devuelve detalles del curso
     foro = Course.objects.all()
     return render(request, 'foro.html', {'foro': foro})
+'''
+def course_foro(request):
+    if request.method == 'POST':
+        form = ForoForm(request.POST)
+        if form.is_valid():            
+            form.instance.usuario = request.user
+            form.instance.fecha = timezone.now()
+            form.save()
+            return redirect('foro') 
+    else:
+        form = ForoForm()
+
+    messages = Foro.objects.order_by('-fecha')
+
+    return render(request, 'foro.html', {'form': form, 'messages': messages})
+
+
 
 def course_register(request):
     #  Devuelve detalles del curso

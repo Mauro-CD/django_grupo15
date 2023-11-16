@@ -104,7 +104,7 @@ class Item(models.Model):
 class Foro(models.Model):
     titulo = models.CharField(max_length=100)
     contenido = models.TextField()
-    fecha = models.DateField()
+    fecha = models.DateTimeField()
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
 
 #### relacion uno a uno: Estudiante -> Direccion

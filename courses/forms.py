@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from courses.models import Estudiante, Course, Docente, Inscripcion
 from datetime import date
 from django.db import connection
-
+from .models import Foro
 
 def table_exists(table_name):
     with connection.cursor() as cursor:
@@ -75,12 +75,17 @@ class ContactoForm(forms.Form):
 
 
 ################################################# Foro ###################################################################
+'''
 class ForoForm(forms.Form):
     # usuario = forms.CharField(label="Usuario",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
     titulo = forms.CharField(label="Usuario",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
     fecha = forms.DateField(label="Fecha")
     contenido = forms.CharField(widget=forms.Textarea)
-
+'''
+class ForoForm(forms.ModelForm):
+    class Meta:
+        model = Foro
+        fields = ['titulo', 'contenido']  # Add other fields if needed
 
 ################################################# Direccion ###################################################################
 class DireccionForm(forms.Form):
