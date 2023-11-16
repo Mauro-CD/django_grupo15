@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block titulo %}ABM{% endblock%}
+
+{% load static %}
+
+{% block class %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/registracion.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/edit-course.css' %}">
+{% endblock %}
+
+{% block encabezado %}
+<h1>Alta Inscripcion</h1>
+{% endblock %}
+
+
+{% block contenido %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for campo in form %}
+        <div class="form-group">
+            <label for="">{{campo.label}}</label>
+            {{campo}}
+        </div>
+        <div>{{campo.errors}}</div>
+    {% endfor %}
+    <div class="row mt-3">
+        <div class="col-12">
+            <!-- <a class="btn btn-secondary" onclick="javascript:window.history.go(-1);">Cancelar</a>        -->
+            <input type="submit" value="Guardar" class="btn btn-primary">
+            <a type="button" href="{% url 'curso_estudiante' %}" value="Cancalar" class="btn btn-danger">Cancelar</a> 
+        </div>
+    </div>
+</form>
+
+
+{% endblock %}

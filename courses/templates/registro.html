@@ -1,64 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    {% load static %}
-    {% include 'navigation.html' %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/principal.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/formularios.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'favicon/boock.ico' %}">
-    <script src="js/registro.js"></script>
-    <title>Registro</title>
-</head>
+{% block titulo %}Registro{% endblock%}
 
-<body>
+{% load static %}
 
-    <header>
-        <menu-ao id="menu-ao"></menu-ao>
-        <h1>Registrarse para una cuenta</h1>
-        <p class="menuSuperior">¿Ya tienes una cuenta? <a href="/">Ingresar aqui</a>.</p>
-    </header>
+{% block class %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/registracion.css' %}">
+{% endblock %}
 
-    <main>
-        <form action="" id="registro" name="formu">
-            <div>
-                <label for="nombreDeUsuario">Nombre:</label>
-                <input class="formInput" type="text" id="name" name="name" placeholder="Nombre" minlength="2"/><p id="invalidName"></p>
-                <div class="error"></div>
-            </div>
-            <div>
-                <label for="nombreDeUsuario">Apellido:</label>
-                <input class="formInput" type="text" id="lastname" name="lastname" placeholder="Apellido" minlength="2"/><p id="invalidLastname"></p>
-                <div class="error"></div>
-            </div>
-            <div>
-                <label for="correoElectronico">Correo Electrónico</label>
-                <input class="formInput" type="email" id="email" name="email" placeholder="abc@gmail.com" pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-zA-Z]{2,4}" /><p id="invalidMail"></p>
-                <div class="error"></div>
-
-            </div>
-
-            <div>
-                <label for="password">Contraseña</label>
-                <input class="formInput" type="password" id="password" name="password" placeholder="Ingresar contraseña" minlength="6"/>
-                <div class="error"></div>
-            </div>
-            <div>
-                <label for="password">Confirmar Contraseña</label>
-                <input class="formInput" type="password" id="password2" name="password2" placeholder="Ingresar contraseña" minlength="6"/><p id="invalidPassword"></p>
-                <div class="error"></div>
-            </div>
-            <input type="button" class="button" id="btn" value="Registrar" onclick="registro()">
-        </form>
+{% block encabezado %}
+<h1>Registrarse para una cuenta</h1>
+<p class="menuSuperior">¿Ya tienes una cuenta? <a href="/login/" style="color: coral;">Ingresar aqui</a>.</p>
+{% endblock %}
 
 
-    </main>
-
-    <footer>
-        <!-- <p>&copy; 2023 Plataforma de aprendizaje en linea. Todos derechos reservados.</p> -->
-    </footer>
-    <script src="{% static 'js/menu.js' %}"></script>
-    
-</body>
-
-</html>
+{% block contenido %}
+<main>
+    <form class="form2" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div>
+            <button type="submit">
+            Registrame
+            </button>
+        </div>
+    </form>
+</main>
+<script src="{% static 'js/menu.js' %}"></script>
+{% endblock %}

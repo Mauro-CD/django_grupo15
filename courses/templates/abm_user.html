@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block titulo %}ABM{% endblock%}
+
+{% load static %}
+
+{% block class %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/registracion.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/edit-course.css' %}">
+{% endblock %}
+
+{% block encabezado %}
+<h1>Modificacion de usuario</h1>
+{% endblock %}
+
+
+{% block contenido %}
+        <table >
+            <thead>
+                <tr>
+                    <th scope="col">Matricula</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Activo</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for estudiante in object_list  %}
+                    <tr>
+                        <td>{{estudiante.matricula}}</td>
+                        <td>{{estudiante.first_name}}</td>
+                        <td>{{estudiante.last_name}}</td>
+                        <td>{{estudiante.activo}}</td>
+                        <td>
+                        <a class="btn btn-primary" href="{{estudiante.modificar_estudiante}}" title="Editar">Editar</a>
+                        <!-- <a type="button" class="btn btn-danger">Eliminar</a> -->
+                        <a type="button" class="btn btn-danger" href="{{estudiante.baja_estudiante}}" title="Eliminar">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+{% endblock %}

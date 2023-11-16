@@ -5,7 +5,6 @@
 {% load static %}
 
 {% block encabezado %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/principal.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'css/contacto.css' %}">
 <script src="https://kit.fontawesome.com/4a51b8871d.js" crossorigin="anonymous"></script>
 <h1>Contactanos</h1>
@@ -15,46 +14,47 @@
 {% block contenido %}
 
     <main>
+        <div class="div_formulario"></div>
 
-        {% comment %} <form method="post" action="{% url 'contact' %}">
+        <form class="formulario" method="post" action="{% url 'contact' %}">
             {% csrf_token %}
-            {{ contacto_form.as_p }}
-            <button type="submit">Enviar</button>
-        </form> {% endcomment %}
-        
-<div class="div_formulario">
-        <form class="formulario" method="post" action="{% url 'contacto' %}">
-            {% csrf_token %}
-        <table class="table_formulario"> 
-            {{ contacto_form.as_table }}
-        </table> 
-            <button  type="submit">Contáctanos</button>
-        </form>
-        
-        {% if messages %} 
-        <ul class="messages"> 
-            {% for message in messages %} 
-                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li> 
-            {% endfor %}  
-        </ul> 
-        {% endif %} 
-    </div>
+            <table class="table_formulario"> 
+                {{ contacto_form.as_table }}
+            </table> 
+                <button  type="submit">Contáctanos</button>
+            </form>
 
+            {% if messages %} 
+            <ul class="messages"> 
+                {% for message in messages %} 
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li> 
+                {% endfor %}  
+            </ul> 
+            {% endif %} 
+        </div>
+        
         <aside>
             <div id="map-container">
-                <h2>Donde Encontrarnos</h2>
+                <h2>Dónde Encontrarnos</h2>                
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13390.992811901342!2d-60.6588955!3d-32.9576567!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b7ab11d0eb49c3%3A0x11f1d3d54f950dd0!2sUniversidad%20Tecnol%C3%B3gica%20Nacional%20%7C%20Facultad%20Regional%20Rosario!5e0!3m2!1ses!2sar!4v1685331428822!5m2!1ses!2sar"
                     width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
+            <div>
+                <br>
+            </div>
             <div id="social-container">
-                <h2>Social Media</h2>
-                <ul class="social-media-list">
+                <h2 style="font-size: 2vh;margin-top: 20px;">Social Media</h2>
+                <ul class="social-media-list" style="font-size: 2vh">
                     <li><a href="https://www.facebook.com"><i class="fab fa-facebook-f"></i> Facebook</a></li>
                     <li><a href="https://www.twitter.com"><i class="fab fa-twitter"></i> Twitter</a></li>
                     <li><a href="https://www.instagram.com"><i class="fab fa-instagram"></i> Instagram</a></li>
                   </ul>
+            </div>
+            <div>
+                <br>
+                <br>                
             </div>
         </aside>
     </main>

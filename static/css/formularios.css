@@ -3,15 +3,16 @@
     display: block;
     width: 100%;
     border: 1px solid #e8e8e8;
+    border-radius: 12px;
     border-radius: 4px;
-    padding: 2x 5px;
-    box-shadow: 1px 1px 2px 0 rgba(51, 51, 51, 0.2) inset;
+    padding: 2x 5px;   
     background-color: #fff;
     background-clip: padding-box;
     color: #0267b2;
     font-size: 16px;
     font-weight: normal;
     transition: all 250ms;
+    box-shadow: 5px 5px 10px 0 rgba(72, 72, 72, 0.7);
   }
   .formInput::-moz-placeholder {
     color: #999;
@@ -220,3 +221,5 @@
   #invalidMessage::before{
     content: 'Ingrese un mensaje';
   }
+
+ 
