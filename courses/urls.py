@@ -2,7 +2,8 @@
 from django.urls import path
 from . import views
 from django.contrib import admin
-
+from django.views.defaults import permission_denied, page_not_found
+from django.conf.urls import handler404
 
 
 urlpatterns = [
@@ -41,4 +42,5 @@ urlpatterns = [
 
     path('courseAvailable/', views.course_available, name='courseAvailable'),
     path('', views.index, name='index'),
+    path('403/', permission_denied, {'exception': 'PermissionDenied'}, name='403'),
 ]

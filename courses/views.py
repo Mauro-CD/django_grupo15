@@ -17,6 +17,8 @@ from .forms import ContactoForm, EstudianteForm, CursosForm, DocenteForm, Docent
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 # from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy, reverse
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+
 
 def index(request):
     current_date = datetime.now()
@@ -146,6 +148,7 @@ def course_detail(request, course_id):
     course = Course.objects.get(pk=course_id)
     return render(request, 'course_detail.html', {'course': course})
 
+@login_required(login_url='login')
 def course_foro(request):
     #  Devuelve detalles del curso
     foro = Course.objects.all()
@@ -171,24 +174,37 @@ def admin(request):
     #  Devuelve detalles del curso
     return redirect('admin')
 
-class estudianteListView(ListView):
+
+class estudianteListView(LoginRequiredMixin, ListView): #UserPassesTestMixin
+    login_url = '/login/'
+    redirect_field_name = 'login'
     model = Estudiante
     template_name = 'abm_user.html'
     ordering = ['matricula']
 
+    # def test_func(self):
+    #     # Cambia el nombre de la función y las referencias dentro de la clase.
+    #     return self.request.user.groups.filter(name='gp_docente').exists()
+        
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['titulo'] = "Usuarios"
         # context['url_alta'] = reverse_lazy('estudiante_alta')
         return context
 
-class estudianteDelete(DeleteView):
+
+class estudianteDelete(LoginRequiredMixin, DeleteView):
+    login_url = '/login/'
+    redirect_field_name = 'login'
     model = Estudiante
     template_name = 'abm_user_delete.html'
     success_url = reverse_lazy('abm_user')
 
 
-class estudianteUpdate(UpdateView):
+class estudianteUpdate(LoginRequiredMixin, UpdateView):
+    login_url = '/login/'
+    redirect_field_name = 'login'
     model = Estudiante
     # fields = ["id"]
     form_class = EstudianteForm
@@ -200,7 +216,10 @@ class estudianteUpdate(UpdateView):
         context['titulo'] = "Baja Usuario"
         return context
 
-class docenteListView(ListView):
+
+class docenteListView(LoginRequiredMixin, ListView):
+    login_url = '/login/'
+    redirect_field_name = 'login'
     model = Docente
     template_name = 'abm_docente.html'
     ordering = ['legajo']
@@ -211,13 +230,18 @@ class docenteListView(ListView):
         # context['url_alta'] = reverse_lazy('estudiante_alta')
         return context
 
-class docenteDelete(DeleteView):
+
+class docenteDelete(LoginRequiredMixin, DeleteView):
+    login_url = '/login/'
+    redirect_field_name = 'login'
     model = Docente
     template_name = 'abm_docente_delete.html'
     success_url = reverse_lazy('abm_docente')
 
 
-class docenteUpdate(UpdateView):
+class docenteUpdate(LoginRequiredMixin, UpdateView):
+    login_url = '/login/'
+    redirect_field_name = 'login'
     model = Docente
     # fields = ["id"]
     form_class = DocenteForm
@@ -229,7 +253,10 @@ class docenteUpdate(UpdateView):
         context['titulo'] = "Baja Docente"
         return context
 
-class docenteCreateView(CreateView):
+
+class docenteCreateView(LoginRequiredMixin, CreateView):
+    login_url = '/login/'
+    redirect_field_name = 'login'
     model = Docente
     form_class = DocenteAltaForm
     template_name = 'abm_docente_update.html'
@@ -267,7 +294,8 @@ class docenteCreateView(CreateView):
             nombre = form.cleaned_data['first_name']
             apellido = form.cleaned_data['last_name']
             email = form.cleaned_data['email']
-            docente = Docente.objects.create_user(legajo=legajo, first_name=nombre, last_name=apellido, email=email, username=email)
+            password = form.cleaned_data['password']
+            docente = Docente.objects.create_user(legajo=legajo, first_name=nombre, last_name=apellido, email=email, username=email, password=password)
             # docente.save()                                   
             direccion = Direccion(usuario_id=docente.id, pais=form.cleaned_data['pais'], ciudad=form.cleaned_data['ciudad'], altura=form.cleaned_data['altura'], calle=form.cleaned_data['calle'])
             # direccion = Direccion(usuario_id=docente.id)
@@ -275,7 +303,9 @@ class docenteCreateView(CreateView):
         return redirect('abm_docente')
 
 
-class course_edit(ListView):
+class course_edit(LoginRequiredMixin, ListView):
+    login_url = '/login/'
+    redirect_field_name = 'login'
     model = Course
     template_name = 'edit-course-listv2.html'
     ordering = ['titulo']
@@ -286,7 +316,9 @@ class course_edit(ListView):
         return context
 
 
-class courseCreateView(CreateView):
+class courseCreateView(LoginRequiredMixin, CreateView):
+    login_url = '/login/'
+    redirect_field_name = 'login'
     model = Course
     form_class = CursosForm
     template_name = 'edit-course-newv2.html'
@@ -308,14 +340,19 @@ class courseCreateView(CreateView):
             curso = Course(duracion=duracion, descripcion=descripcion, precio=precio, titulo=titulo, docente_id=docente.id,habilitado=habilitado)
             curso.save()
         return redirect('course_edit')
+    
 
-class cursoDelete(DeleteView):
+class cursoDelete(LoginRequiredMixin, DeleteView):
+    login_url = '/login/'
+    redirect_field_name = 'login'
     model = Course
     template_name = 'edit-course-deletev2.html'
     success_url = reverse_lazy('course_edit')
 
 
-class cursoUpdate(UpdateView):
+class cursoUpdate(LoginRequiredMixin, UpdateView):
+    login_url = '/login/'
+    redirect_field_name = 'login'
     model = Course
     # fields = ["id"]
     form_class = CursosForm
@@ -326,8 +363,11 @@ class cursoUpdate(UpdateView):
         context = super().get_context_data(**kwargs)
         context['titulo'] = "Actualizar Curso"
         return context
-    
-class inscripcionesListView(ListView):
+
+
+class inscripcionesListView(LoginRequiredMixin, ListView):
+    login_url = '/login/'
+    redirect_field_name = 'login'
     model = Course
     template_name = 'abm_estudiante_curso.html'
     ordering = ['titulo']
@@ -344,12 +384,14 @@ class inscripcionesListView(ListView):
         return context
     
 
-class inscripcionesDelete(DeleteView):
+class inscripcionesDelete(LoginRequiredMixin, DeleteView):
+    login_url = '/login/'
+    redirect_field_name = 'login'
     model = Inscripcion
     template_name = 'abm_estudiante_curso_delete.html'
     success_url = reverse_lazy('curso_estudiante')
     
-    
+@login_required(login_url='login')
 def eliminar_inscripcion(request, estudiante_id, curso_id):
     if Inscripcion.objects.filter(estudiante_id=estudiante_id,curso_id=curso_id).exists():
         id_inscripcion=Inscripcion.objects.filter(estudiante_id=estudiante_id,curso_id=curso_id)[0].id
@@ -359,7 +401,9 @@ def eliminar_inscripcion(request, estudiante_id, curso_id):
     return redirect(url)
 
 
-class inscripcionesCreateView(CreateView):
+class inscripcionesCreateView(LoginRequiredMixin, CreateView):
+    login_url = '/login/'
+    redirect_field_name = 'login'
     model = Inscripcion
     form_class = InscripcionForm
     template_name = 'abm_estudiante_cursonUpdate.html'
@@ -376,7 +420,7 @@ class inscripcionesCreateView(CreateView):
             inscripcion.save()
         return redirect('curso_estudiante')
 
-
+@login_required(login_url='login')
 def alta_inscripcion(request, estudiante_id, curso_id):
     if Inscripcion.objects.filter(estudiante_id=estudiante_id,curso_id=curso_id).exists():
         id_inscripcion=Inscripcion.objects.filter(estudiante_id=estudiante_id,curso_id=curso_id)[0].id
