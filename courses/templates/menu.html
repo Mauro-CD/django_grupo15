@@ -65,7 +65,7 @@
             <li><a class="menuList" href="{% url 'courseAvailable' %}"><img class="iconMenuGrid" src="{% static 'favicon/book.ico' %}" alt="Pagina principal">Cursos Disponibles</a></li>
             <li><a class="menuList" href="{% url 'foro' %}"><img class="iconMenuGrid" src="{% static 'favicon/partners.ico' %}" alt="Pagina principal">Foro</a></li>
             {% if user.is_staff %}
-            <li><a class="menuList" href="{% url 'abm_user' %}"><img class="iconMenuGrid" src="/static/favicon/operator.ico" alt="Pagina principal">Editar Usuario</a></li>
+            <li><a class="menuList" href="{% url 'abm_user' %}"><img class="iconMenuGrid" src="/static/favicon/operator.ico" alt="Pagina principal">Alumno edición</a></li>
             <li><a class="menuList" href="{% url 'course_edit' %}"><img class="iconMenuGrid" src="/static/favicon/operator.ico" alt="Pagina principal">Cursos edición</a></li>
             <li><a class="menuList" href="{% url 'abm_docente' %}"><img class="iconMenuGrid" src="/static/favicon/operator.ico" alt="Pagina principal">Docente edición</a></li>
             <li><a class="menuList" href="{% url 'curso_estudiante' %}"><img class="iconMenuGrid" src="/static/favicon/operator.ico" alt="Pagina principal">Inscripciones</a></li>
