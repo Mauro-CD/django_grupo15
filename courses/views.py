@@ -458,10 +458,6 @@ def cursos_from_db(request):
     return render(request, 'cursos_from_db.html', {'cursos': cursos})
 
 def pago(request):
-    # Your payment logic goes here
-    # You can access form data using request.POST
-
-    # For example, check if payment is successful
-    payment_successful = True  # You need to replace this with your actual payment logic
-
+    
+    payment_successful = True  
     return render(request, 'pago_curso.html', {'payment_successful': payment_successful})

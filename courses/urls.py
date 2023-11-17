@@ -20,6 +20,7 @@ urlpatterns = [
 
     path('courses/inscripciones', views.inscripcionesListView.as_view(), name='curso_estudiante'),
     path('courses/inscripciones/nuevo', views.inscripcionesCreateView.as_view(), name='curso_estudiante_alta'),
+    #path('couses/inscripciones/estadopagos', views.estadoPagos.as_view(), name='estado_total'),
     # path('courses/inscripciones/nuevo/<int:estudiante_id>/<int:curso_id>/', views.alta_inscripcion, name='alta_inscripcion'),
     path('courses/inscripciones/baja/<int:pk>', views.inscripcionesDelete.as_view(), name='curso_estudiante_delete'),
     path('courses/inscripciones/baja/<int:estudiante_id>/<int:curso_id>/', views.eliminar_inscripcion, name='eliminar_inscripcion'),
