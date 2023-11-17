@@ -158,6 +158,7 @@ class DocenteAltaForm(forms.ModelForm):
     first_name = forms.CharField(label="Nombre",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
     last_name = forms.CharField(label="Apellido",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
     email = forms.EmailField(label='Correo Electrónico', widget=forms.EmailInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
+    password = forms.CharField(label='Contraseña', widget=forms.PasswordInput, min_length=6)
     pais = forms.CharField(label="Pais",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
     ciudad = forms.CharField(label="Ciudad",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
     calle = forms.CharField(label="Calle",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
@@ -165,12 +166,13 @@ class DocenteAltaForm(forms.ModelForm):
 
     class Meta:
         model=Docente
-        fields=['legajo','last_name','first_name', 'email']
+        fields=['legajo','first_name','last_name', 'email', 'password']
         widgets = {
             'legajo': forms.NumberInput(attrs={'class':'form-control'}),
             'first_name': forms.TextInput(attrs={'class':'form-control'}),
             'last_name': forms.TextInput(attrs={'class':'form-control'}),
             'email': forms.TextInput(attrs={'class':'form-control'}),
+            'password': forms.TextInput(attrs={'class':'form-control'}),
         }
 
     def clean_legajo(self):
