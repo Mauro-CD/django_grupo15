@@ -9,10 +9,9 @@
 {% endblock %}
 
 {% block encabezado %}
-<h1>Registrarse para una cuenta</h1>
-<p class="menuSuperior">¿Ya tienes una cuenta? <a href="/login/" style="color: coral;">Ingresar aqui</a>.</p>
+<h1 style="font-size: 8vh;">Registraciòn de cuenta</h1>
+<p class="menuSuperior">¿Ya tenès una cuenta? <a href="/login/" style="color: coral;">Ingresar aquì</a>.</p>
 {% endblock %}
-
 
 {% block contenido %}
 <main>
@@ -21,10 +20,13 @@
         {{ form.as_p }}
         <div>
             <button type="submit">
-            Registrame
+            Registrarme
             </button>
         </div>
     </form>
 </main>
+<br>
+<br>
+<br>
 <script src="{% static 'js/menu.js' %}"></script>
 {% endblock %}

@@ -6,11 +6,11 @@
 
 {% block class %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/registracion.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'css/edit-course.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/edit-course-edit.css' %}">
 {% endblock %}
 
 {% block encabezado %}
-<h1>Modificacion de usuario</h1>
+<h1 style="font-size: 8vh;">Ediciòn de usuario/Inscripciòn</h1>
 {% endblock %}
 
 
@@ -18,7 +18,7 @@
 
 <form method="get">
     {{ form.as_p }}
-    <button type="submit">Filtrar</button>
+    <button type="submit" class="btn btn-primary btn-sm">Filtrar</button>
 </form>
 
 <a name="" id="" class="btn btn-primary" href="{% url 'curso_estudiante_alta' %}" role="button"> <i class="fa-solid fa-circle-plus"></i> Nuevo</a>
@@ -27,9 +27,9 @@
 <table >
     <thead>
         <tr>
-            <th scope="col">Matricula</th>
-            <th scope="col">Usuario</th>
-            <th scope="col">Alumno</th>
+            <th scope="col" style="text-align: center;">Matricula</th>
+            <th scope="col" style="text-align: center;">Usuario</th>
+            <th scope="col" style="text-align: center;">Alumno</th>
         </tr>
     </thead>
     <tbody>
@@ -52,6 +52,17 @@
 <p>No hay estudiantes disponibles.</p>
 {% endif %}
 
-
+<!-- Include Bootstrap CSS and JS via CDN -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+crossorigin="anonymous"></script>
 
 {% endblock %}

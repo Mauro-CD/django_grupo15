@@ -18,7 +18,11 @@ from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 # from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from .forms import obtener_cursos#agregado14nov
 
+from .models import Foro
+from .forms import ForoForm
+from django.utils import timezone
 
 def index(request):
     current_date = datetime.now()
@@ -148,11 +152,30 @@ def course_detail(request, course_id):
     course = Course.objects.get(pk=course_id)
     return render(request, 'course_detail.html', {'course': course})
 
-@login_required(login_url='login')
+'''
 def course_foro(request):
     #  Devuelve detalles del curso
     foro = Course.objects.all()
     return render(request, 'foro.html', {'foro': foro})
+'''
+
+@login_required(login_url='login')
+def course_foro(request):
+    if request.method == 'POST':
+        form = ForoForm(request.POST)
+        if form.is_valid():            
+            form.instance.usuario = request.user
+            form.instance.fecha = timezone.now()
+            form.save()
+            return redirect('foro') 
+    else:
+        form = ForoForm()
+
+    messages = Foro.objects.order_by('-fecha')
+
+    return render(request, 'foro.html', {'form': form, 'messages': messages})
+
+
 
 def course_register(request):
     #  Devuelve detalles del curso
@@ -333,11 +356,12 @@ class courseCreateView(LoginRequiredMixin, CreateView):
         if form.is_valid():
             duracion = form.cleaned_data['duracion']
             descripcion = form.cleaned_data['descripcion']
+            imagen=form.cleaned_data['imagen']#13nov
             precio = form.cleaned_data['precio']
             titulo = form.cleaned_data['titulo']
             docente = form.cleaned_data['docente']
             habilitado = form.cleaned_data['habilitado']
-            curso = Course(duracion=duracion, descripcion=descripcion, precio=precio, titulo=titulo, docente_id=docente.id,habilitado=habilitado)
+            curso = Course(duracion=duracion, descripcion=descripcion,imagen=imagen, precio=precio, titulo=titulo, docente_id=docente.id,habilitado=habilitado)
             curso.save()
         return redirect('course_edit')
     
@@ -429,3 +453,15 @@ def alta_inscripcion(request, estudiante_id, curso_id):
     url = reverse('curso_estudiante_alta', args=[id_inscripcion])
     return redirect(url)
 
+def cursos_from_db(request):
+    cursos = obtener_cursos()
+    return render(request, 'cursos_from_db.html', {'cursos': cursos})
+
+def pago(request):
+    # Your payment logic goes here
+    # You can access form data using request.POST
+
+    # For example, check if payment is successful
+    payment_successful = True  # You need to replace this with your actual payment logic
+
+    return render(request, 'pago_curso.html', {'payment_successful': payment_successful})

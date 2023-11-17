@@ -40,7 +40,9 @@ urlpatterns = [
     path('abm/docente/modificar/<int:pk>', views.docenteUpdate.as_view(), name='modificar_docente'),
     path('abm/docente/nuevo', views.docenteCreateView.as_view(), name='docente_nuevo'),
 
-    path('courseAvailable/', views.course_available, name='courseAvailable'),
+    #path('courseAvailable/', views.course_available, name='courseAvailable'),original
+    path('courseAvailable/', views.cursos_from_db, name='courseAvailable'),
+    path('pagocurso/', views.pago, name='pago'),
     path('', views.index, name='index'),
     path('403/', permission_denied, {'exception': 'PermissionDenied'}, name='403'),
 ]

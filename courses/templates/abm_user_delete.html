@@ -10,13 +10,13 @@
 {% endblock %}
 
 {% block encabezado %}
-<h1>Modificacion de usuario</h1>
+<h1 style="font-size: 8vh;">Ediciòn de usuario</h1>
 {% endblock %}
 
 
 {% block contenido %}
 <form method="post">{% csrf_token %}
-    <p>Se dara la baja del usaurio: {{ object.username }} matricula: {{ object.matricula }} </p>
+    <p>Se dara la baja del usuario: {{ object.username }} matricula: {{ object.matricula }} </p>
     <input type="submit" value="Confirmar" class="btn btn-danger">
     <a type="button" href="{% url 'abm_user' %}" value="Cancalar" class="btn btn-primary">Cancelar</a>
 </form>

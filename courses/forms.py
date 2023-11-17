@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from courses.models import Estudiante, Course, Docente, Inscripcion
 from datetime import date
 from django.db import connection
-
+from .models import Foro
 
 def table_exists(table_name):
     with connection.cursor() as cursor:
@@ -75,12 +75,17 @@ class ContactoForm(forms.Form):
 
 
 ################################################# Foro ###################################################################
+'''
 class ForoForm(forms.Form):
     # usuario = forms.CharField(label="Usuario",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
     titulo = forms.CharField(label="Usuario",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
     fecha = forms.DateField(label="Fecha")
     contenido = forms.CharField(widget=forms.Textarea)
-
+'''
+class ForoForm(forms.ModelForm):
+    class Meta:
+        model = Foro
+        fields = ['titulo', 'contenido']  # Add other fields if needed
 
 ################################################# Direccion ###################################################################
 class DireccionForm(forms.Form):
@@ -218,6 +223,7 @@ class CursosForm(forms.ModelForm):
     titulo = forms.CharField(label="Titulo",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
     duracion = forms.CharField(label="Duracion",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
     descripcion = forms.CharField(label="Descripcion",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
+    imagen=forms.CharField(label="Imagen",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo string url'}  ),required=True)#13nov agregado
     # docente = forms.CharField(label="Docente",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
     precio = forms.IntegerField(label="Precio",   widget=forms.NumberInput(attrs={'class': 'formulario'}  ),required=True)
     habilitado = forms.ChoiceField(label="Estado",  choices=habilitado_choices )
@@ -231,6 +237,7 @@ class CursosForm(forms.ModelForm):
             'titulo': forms.TextInput(attrs={'class':'form-control'}),
             'duracion': forms.TextInput(attrs={'class':'form-control'}),
             'descripcion': forms.TextInput(attrs={'class':'form-control'}),
+            'imagen': forms.TextInput(attrs={'class':'form-control'}),
             'docente': forms.TextInput(attrs={'class':'form-control'}),
             'precio': forms.NumberInput(attrs={'class':'form-control'}),
             'habilitado': forms.NumberInput(attrs={'class':'form-control'})

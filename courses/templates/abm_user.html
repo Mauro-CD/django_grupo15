@@ -6,33 +6,34 @@
 
 {% block class %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/registracion.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'css/edit-course.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/edit-course-edit.css' %}">
 {% endblock %}
 
 {% block encabezado %}
-<h1>Modificacion de usuario</h1>
+<h1 style="font-size: 8vh;">Ediciòn de usuario</h1>
 {% endblock %}
 
 
 {% block contenido %}
-        <table >
+    <div class="table-responsive">
+        <table class="table" style="width: 100%;margin-left: auto;margin-right: auto;">
             <thead>
                 <tr>
-                    <th scope="col">Matricula</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido</th>
-                    <th scope="col">Activo</th>
-                    <th scope="col">Acciones</th>
+                    <th scope="col" style="width: auto;">Matrìcula</th>
+                    <th scope="col" >Nombre</th>
+                    <th scope="col" >Apellido</th>
+                    <th scope="col" >Activo</th>
+                    <th scope="col" style="width: auto;">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 {% for estudiante in object_list  %}
                     <tr>
-                        <td>{{estudiante.matricula}}</td>
-                        <td>{{estudiante.first_name}}</td>
-                        <td>{{estudiante.last_name}}</td>
-                        <td>{{estudiante.activo}}</td>
-                        <td>
+                        <td style="width: auto;">{{estudiante.matricula}}</td>
+                        <td >{{estudiante.first_name}}</td>
+                        <td >{{estudiante.last_name}}</td>
+                        <td >{{estudiante.activo}}</td>
+                        <td style="width: auto;">
                         <a class="btn btn-primary" href="{{estudiante.modificar_estudiante}}" title="Editar">Editar</a>
                         <!-- <a type="button" class="btn btn-danger">Eliminar</a> -->
                         <a type="button" class="btn btn-danger" href="{{estudiante.baja_estudiante}}" title="Eliminar">Eliminar</a>
@@ -42,5 +43,14 @@
 
             </tbody>
         </table>
-
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 {% endblock %}

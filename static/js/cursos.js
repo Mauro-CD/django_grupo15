@@ -48,3 +48,5 @@ function loadCourse(cursos) {
         listado.innerHTML += `<li >${ a +  name + image + description + af}</li>`;
     };
 }
+
+

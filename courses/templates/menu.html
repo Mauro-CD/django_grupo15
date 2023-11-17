@@ -1,5 +1,6 @@
 {% load static %}
 
+
     <nav id="login">
         {% if not user.is_authenticated %}
         <a href="{% url 'login' %}"><img class="iconLogin" src="{% static 'icons/user-profile-icon.png' %}" alt="menu"></a>
@@ -57,7 +58,7 @@
             <a class="Burger" onclick="showMenu(false)">
                 <img class="iconMenu" src="{% static 'icons/icon-menu-w.png' %}" alt="menu">
             </a>
-            <li><a class="menuList" href="/"><img class="iconMenuGrid" src="{% static 'favicon/boock.ico' %}" alt="Pagina principal">Página principal</a></li>
+            <li><a class="menuList" href="/"><img class="iconMenuGrid" src="{% static 'favicon/boock.ico' %}" alt="Pagina principal">Inicio</a></li>
             {% if not user.is_authenticated %}
             <li><a class="menuList" href="{% url 'registro' %}"><img class="iconMenuGrid" src="{% static 'favicon/registro.ico' %}" alt="Pagina principal">Registrese</a></li>
             {% else %}
@@ -74,8 +75,16 @@
             <li><a class="menuList" href="{% url 'contact' %}"><img class="iconMenuGrid" src="{% static 'favicon/operator.ico' %}" alt="Pagina principal">Contáctenos</a></li>
         </ul>
     </nav>
-    
-
+    <style>
+        li a.menuList {
+            text-decoration: none; 
+            color: rgb(255, 255, 255); 
+        }        
+        li a.menuList:hover {
+        color: rgb(255, 234, 234); 
+        }
+        
+    </style>
 </div>
 
 
