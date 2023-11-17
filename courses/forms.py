@@ -232,7 +232,7 @@ class CursosForm(forms.ModelForm):
 
     class Meta:
         model=Course
-        fields=['titulo','duracion','descripcion','precio','habilitado','docente']
+        fields=['titulo','duracion','descripcion','precio','habilitado','docente', 'imagen']
         widgets = {
             'titulo': forms.TextInput(attrs={'class':'form-control'}),
             'duracion': forms.TextInput(attrs={'class':'form-control'}),
