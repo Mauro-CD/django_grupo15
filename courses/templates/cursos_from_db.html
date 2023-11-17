@@ -4,6 +4,7 @@
 {% block class %} 
 <link rel="stylesheet" type="text/css" href="{% static 'css/cards-cursos.css' %}">
 <script src="{% static 'js/filtrobusqueda.js' %}"></script>
+
 {% endblock %}
 {% block encabezado %}
 <h1 style="font-size: 8vh;">Cursos disponibles</h1>
@@ -46,7 +47,10 @@
                 </div>
                 <div class="card-footer">
                     <button class="btn btn-primary" data-toggle="modal" data-target="#cursoModal{{ curso_id }}">Ver detalles</button>
-                    <button href="{% url 'pago' %}" class="btn btn-success"><a href="{% url 'pago' %}" style="color: white;">Comprar</a></button>
+                    <!--<button href="{% url 'pago' %}" class="btn btn-success"><a href="{% url 'pago' %}" style="color: white;">Comprar</a></button>-->
+                    <button class="btn btn-success comprar-button">
+                        <a href="{% url 'pago' %}?curso_id={{ curso_id }}&curso_titulo={{ curso.titulo }}&curso_docente_id={{ curso.docente_id }}" style="color: white;">Comprar</a>
+                    </button>
                     
                 </div>
             </div>
