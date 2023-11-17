@@ -3,11 +3,10 @@
 th,
 td {
    width: 25%;
-   text-align: left;
-   vertical-align: top;
+   text-align: center;
+   
    border: 1px solid #000;
-   border-collapse: collapse;
-   text-align: center; 
+   border-collapse: collapse;   
    vertical-align: middle;
 }
 
