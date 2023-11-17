@@ -15,8 +15,8 @@
 <body>
     <form id="paymentForm">
         <!-- Numero tarjeta -->
-        <label for="creditCardNumber">Nùmero Tarjeta de Crèdito</label>
-        <input type="text" id="creditCardNumber" maxlength="16" required>
+        <label for="creditCardNumber" >Nùmero Tarjeta de Crèdito</label>
+        <input type="text" id="creditCardNumber" maxlength="16" required placeholder="XXXXXXXXXXXXXXXX">
         <br>
         <!-- Vencimiento (MM/YYYY) -->
         <label for="expiryDate">Vencimiento (MM/YYYY):</label>
@@ -24,16 +24,13 @@
         <br>
         <!-- CVV -->
         <label for="cvv">CVV:</label>
-        <input type="text" id="cvv" pattern="[0-9]{3}" maxlength="3" required>
-        <br>
+        <input type="text" id="cvv" pattern="[0-9]{3}" maxlength="3" required placeholder="xxx">
+        <br><br>
         <div class="boxbuttons">
-            <button type="button" onclick="cancelPayment()" style="background-color: red;">Anular pago</button>
-            <button type="button" onclick="confirmPayment()" style="background-color: green;">Confirmar Pago</button>
-        </div>
-        
+            <button type="button" onclick="cancelPayment()" style="background-color: red;border-radius: 8px;">Anular pago</button>
+            <button type="button" onclick="confirmPayment()" style="background-color: green;border-radius: 8px;">Confirmar Pago</button>
+        </div>        
     </form>
-    <div id="paymentMessage"></div>
-
-    
+    <div id="paymentMessage"></div>    
 </body>
 {% endblock %}

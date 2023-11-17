@@ -16,8 +16,10 @@
         <p><b>{{text_date}} {{date|date:"l d \d\e F \d\e Y" }}</b></p>
         <p><b>{{text_hour}} {{date|date:"H:i:s" }}</b></p>
         <div>
-            <i>{{ user.first_name }}</i>
-            <i>{{ user.last_name }}</i>
+            <i id="nombreUsuario">{{ user.first_name }}</i>
+            <i id="apellidoUsuario">{{ user.last_name }}</i>
+            <i id="idUsuario" hidden>{{ user.id }}</i>
+            <i id="emailUsuario" hidden>{{ user.email }}</i>
         </div>
     </div>
 </div>

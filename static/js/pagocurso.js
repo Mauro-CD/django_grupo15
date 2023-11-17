@@ -8,6 +8,10 @@ function confirmPayment() {
     var creditCardNumber = document.getElementById("creditCardNumber").value;
     var expiryDate = document.getElementById("expiryDate").value;
     var cvv = document.getElementById("cvv").value;
+    var nombre = document.getElementById("nombreUsuario").innerText;
+    var apellido = document.getElementById("apellidoUsuario").innerText;
+    var id = document.getElementById("idUsuario").innerText;
+    var email = document.getElementById("emailUsuario").innerText;
 
     // Ejecutar validación
     if (creditCardNumber.length !== 16 || !expiryDate.match(/^(0[1-9]|1[0-2])\/[0-9]{4}$/) || cvv.length !== 3) {
@@ -30,6 +34,10 @@ function confirmPayment() {
         console.log('Curso ID:', cursoId);
         console.log('Curso Título:', cursoTitulo);
         console.log('Curso Docente ID:', cursoDocenteId);
+        console.log('Nombre:',nombre);
+        console.log('Apellido:',apellido);
+        console.log('Id:',id);
+        console.log('Email:',email);
         // También puedes mostrar un mensaje en la consola
         console.log('Compra confirmada para el curso:', cursoTitulo);
     }
