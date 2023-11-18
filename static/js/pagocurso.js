@@ -17,11 +17,12 @@ function confirmPayment() {
     // Ejecutar validación
     if (creditCardNumber.length !== 16 || !expiryDate.match(/^(0[1-9]|1[0-2])\/[0-9]{4}$/) || cvv.length !== 3) {
         document.getElementById("paymentMessage").innerText = "Información de pago inválida. Verifica los datos ingresados.";
+        window.alert("Información de pago inválida. Verifica los datos ingresados.");
         return;
     }
     // Mensaje de pago (simulación)
     document.getElementById("paymentMessage").innerText = "Pago realizado con éxito. ¡Gracias por tu compra!";
-
+    window.alert("Pago realizado con éxito. ¡Gracias por tu compra!");
     // Componentes de la fecha en formato string simple
     const pagado=true;
     const altaInscripcion=false;
@@ -68,32 +69,6 @@ function confirmPayment() {
         console.log('Pagado:',pagado);        
         console.log("Fecha",fecha);
         console.log("altaInscripcion",altaInscripcion);
-        //console.log(`Current Date: ${day}/${month}/${year}`);
-        // Solicitud ajax para conservar los datos
-        /*
-        $.ajax({
-            url: '/pagocurso/',  // Replace with the actual URL in your Django project
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({
-                cursoId: cursoId,
-                cursoTitulo: cursoTitulo,
-                cursoDocenteId: cursoDocenteId,
-                nombre: nombre,
-                apellido: apellido,
-                id_alumno: id_alumno,
-                email: email,
-                matricula: matricula,
-                pagado: pagado,
-                fecha: fecha,
-                altaInscripcion: altaInscripcion
-            }),
-            success: function (data) {
-                console.log('Data saved successfully:', data);
-            },
-            error: function (error) {
-                console.error('Error saving data:', error);
-            }
-        });*/
+        
     }
 }

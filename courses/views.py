@@ -462,36 +462,3 @@ def pago(request):
     payment_successful = True  
     return render(request, 'pago_curso.html', {'payment_successful': payment_successful})
 
-'''intento de metodo per gestion ajax
-def save_payment_info(request):
-    if request.method == 'POST' and request.is_ajax():
-        try:
-            data = json.loads(request.body)
-            pago = PagoHabilitacionAlumnoCurso.objects.create(
-                cursoId=data['cursoId'],
-                cursoTitulo=data['cursoTitulo'],
-                cursoDocenteId=data['cursoDocenteId'],
-                nombre=data['nombre'],
-                apellido=data['apellido'],
-                id_alumno=data['id_alumno'],
-                email=data['email'],
-                matricula=data['matricula'],
-                pagado=data['pagado'],
-                fecha=data['fecha'],
-                altaInscripcion=data['altaInscripcion']
-            )
-            pago.save()
-            return JsonResponse({'status': 'success', 'message': 'Data saved successfully'})
-        except json.JSONDecodeError as e:
-            return JsonResponse({'status': 'error', 'message': str(e)})
-    return JsonResponse({'status': 'error', 'message': 'Invalid request'})
-
-def pago(request):
-    payment_successful = True
-
-    # Handle the AJAX request to save payment info
-    if request.method == 'POST' and request.is_ajax():
-        return save_payment_info(request)
-
-    return render(request, 'pago_curso.html', {'payment_successful': payment_successful})
-'''
