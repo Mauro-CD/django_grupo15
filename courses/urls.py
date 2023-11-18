@@ -43,7 +43,9 @@ urlpatterns = [
 
     #path('courseAvailable/', views.course_available, name='courseAvailable'),original
     path('courseAvailable/', views.cursos_from_db, name='courseAvailable'),
+    path('courseAvailableList/', views.cursos_from_list, name='courseAvailableList'), 
     path('pagocurso/', views.pago, name='pago'),
+    path('pagocursoconfirmado/<int:estudiante_id>/<int:curso_id>/', views.pago_confirmado, name='pagoconfirmado'),
     path('', views.index, name='index'),
     path('403/', permission_denied, {'exception': 'PermissionDenied'}, name='403'),
 ]

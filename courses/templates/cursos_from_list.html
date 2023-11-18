@@ -7,18 +7,18 @@
 
 {% endblock %}
 {% block encabezado %}
-<h1 style="font-size: 8vh;">Cursos disponibles</h1>
+<h1 style="font-size: 8vh;">Mi Aprendizaje</h1>
 <input type="text" id="buscar" name="buscar" placeholder="Buscar cursos..." >
 <button  onclick="search()" type="button" class="btn btn-primary btn-sm" >Buscar </button>
 {% endblock %}
 
 {% block contenido %}
-<h1>Lista de cursos</h1>
+<h1>Mi Aprendizaje</h1>
 
 
 {% if cursos %}
 <div class="card-deck">
-    {% for curso_id, curso, inscripto in cursos %}
+    {% for curso_id, curso, habilitado in cursos %}
         {% if curso.habilitado %}
             <div class="card">
                 <img src="{{ curso.imagen }}" class="card-img-top" alt="Curso Image">
@@ -28,12 +28,10 @@
                 <div class="card-footer">
                     <button class="btn btn-primary" data-toggle="modal" data-target="#cursoModal{{ curso_id }}">Ver detalles</button>
                     <!--<button href="{% url 'pago' %}" class="btn btn-success"><a href="{% url 'pago' %}" style="color: white;">Comprar</a></button>-->
-                    {% if inscripto %}
-                    <button class="btn btn-info" data-toggle="modal" data-target="#cursoModal{{ curso_id }}">Inscripto</button>
+                    {% if habilitado %}
+                    <button class="btn btn-info" data-toggle="modal" data-target="#cursoModal{{ curso_id }}">Ingresar</button>
                     {% else %}
-                    <button class="btn btn-success comprar-button">
-                        <a href="{% url 'pago' %}?curso_id={{ curso_id }}&curso_titulo={{ curso.titulo }}&curso_docente_id={{ curso.docente_id }}" style="color: white;">Comprar</a>
-                    </button>
+                    <button class="btn btn-secondary" data-toggle="modal" data-target="#cursoModal{{ curso_id }}">En Verificacion</button>
                     {% endif %}
                 </div>
             </div>
@@ -64,7 +62,7 @@
     {% endfor %}
 </div>
 {% else %}
-<p>No courses available.</p>
+<p>No dispone de cursos inscriptos</p>
 {% endif %}
 
 

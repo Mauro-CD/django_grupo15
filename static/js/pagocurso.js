@@ -67,5 +67,6 @@ function confirmPayment() {
         console.log("fecha en formato",formattedDate);
         // También puedes mostrar un mensaje en la consola
         console.log('Compra confirmada para el curso:', cursoTitulo);
+        window.location.href = '/pagocursoconfirmado/' + id + '/' + cursoId +'/';
     }
 }

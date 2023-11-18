@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block encabezado %}
-<h1 style="font-size: 8vh;">Ediciòn de usuario/Inscripciòn</h1>
+<h1 style="font-size: 8vh;">Edición de usuario/Inscripciòn</h1>
 {% endblock %}
 
 
@@ -21,6 +21,8 @@
     <button type="submit" class="btn btn-primary btn-sm">Filtrar</button>
 </form>
 
+
+<a name="" id="" class="btn btn-primary" href="{% url 'curso_estudiante_alta' %}" role="button"> <i class="fa-solid fa-circle-plus"></i> Pendientes</a>
 <a name="" id="" class="btn btn-primary" href="{% url 'curso_estudiante_alta' %}" role="button"> <i class="fa-solid fa-circle-plus"></i> Nuevo</a>
 
 {% if estudiantes %}

@@ -454,10 +454,44 @@ def alta_inscripcion(request, estudiante_id, curso_id):
     return redirect(url)
 
 def cursos_from_db(request):
-    cursos = obtener_cursos()
-    return render(request, 'cursos_from_db.html', {'cursos': cursos})
+    cursos_inscriptos = Inscripcion.objects.filter(estudiante_id=request.user.id)
+    lista_cursos_inscriptos = [(curso.curso) for curso in cursos_inscriptos]
+    cursos_disponibles = Course.objects.all()
+    lista_cursos_disponibles = [(curso) for curso in cursos_disponibles]
+    cursos_inscriptos_disponibles = [(curso, curso in lista_cursos_inscriptos) for curso in lista_cursos_disponibles]
+    cursos_inscriptos_disponibles = [(curso.id, curso, curso in lista_cursos_inscriptos) for curso in lista_cursos_disponibles]
+  
+    return render(request, 'cursos_from_db.html', {'cursos': cursos_inscriptos_disponibles})
 
 def pago(request):
     
     payment_successful = True  
     return render(request, 'pago_curso.html', {'payment_successful': payment_successful})
+
+
+@login_required(login_url='login')
+def pago_confirmado(request, estudiante_id, curso_id):
+    if Inscripcion.objects.filter(estudiante_id=estudiante_id,curso_id=curso_id).exists():
+        url = '500'
+    else:
+        inscripcion = Inscripcion(fecha=timezone.now(), curso_id=curso_id, estudiante_id=estudiante_id)
+        inscripcion.save()
+        url = 'courseAvailable'
+    return redirect(url)
+
+
+def obtener_cursos_lista(request):
+    cursos = Inscripcion.objects.filter(estudiante_id=request.user.id)
+    lista_cursos = [(curso.curso.id, curso.curso) for curso in cursos]
+    return lista_cursos
+
+@login_required(login_url='login')
+def cursos_from_list(request):
+    cursos_habilitado = Inscripcion.objects.filter(estudiante_id=request.user.id,habilitado=True)
+    lista_cursos_habilitado = [(curso.curso) for curso in cursos_habilitado]
+    cursos_disponibles = Inscripcion.objects.filter(estudiante_id=request.user.id)
+    lista_cursos_disponibles = [(curso.curso) for curso in cursos_disponibles]
+    cursos_inscriptos_disponibles = [(curso.id, curso, curso in lista_cursos_habilitado) for curso in lista_cursos_disponibles]
+
+
+    return render(request, 'cursos_from_list.html', {'cursos': cursos_inscriptos_disponibles})

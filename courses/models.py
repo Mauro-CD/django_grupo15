@@ -80,6 +80,8 @@ class Inscripcion(models.Model):
     estudiante = models.ForeignKey(Estudiante, on_delete=models.CASCADE)
     curso = models.ForeignKey(Course, on_delete=models.CASCADE)
     fecha = models.DateField()
+    habilitado = models.BooleanField(default=False)
+    activo = models.BooleanField(default=True)
 
     def __str__(self):
         return f"{self.estudiante.matricula} {self.estudiante.username}- {self.curso.titulo} "
