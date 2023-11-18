@@ -468,7 +468,6 @@ def pago(request):
     payment_successful = True  
     return render(request, 'pago_curso.html', {'payment_successful': payment_successful})
 
-
 @login_required(login_url='login')
 def pago_confirmado(request, estudiante_id, curso_id):
     if Inscripcion.objects.filter(estudiante_id=estudiante_id,curso_id=curso_id).exists():
