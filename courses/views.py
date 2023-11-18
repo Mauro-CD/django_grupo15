@@ -20,6 +20,7 @@ from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import obtener_cursos#agregado14nov
 from django.http import JsonResponse#agregado18nov
+from .models import PagoHabilitacionAlumnoCurso#agregado18nov
 from .models import Foro
 from .forms import ForoForm
 from django.utils import timezone
@@ -456,42 +457,41 @@ def alta_inscripcion(request, estudiante_id, curso_id):
 def cursos_from_db(request):
     cursos = obtener_cursos()
     return render(request, 'cursos_from_db.html', {'cursos': cursos})
-'''
+
 def pago(request):    
     payment_successful = True  
     return render(request, 'pago_curso.html', {'payment_successful': payment_successful})
-'''
+
+'''intento de metodo per gestion ajax
+def save_payment_info(request):
+    if request.method == 'POST' and request.is_ajax():
+        try:
+            data = json.loads(request.body)
+            pago = PagoHabilitacionAlumnoCurso.objects.create(
+                cursoId=data['cursoId'],
+                cursoTitulo=data['cursoTitulo'],
+                cursoDocenteId=data['cursoDocenteId'],
+                nombre=data['nombre'],
+                apellido=data['apellido'],
+                id_alumno=data['id_alumno'],
+                email=data['email'],
+                matricula=data['matricula'],
+                pagado=data['pagado'],
+                fecha=data['fecha'],
+                altaInscripcion=data['altaInscripcion']
+            )
+            pago.save()
+            return JsonResponse({'status': 'success', 'message': 'Data saved successfully'})
+        except json.JSONDecodeError as e:
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    return JsonResponse({'status': 'error', 'message': 'Invalid request'})
+
 def pago(request):
     payment_successful = True
 
+    # Handle the AJAX request to save payment info
     if request.method == 'POST' and request.is_ajax():
-        # Retrieve data from the AJAX request
-        cursoId = request.POST.get('cursoId')
-        cursoTitulo= request.POST.get('cursoTitulo')
-        cursoDocenteId = request.POST.get('cursoDocenteId')
-        nombre = request.POST.get('nombre')
-        apellido = request.POST.get('apellido')
-        id_alumno = request.POST.get('id_alumno')
-        email = request.POST.get('email')
-        matricula = request.POST.get('matricula')
-        pagado = request.POST.get('pagado')
-        formatted_date = request.POST.get('fecha')
-        formatted_date = request.POST.get('altaInscripcion')
-        # Perform any additional logic if needed
-
-        # For simplicity, you can pass the retrieved values to the template
-        return JsonResponse({'status': 'success', 'data': {
-            'cursoId': cursoId,
-            'cursoTitulo': cursoTitulo,
-            'cursoDocenteId': cursoDocenteId,
-            'nombre': nombre,
-            'apellido': apellido,
-            'id_alumno': id_alumno,
-            'email': email,
-            'matricula': matricula,
-            'pagado': pagado,
-            'fecha': fecha,
-            'altaInscripcion':altaInscripcion
-        }})
+        return save_payment_info(request)
 
     return render(request, 'pago_curso.html', {'payment_successful': payment_successful})
+'''

@@ -69,5 +69,31 @@ function confirmPayment() {
         console.log("Fecha",fecha);
         console.log("altaInscripcion",altaInscripcion);
         //console.log(`Current Date: ${day}/${month}/${year}`);
+        // Solicitud ajax para conservar los datos
+        /*
+        $.ajax({
+            url: '/pagocurso/',  // Replace with the actual URL in your Django project
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                cursoId: cursoId,
+                cursoTitulo: cursoTitulo,
+                cursoDocenteId: cursoDocenteId,
+                nombre: nombre,
+                apellido: apellido,
+                id_alumno: id_alumno,
+                email: email,
+                matricula: matricula,
+                pagado: pagado,
+                fecha: fecha,
+                altaInscripcion: altaInscripcion
+            }),
+            success: function (data) {
+                console.log('Data saved successfully:', data);
+            },
+            error: function (error) {
+                console.error('Error saving data:', error);
+            }
+        });*/
     }
 }
