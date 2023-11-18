@@ -5,6 +5,7 @@
 {% block class %} 
 <link rel="stylesheet" type="text/css" href="{% static 'css/pagoform.css' %}">
 <script src="{% static 'js/pagocurso.js' %}"></script>
+
 {% endblock %}
 
 {% block encabezado %}
@@ -13,7 +14,7 @@
 
 {% block contenido %}
 <body>
-    <form id="paymentForm">
+    <form id="paymentForm">        
         <!-- Numero tarjeta -->
         <label for="creditCardNumber" >Nùmero Tarjeta de Crèdito</label>
         <input type="text" id="creditCardNumber" maxlength="16" required placeholder="XXXXXXXXXXXXXXXX">
@@ -25,7 +26,8 @@
         <!-- CVV -->
         <label for="cvv">CVV:</label>
         <input type="text" id="cvv" pattern="[0-9]{3}" maxlength="3" required placeholder="xxx">
-        <br><br>
+        <br>
+        <br>
         <div class="boxbuttons">
             <button type="button" onclick="cancelPayment()" style="background-color: red;border-radius: 8px;">Anular pago</button>
             <button type="button" onclick="confirmPayment()" style="background-color: green;border-radius: 8px;">Confirmar Pago</button>

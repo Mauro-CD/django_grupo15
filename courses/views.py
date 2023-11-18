@@ -19,7 +19,7 @@ from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import obtener_cursos#agregado14nov
-
+from django.http import JsonResponse#agregado18nov
 from .models import Foro
 from .forms import ForoForm
 from django.utils import timezone
@@ -456,8 +456,42 @@ def alta_inscripcion(request, estudiante_id, curso_id):
 def cursos_from_db(request):
     cursos = obtener_cursos()
     return render(request, 'cursos_from_db.html', {'cursos': cursos})
-
-def pago(request):
-    
+'''
+def pago(request):    
     payment_successful = True  
+    return render(request, 'pago_curso.html', {'payment_successful': payment_successful})
+'''
+def pago(request):
+    payment_successful = True
+
+    if request.method == 'POST' and request.is_ajax():
+        # Retrieve data from the AJAX request
+        cursoId = request.POST.get('cursoId')
+        cursoTitulo= request.POST.get('cursoTitulo')
+        cursoDocenteId = request.POST.get('cursoDocenteId')
+        nombre = request.POST.get('nombre')
+        apellido = request.POST.get('apellido')
+        id_alumno = request.POST.get('id_alumno')
+        email = request.POST.get('email')
+        matricula = request.POST.get('matricula')
+        pagado = request.POST.get('pagado')
+        formatted_date = request.POST.get('fecha')
+        formatted_date = request.POST.get('altaInscripcion')
+        # Perform any additional logic if needed
+
+        # For simplicity, you can pass the retrieved values to the template
+        return JsonResponse({'status': 'success', 'data': {
+            'cursoId': cursoId,
+            'cursoTitulo': cursoTitulo,
+            'cursoDocenteId': cursoDocenteId,
+            'nombre': nombre,
+            'apellido': apellido,
+            'id_alumno': id_alumno,
+            'email': email,
+            'matricula': matricula,
+            'pagado': pagado,
+            'fecha': fecha,
+            'altaInscripcion':altaInscripcion
+        }})
+
     return render(request, 'pago_curso.html', {'payment_successful': payment_successful})

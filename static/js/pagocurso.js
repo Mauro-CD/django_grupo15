@@ -10,19 +10,21 @@ function confirmPayment() {
     var cvv = document.getElementById("cvv").value;
     var nombre = document.getElementById("nombreUsuario").innerText;
     var apellido = document.getElementById("apellidoUsuario").innerText;
-    var id = parseInt(document.getElementById("idUsuario").innerText);
+    var id_alumno = parseInt(document.getElementById("idUsuario").innerText);
     var email = document.getElementById("emailUsuario").innerText; 
-    var matricula = parseInt(id) + 5000;
+    var matricula = id_alumno + 5000;
+    
     // Ejecutar validación
     if (creditCardNumber.length !== 16 || !expiryDate.match(/^(0[1-9]|1[0-2])\/[0-9]{4}$/) || cvv.length !== 3) {
         document.getElementById("paymentMessage").innerText = "Información de pago inválida. Verifica los datos ingresados.";
         return;
     }
-
     // Mensaje de pago (simulación)
     document.getElementById("paymentMessage").innerText = "Pago realizado con éxito. ¡Gracias por tu compra!";
 
     // Componentes de la fecha en formato string simple
+    const pagado=true;
+    const altaInscripcion=false;
     const currentDate = new Date();
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth() + 1; 
@@ -30,7 +32,7 @@ function confirmPayment() {
     //componentes fecha en formato mas detallado
     var currentDate2 = new Date();
     // Formateo fecha en el formato del db
-    var formattedDate =
+    var fecha =
     currentDate.getFullYear() +
     "-" +
     ((currentDate.getMonth() + 1) < 10 ? '0' : '') + (currentDate.getMonth() + 1) +
@@ -60,12 +62,12 @@ function confirmPayment() {
         console.log('Curso Docente ID:', cursoDocenteId);
         console.log('Nombre:',nombre);
         console.log('Apellido:',apellido);
-        console.log('Id:',id);
+        console.log('Id:',id_alumno);
         console.log('Email:',email);
         console.log('Matricula:',matricula);
-        console.log(`Current Date: ${day}/${month}/${year}`);
-        console.log("fecha en formato",formattedDate);
-        // También puedes mostrar un mensaje en la consola
-        console.log('Compra confirmada para el curso:', cursoTitulo);
+        console.log('Pagado:',pagado);        
+        console.log("Fecha",fecha);
+        console.log("altaInscripcion",altaInscripcion);
+        //console.log(`Current Date: ${day}/${month}/${year}`);
     }
 }

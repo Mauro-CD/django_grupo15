@@ -131,3 +131,19 @@ class ContactMessage(models.Model):
 # class UserList(User):
 #     def __str__(self):
 #         return f"{self.username} {self.email} {self.is_active} {self.first_name} {self.last_name}"
+
+# Para generar la tabla de gestion de PagoHabilitacionAlumnoCurso
+class PagoHabilitacionAlumnoCurso(models.Model):
+    cursoId = models.IntegerField()
+    cursoTitulo = models.CharField(max_length=100)
+    cursoDocenteId = models.CharField(max_length=100)
+    nombre = models.CharField(max_length=100)
+    apellido = models.CharField(max_length=100)
+    id_alumno = models.IntegerField()  # Assuming this is the student ID
+    email = models.CharField(max_length=100)
+    matricula = models.IntegerField()
+    pagado = models.BooleanField(default=True)
+    fecha = models.DateTimeField()
+    altaInscripcion = models.BooleanField(default=False)
+    def __str__(self):
+        return f"{self.nombre} {self.apellido} - Curso: {self.cursoTitulo}"
