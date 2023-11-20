@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from .models import Course, UserCourse
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth.forms import AuthenticationForm  # Importa il AuthenticationForm
@@ -9,7 +9,7 @@ import json
 from django.shortcuts import render
 from .forms import CourseFilterForm, ContactoForm, DireccionForm
 from datetime import datetime
-from django.contrib.auth.models import User #agregado 22 octubre
+from django.contrib.auth.models import User, Group #agregado 22 octubre
 from django.contrib import messages #AGREGADO 22 OCTUBRE
 from .forms import UserRegistrationForm#agregado 22 octubre
 from .models import ContactMessage, Direccion, Estudiante, Direccion, Docente, Inscripcion
@@ -43,6 +43,14 @@ def contacto_form(request):
     }
     return render(request, "contacto.html", contexto)
 
+def es_estudiante(user):
+    return user.groups.filter(name='gp_estudiante').exists()
+
+def es_docente(user):
+    return user.groups.filter(name='gp_docente').exists()
+
+def es_admin(user):
+    return user.groups.filter(name='admin').exists()
 
 @login_required
 def abm_user(request):
@@ -84,9 +92,12 @@ def registro(request):
                     user.first_name = name
                     user.last_name = lastname
                     user.matricula = user.id + 5000
+                    grupo_estudiante = Group.objects.get(name='gp_estudiante')
+                    user.groups.add(grupo_estudiante)
                     user.save()
                     direccion = Direccion(usuario_id=user.id)
                     direccion.save()
+
 
     #             Direccion(models.Model):
     # calle = models.CharField(max_length=100)
@@ -128,8 +139,10 @@ def user_login(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            # Redirecciona si el login fue bueno
-            return redirect('courseAvailable')
+            if es_estudiante(user):
+                return redirect('courseAvailable')
+            else:
+                return redirect('index')
     else:
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
@@ -198,17 +211,16 @@ def admin(request):
     return redirect('admin')
 
 
-class estudianteListView(LoginRequiredMixin, ListView): #UserPassesTestMixin
+class estudianteListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     login_url = '/login/'
     redirect_field_name = 'login'
     model = Estudiante
     template_name = 'abm_user.html'
     ordering = ['matricula']
 
-    # def test_func(self):
-    #     # Cambia el nombre de la función y las referencias dentro de la clase.
-    #     return self.request.user.groups.filter(name='gp_docente').exists()
-        
+    def test_func(self):
+        return self.request.user.groups.filter(name='gp_admin').exists()
+
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -217,15 +229,17 @@ class estudianteListView(LoginRequiredMixin, ListView): #UserPassesTestMixin
         return context
 
 
-class estudianteDelete(LoginRequiredMixin, DeleteView):
+class estudianteDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     login_url = '/login/'
     redirect_field_name = 'login'
     model = Estudiante
     template_name = 'abm_user_delete.html'
     success_url = reverse_lazy('abm_user')
 
+    def test_func(self):
+        return self.request.user.groups.filter(name='gp_admin').exists()
 
-class estudianteUpdate(LoginRequiredMixin, UpdateView):
+class estudianteUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     login_url = '/login/'
     redirect_field_name = 'login'
     model = Estudiante
@@ -234,18 +248,24 @@ class estudianteUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'abm_user_update.html'
     success_url = reverse_lazy('abm_user')
 
+    def test_func(self):
+        return self.request.user.groups.filter(name='gp_admin').exists()
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['titulo'] = "Baja Usuario"
         return context
 
 
-class docenteListView(LoginRequiredMixin, ListView):
+class docenteListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     login_url = '/login/'
     redirect_field_name = 'login'
     model = Docente
     template_name = 'abm_docente.html'
     ordering = ['legajo']
+
+    def test_func(self):
+        return self.request.user.groups.filter(name='gp_admin').exists()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -254,15 +274,17 @@ class docenteListView(LoginRequiredMixin, ListView):
         return context
 
 
-class docenteDelete(LoginRequiredMixin, DeleteView):
+class docenteDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     login_url = '/login/'
     redirect_field_name = 'login'
     model = Docente
     template_name = 'abm_docente_delete.html'
     success_url = reverse_lazy('abm_docente')
 
+    def test_func(self):
+        return self.request.user.groups.filter(name='gp_admin').exists()
 
-class docenteUpdate(LoginRequiredMixin, UpdateView):
+class docenteUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     login_url = '/login/'
     redirect_field_name = 'login'
     model = Docente
@@ -271,19 +293,24 @@ class docenteUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'abm_docente_update.html'
     success_url = reverse_lazy('abm_docente')
 
+    def test_func(self):
+        return self.request.user.groups.filter(name='gp_admin').exists()
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['titulo'] = "Baja Docente"
         return context
 
 
-class docenteCreateView(LoginRequiredMixin, CreateView):
+class docenteCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     login_url = '/login/'
     redirect_field_name = 'login'
     model = Docente
     form_class = DocenteAltaForm
     template_name = 'abm_docente_update.html'
-   
+
+    def test_func(self):
+        return self.request.user.groups.filter(name='gp_admin').exists()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -291,47 +318,30 @@ class docenteCreateView(LoginRequiredMixin, CreateView):
         return context
 
     def form_valid(self, form):
-        # Agregar lógica de validación adicional aquí
-        # Por ejemplo, puedes verificar si el formulario cumple con ciertas condiciones
         if form.is_valid():
-            
-                    # user = Estudiante.objects.create_user(username=email, email=email, password=password, matricula=0, activo=True)
-                    # user.first_name = name
-                    # user.last_name = lastname
-                    # user.matricula = user.id + 5000
-                    # user.save()
-            
-
-
-            # duracion = form.cleaned_data['duracion']
-            # descripcion = form.cleaned_data['descripcion']
-            # precio = form.cleaned_data['precio']
-            # titulo = form.cleaned_data['titulo']
-            # docente = Docente.objects.get(id=form.cleaned_data['docente'])
-            # habilitado = form.cleaned_data['habilitado']
-            # curso = Course(duracion=duracion, descripcion=descripcion, precio=precio, titulo=titulo, docente_id=docente.id,habilitado=habilitado)
-            # curso.save()
-
-
             legajo = form.cleaned_data['legajo'] 
             nombre = form.cleaned_data['first_name']
             apellido = form.cleaned_data['last_name']
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
             docente = Docente.objects.create_user(legajo=legajo, first_name=nombre, last_name=apellido, email=email, username=email, password=password)
-            # docente.save()                                   
+            grupo_estudiante = Group.objects.get(name='gp_docente')
+            docente.groups.add(grupo_estudiante)
+            docente.save()                                   
             direccion = Direccion(usuario_id=docente.id, pais=form.cleaned_data['pais'], ciudad=form.cleaned_data['ciudad'], altura=form.cleaned_data['altura'], calle=form.cleaned_data['calle'])
-            # direccion = Direccion(usuario_id=docente.id)
             direccion.save()
         return redirect('abm_docente')
 
 
-class course_edit(LoginRequiredMixin, ListView):
+class course_edit(LoginRequiredMixin, UserPassesTestMixin, ListView):
     login_url = '/login/'
     redirect_field_name = 'login'
     model = Course
     template_name = 'edit-course-listv2.html'
     ordering = ['titulo']
+
+    def test_func(self):
+        return self.request.user.groups.filter(name='gp_admin').exists()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -339,13 +349,16 @@ class course_edit(LoginRequiredMixin, ListView):
         return context
 
 
-class courseCreateView(LoginRequiredMixin, CreateView):
+
+class courseCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     login_url = '/login/'
     redirect_field_name = 'login'
     model = Course
     form_class = CursosForm
     template_name = 'edit-course-newv2.html'
    
+    def test_func(self):
+        return self.request.user.groups.filter(name='gp_admin').exists()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -366,15 +379,17 @@ class courseCreateView(LoginRequiredMixin, CreateView):
         return redirect('course_edit')
     
 
-class cursoDelete(LoginRequiredMixin, DeleteView):
+class cursoDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     login_url = '/login/'
     redirect_field_name = 'login'
     model = Course
     template_name = 'edit-course-deletev2.html'
     success_url = reverse_lazy('course_edit')
 
+    def test_func(self):
+        return self.request.user.groups.filter(name='gp_admin').exists()
 
-class cursoUpdate(LoginRequiredMixin, UpdateView):
+class cursoUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     login_url = '/login/'
     redirect_field_name = 'login'
     model = Course
@@ -383,19 +398,24 @@ class cursoUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'edit-course-updatev2.html'
     success_url = reverse_lazy('course_edit')
 
+    def test_func(self):
+        return self.request.user.groups.filter(name='gp_admin').exists()
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['titulo'] = "Actualizar Curso"
         return context
 
 
-class inscripcionesListView(LoginRequiredMixin, ListView):
+class inscripcionesListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     login_url = '/login/'
     redirect_field_name = 'login'
     model = Course
     template_name = 'abm_estudiante_curso.html'
     ordering = ['titulo']
-    
+
+    def test_func(self):
+        return self.request.user.groups.filter(name='gp_admin').exists()    
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -408,14 +428,17 @@ class inscripcionesListView(LoginRequiredMixin, ListView):
         return context
     
 
-class inscripcionesDelete(LoginRequiredMixin, DeleteView):
+class inscripcionesDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     login_url = '/login/'
     redirect_field_name = 'login'
     model = Inscripcion
     template_name = 'abm_estudiante_curso_delete.html'
     success_url = reverse_lazy('curso_estudiante')
+
+    def test_func(self):
+        return self.request.user.groups.filter(name='gp_admin').exists()   
     
-@login_required(login_url='login')
+@user_passes_test(es_admin, login_url='403')
 def eliminar_inscripcion(request, estudiante_id, curso_id):
     if Inscripcion.objects.filter(estudiante_id=estudiante_id,curso_id=curso_id).exists():
         id_inscripcion=Inscripcion.objects.filter(estudiante_id=estudiante_id,curso_id=curso_id)[0].id
@@ -424,14 +447,15 @@ def eliminar_inscripcion(request, estudiante_id, curso_id):
     url = reverse('curso_estudiante_delete', args=[id_inscripcion])
     return redirect(url)
 
-
-class inscripcionesCreateView(LoginRequiredMixin, CreateView):
+class inscripcionesCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     login_url = '/login/'
     redirect_field_name = 'login'
     model = Inscripcion
     form_class = InscripcionForm
     template_name = 'abm_estudiante_cursonUpdate.html'
    
+    def test_func(self):
+        return self.request.user.groups.filter(name='gp_admin').exists()  
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -453,6 +477,7 @@ def alta_inscripcion(request, estudiante_id, curso_id):
     url = reverse('curso_estudiante_alta', args=[id_inscripcion])
     return redirect(url)
 
+@user_passes_test(es_estudiante, login_url='403')
 def cursos_from_db(request):
     cursos_inscriptos = Inscripcion.objects.filter(estudiante_id=request.user.id)
     lista_cursos_inscriptos = [(curso.curso) for curso in cursos_inscriptos]
@@ -463,12 +488,14 @@ def cursos_from_db(request):
   
     return render(request, 'cursos_from_db.html', {'cursos': cursos_inscriptos_disponibles})
 
+@user_passes_test(es_estudiante, login_url='403')
 def pago(request):
     
     payment_successful = True  
     return render(request, 'pago_curso.html', {'payment_successful': payment_successful})
 
-@login_required(login_url='login')
+
+@user_passes_test(es_estudiante, login_url='403')
 def pago_confirmado(request, curso_id):
     if Inscripcion.objects.filter(estudiante_id=request.user.id,curso_id=curso_id).exists():
         url = '500'
@@ -484,7 +511,7 @@ def obtener_cursos_lista(request):
     lista_cursos = [(curso.curso.id, curso.curso) for curso in cursos]
     return lista_cursos
 
-@login_required(login_url='login')
+@user_passes_test(es_estudiante, login_url='403')
 def cursos_from_list(request):
     cursos_habilitado = Inscripcion.objects.filter(estudiante_id=request.user.id,habilitado=True)
     lista_cursos_habilitado = [(curso.curso) for curso in cursos_habilitado]
