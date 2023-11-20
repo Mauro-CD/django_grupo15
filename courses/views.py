@@ -469,11 +469,11 @@ def pago(request):
     return render(request, 'pago_curso.html', {'payment_successful': payment_successful})
 
 @login_required(login_url='login')
-def pago_confirmado(request, estudiante_id, curso_id):
-    if Inscripcion.objects.filter(estudiante_id=estudiante_id,curso_id=curso_id).exists():
+def pago_confirmado(request, curso_id):
+    if Inscripcion.objects.filter(estudiante_id=request.user.id,curso_id=curso_id).exists():
         url = '500'
     else:
-        inscripcion = Inscripcion(fecha=timezone.now(), curso_id=curso_id, estudiante_id=estudiante_id)
+        inscripcion = Inscripcion(fecha=timezone.now(), curso_id=curso_id, estudiante_id=request.user.id, habilitado=True)
         inscripcion.save()
         url = 'courseAvailable'
     return redirect(url)

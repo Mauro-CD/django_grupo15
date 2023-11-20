@@ -69,7 +69,7 @@ function confirmPayment() {
         console.log('Pagado:',pagado);        
         console.log("Fecha",fecha);
         console.log("altaInscripcion",altaInscripcion);
-        window.location.href = '/pagocursoconfirmado/' + id + '/' + cursoId +'/';
+        window.location.href = '/pagocursoconfirmado/' + cursoId +'/';
 
     }
 }
