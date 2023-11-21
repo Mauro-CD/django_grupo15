@@ -28,7 +28,7 @@
                     <button class="btn btn-primary" data-toggle="modal" data-target="#cursoModal{{ curso_id }}">Ver detalles</button>
                     <!--<button href="{% url 'pago' %}" class="btn btn-success"><a href="{% url 'pago' %}" style="color: white;">Comprar</a></button>-->
                     {% if habilitado %}
-                    <button class="btn btn-info" id="tituloCursoBuscar" data-target="{{curso.titulo}}" onclick="redirigeVideoCurso()">Ingresar</button>
+                    <button class="btn btn-info" id="tituloCursoBuscar" onclick="redirigeVideoCurso('{{curso.titulo}}')">Ingresar</button>
                     <!--<button class="btn btn-info" data-toggle="modal" data-target="#cursoModal{{ curso_id }}">Ingresar</button>-->
                     {% else %}
                     <button class="btn btn-secondary" data-toggle="modal" data-target="#cursoModal{{ curso_id }}">En Verificacion</button>
@@ -65,9 +65,8 @@
 <p>No dispone de cursos inscriptos</p>
 {% endif %}
 <script>
-    function redirigeVideoCurso() {
-    var dataTargetValue = document.getElementById('tituloCursoBuscar').getAttribute('data-target');
-    var searchQuery = dataTargetValue;   
+    function redirigeVideoCurso(titulo) {    
+    var searchQuery = titulo;   
     var formattedQuery = searchQuery.replace(/\s/g, '+');
     //Construyo la url del sitio busqueda del canal de youtube
     var youtubeSearchURL = 'https://www.youtube.com/results?search_query=' + formattedQuery;
@@ -82,7 +81,74 @@
     }
   </script>
 <br><br><br><br>
+<style>
+    .card {
+        position: relative;
+        border: 1px solid #ddd;
+        overflow: hidden;
+        transition: box-shadow 0.3s;
+    }
 
+    .card:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .card:hover img {
+        transform: scale(1.1);
+    }
+
+    .card-img-top {
+        max-width: 100%;
+        height: auto;
+        transition: transform 0.3s;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+
+    .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+    }
+
+    .btn {
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .btn-info {
+        background-color: #17a2b8;
+        color: white;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+    }
+
+    .comprar-button a {
+        text-decoration: none;
+        color: white;
+    }
+</style>
 
 
 
