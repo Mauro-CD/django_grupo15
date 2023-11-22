@@ -457,6 +457,12 @@ class inscripcionesCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateVie
             inscripcion = Inscripcion(fecha=form.cleaned_data['fecha'], curso_id=form.cleaned_data['curso'].id, estudiante_id=form.cleaned_data['estudiante'].id)
             inscripcion.save()
         return redirect('curso_estudiante')
+    
+    def form_invalid(self, form):
+        context = self.get_context_data()
+        error=form.errors.get('__all__')[0]
+        context['mensaje_error'] = error  
+        return render(self.request, self.template_name, context)
 
 @login_required(login_url='login')
 def alta_inscripcion(request, estudiante_id, curso_id):
