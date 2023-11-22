@@ -79,7 +79,7 @@
                 {% endfor %}
 
                 {% if user.is_staff %}
-                    <li><a class="menuList" href="{% url 'admin_total' %}"><img class="iconMenuGrid" src="/static/favicon/operator.ico" alt="Pagina principal">Administración</a></li>
+                    <li><a class="menuList" href="/administracion"><img class="iconMenuGrid" src="/static/favicon/operator.ico" alt="Pagina principal">Administración</a></li>
                 {% endif %}
                 <li><a class="menuList" href="{% url 'foro' %}"><img class="iconMenuGrid" src="{% static 'favicon/partners.ico' %}" alt="Pagina principal">Foro</a></li>
             {% endif %}

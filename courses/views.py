@@ -50,7 +50,7 @@ def es_docente(user):
     return user.groups.filter(name='gp_docente').exists()
 
 def es_admin(user):
-    return user.groups.filter(name='admin').exists()
+    return user.groups.filter(name='gp_admin').exists()
 
 @login_required
 def abm_user(request):
@@ -208,7 +208,7 @@ def course_available(request):
 
 def admin(request):
     #  Devuelve detalles del curso
-    return redirect('admin')
+    return redirect('admin_customizado')
 
 
 class estudianteListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
@@ -325,8 +325,8 @@ class docenteCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
             docente = Docente.objects.create_user(legajo=legajo, first_name=nombre, last_name=apellido, email=email, username=email, password=password)
-            grupo_estudiante = Group.objects.get(name='gp_docente')
-            docente.groups.add(grupo_estudiante)
+            grupo_docente = Group.objects.get(name='gp_docente')
+            docente.groups.add(grupo_docente)
             docente.save()                                   
             direccion = Direccion(usuario_id=docente.id, pais=form.cleaned_data['pais'], ciudad=form.cleaned_data['ciudad'], altura=form.cleaned_data['altura'], calle=form.cleaned_data['calle'])
             direccion.save()

@@ -17,7 +17,7 @@
 
 
 {% if cursos %}
-<div class="card-deck">
+<div class="grid-container">
     {% for curso_id, curso, inscripto in cursos %}
         {% if curso.habilitado %}
             <div class="card">

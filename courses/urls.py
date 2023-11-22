@@ -4,11 +4,12 @@ from . import views
 from django.contrib import admin
 from django.views.defaults import permission_denied, page_not_found
 from django.conf.urls import handler404
+from .admin import sitio_admin
 
 
 urlpatterns = [
     path('admin/', views.admin, name='admin_total'),
-
+    path('administracion/', sitio_admin.urls, name="admin_customizado"),
     #Publico
     # path('register/', views.registro, name="registro"),
     path('signup/', views.signup, name='signup'),
