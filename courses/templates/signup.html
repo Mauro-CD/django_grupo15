@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
-
-
 <head>
     {% load static %}
     <meta charset="UTF-8">
@@ -10,15 +7,12 @@
     <script src="js/registro.js"></script>
     <title>Registrate</title>
 </head>
-
 <body>
-
     <header>
         {% include 'menu.html' %}
         <h1>Registrate</h1>
         <p class="menuSuperior">¿Ya tienes una cuenta? <a href="/">Ingresar aqui</a>.</p>
     </header>
-
     <main>
         <form method="post">
             {% csrf_token %}

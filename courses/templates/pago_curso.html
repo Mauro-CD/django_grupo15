@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% block titulo %}Pago{% endblock %}
+{% load static %}
+{% block class %} 
+<link rel="stylesheet" type="text/css" href="{% static 'css/pagoform.css' %}">
+<script src="{% static 'js/pagocurso.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+{% endblock %}
+
+{% block encabezado %}
+<h1 style="font-size: 8vh;">Información de pago</h1>
+{% endblock %}
+
+{% block contenido %}
+<body>
+    <form id="PagoHabilitacionAlumnoCurso" method="POST" action="/pagocurso/">
+        {% csrf_token %}
+        <!-- Numero tarjeta -->
+        <label for="creditCardNumber" >Nùmero Tarjeta de Crèdito</label>
+        <input type="text" id="creditCardNumber" maxlength="16" required placeholder="XXXXXXXXXXXXXXXX">
+        <br>
+        <!-- Vencimiento (MM/YYYY) -->
+        <label for="expiryDate">Vencimiento (MM/YYYY):</label>
+        <input type="text" id="expiryDate" pattern="^(0[1-9]|1[0-2])\/[0-9]{4}$" placeholder="MM/YYYY" required>
+        <br>
+        <!-- CVV -->
+        <label for="cvv">CVV:</label>
+        <input type="text" id="cvv" pattern="[0-9]{3}" maxlength="3" required placeholder="xxx">
+        <br>
+        <label for="cursoId">Curso ID:</label>
+        <input type="text" id="cursoId" disabled  required>
+        <br>
+        <label for="cursoTitulo">Titulo:</label>
+        <input type="text" id="cursoTitulo" disabled  required>
+        <br>
+        <label for="cursoDocenteId" hidden>Docente ID:</label>
+        <input type="number" id="cursoDocenteId" disabled  required hidden>
+        <br>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" disabled  required>
+        <br>
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" disabled  required>
+        <br>
+        <label for="id_alumno" hidden>Id alumno:</label>
+        <input type="number" id="id_alumno" required hidden>
+        <br>
+        <label for="email">Email:</label>
+        <input type="text" id="email" disabled  required>
+        <br>
+        <label for="matricula" hidden>Matricula:</label>
+        <input type="number" id="matricula" disabled  required hidden>
+        <br>
+        <label for="pagado" hidden>Pagado:</label>
+        <input type="text" id="pagado" required hidden>
+        <br>
+        <label for="fecha">Fecha:</label>
+        <input type="string" id="fecha" disabled  required>
+        <br>
+        <label for="altaInscripcion" hidden>Alta inscripcion:</label>
+        <input type="text" id="altaInscripcion" required hidden>
+        <br>
+        <br>
+        <div class="boxbuttons">
+            <button type="button" onclick="cancelPayment()" style="background-color: red;border-radius: 8px;">Anular pago</button>
+            <button type="button" onclick="confirmPayment()" style="background-color: green;border-radius: 8px;">Confirmar Pago</button>
+        </div>        
+    </form>
+    <br>
+    <div id="paymentMessage"></div>    
+    <br>
+    <br>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    // extraer info de la URl y del DOM
+    var urlParams = new URLSearchParams(window.location.search);
+    var cursoId = parseInt(urlParams.get('curso_id'));
+    var cursoTitulo= urlParams.get('curso_titulo');
+    var cursoDocenteId=urlParams.get('curso_docente_id');
+    var nombre = document.getElementById("nombreUsuario").innerText;
+    var apellido = document.getElementById("apellidoUsuario").innerText;
+    var id_alumno = document.getElementById("idUsuario").innerText;
+    var email = document.getElementById("emailUsuario").innerText;
+    var matricula= parseInt(id_alumno)+5000;
+    var pagado=true;        
+    var currentDate = new Date();
+    var altaInscripcion=false;
+    // Componentes de la fecha
+    var year = currentDate.getUTCFullYear();
+    var month = (currentDate.getUTCMonth() + 1).toString().padStart(2, '0');
+    var day = currentDate.getUTCDate().toString().padStart(2, '0');
+    var hours = currentDate.getUTCHours().toString().padStart(2, '0');
+    var minutes = currentDate.getUTCMinutes().toString().padStart(2, '0');
+    var seconds = currentDate.getUTCSeconds().toString().padStart(2, '0');
+    var milliseconds = currentDate.getUTCMilliseconds().toString().padStart(3, '0');
+    // Concateno para lograr el string con el formato deseado
+    var fecha = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}+00`;
+    // Envio los datos a los inputs
+    document.getElementById("cursoId").value = cursoId;
+    document.getElementById("cursoTitulo").value = cursoTitulo;
+    document.getElementById("cursoDocenteId").value = cursoDocenteId;
+    document.getElementById("nombre").value = nombre;
+    document.getElementById("apellido").value = apellido;
+    document.getElementById("id_alumno").value = id_alumno;
+    document.getElementById("email").value = email;
+    document.getElementById("matricula").value = matricula;
+    document.getElementById("pagado").value = pagado;
+    document.getElementById("fecha").value=fecha;
+    document.getElementById("altaInscripcion").value = altaInscripcion;
+});
+</script>
+{% endblock %}

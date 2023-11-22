@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block encabezado %}
-<h1>Alta Inscripcion</h1>
+<h1 style="font-size: 8vh;">Alta Inscripción</h1>
 {% endblock %}
 
 
@@ -24,6 +24,7 @@
         </div>
         <div>{{campo.errors}}</div>
     {% endfor %}
+    <div> {{mensaje_error}} </div>
     <div class="row mt-3">
         <div class="col-12">
             <!-- <a class="btn btn-secondary" onclick="javascript:window.history.go(-1);">Cancelar</a>        -->
@@ -32,6 +33,7 @@
         </div>
     </div>
 </form>
-
-
+<br>
+<br>
+<br>
 {% endblock %}

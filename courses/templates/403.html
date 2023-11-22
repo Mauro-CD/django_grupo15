@@ -1,0 +1,22 @@
+<!-- 403.html -->
+{% extends 'base.html' %}
+
+{% block titulo %}403{% endblock%}
+
+{% load static %}
+
+{% block class %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/registracion.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/edit-course.css' %}">
+{% endblock %}
+
+{% block encabezado %}
+<h1>Acceso Denegado</h1>
+{% endblock %}
+
+
+{% block contenido %}
+
+<h2> el usuario "{{user}}" no dispone los permisos suficientes para acceder al sitio</h2>
+
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block titulo %}Cursos{% endblock%}
+{% load static %}
+{% block class %} 
+<link rel="stylesheet" type="text/css" href="{% static 'css/cards-cursos.css' %}">
+<script src="{% static 'js/filtrobusqueda.js' %}"></script>
+
+{% endblock %}
+{% block encabezado %}
+<h1 style="font-size: 8vh;">Cursos disponibles</h1>
+<input type="text" id="buscar" name="buscar" placeholder="Buscar cursos..." >
+<button  onclick="search()" type="button" class="btn btn-primary btn-sm" >Buscar </button>
+{% endblock %}
+
+{% block contenido %}
+<h1>Lista de cursos</h1>
+
+
+{% if cursos %}
+<div class="grid-container">
+    {% for curso_id, curso, inscripto in cursos %}
+        {% if curso.habilitado %}
+            <div class="card">
+                <img src="{{ curso.imagen }}" class="card-img-top" alt="Curso Image">
+                <div class="card-body">
+                    <h5 class="card-title">{{ curso.titulo }}</h5>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#cursoModal{{ curso_id }}">Ver detalles</button>
+                    <!--<button href="{% url 'pago' %}" class="btn btn-success"><a href="{% url 'pago' %}" style="color: white;">Comprar</a></button>-->
+                    {% if inscripto %}
+                    <button class="btn btn-info" data-toggle="modal" data-target="#cursoModal{{ curso_id }}">Inscripto</button>
+                    {% else %}
+                    <button class="btn btn-success comprar-button">
+                        <a href="{% url 'pago' %}?curso_id={{ curso_id }}&curso_titulo={{ curso.titulo }}&curso_docente_id={{ curso.docente_id }}" style="color: white;">Comprar</a>
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Modal para detalles-->
+            <div class="modal fade" id="cursoModal{{ curso_id }}" tabindex="-1" role="dialog" aria-labelledby="cursoModalLabel{{ curso_id }}" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="cursoModalLabel{{ curso_id }}">Detalles del Curso</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>ID Curso: {{ curso_id }}</p>
+                            <p>{{ curso.titulo }}</p>
+                            <p>Duración: {{ curso.duracion }}</p>
+                            <p>Descripción: {{ curso.descripcion }}</p>
+                            <p><img src="{{ curso.imagen }}" alt="Curso Image"></p>
+                            <p>Precio: $AR {{ curso.precio }}</p>
+                            <p>Docente ID: {{ curso.docente_id }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+{% else %}
+<p>No courses available.</p>
+{% endif %}
+
+<br><br><br><br>
+
+
+
+
+{% endblock %}
+

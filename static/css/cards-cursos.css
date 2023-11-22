@@ -1,0 +1,78 @@
+.card-deck {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -15px; /* Adjust margin to remove default spacing */
+}
+
+.card {
+    flex: 0 0 calc(90% - 30px); /* 30px to account for margins */
+    margin: 15px;
+    max-width: calc(90% - 30px); /* 30px to account for margins */
+    box-sizing: border-box;
+}
+
+
+
+.card {
+    position: relative;
+    border: 1px solid #ddd;
+    overflow: hidden;
+    transition: box-shadow 0.3s;
+    width: 90%;
+    height: 90%;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card:hover img {
+    transform: scale(1.1);
+}
+
+.card-img-top {
+    max-width: 100%;
+    height: auto;
+    transition: transform 0.3s;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+
+.btn {
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-info,
+.btn-secondary {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.comprar-button a {
+    text-decoration: none;
+    color: white;
+}

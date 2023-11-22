@@ -12,9 +12,9 @@
 
 {% block encabezado %}
 
-<h1>Cursos disponibles</h1>
+<h1 style="font-size: 8vh;">Cursos disponibles</h1>
 <input type="text" id="buscar" name="buscar" placeholder="buscar cursos..." >
-<button  onclick="search()">Buscar </button>
+<button  onclick="search()" type="button" class="btn btn-primary btn-sm" >Buscar </button>
 
 {% endblock %}
 
@@ -23,12 +23,14 @@
     <main>
         <div  id="principal">
             <section>
-                <h2>Listado de Cursos</h2>
+                <h2>*Listado de Cursos*</h2>
                <div class="cardbox">
-                <ul  id="prueba">
-                    
-                    <cursos-lista id="cursos-lista" class="grid-container"></cursos-lista>
-                </ul></div>
+                <!--
+                    <ul  id="prueba">                        
+                        <cursos-lista id="cursos-lista" class="grid-container"></cursos-lista>
+                    </ul>
+                -->
+                </div>
             </section>
             <div id="openModal" class="modalbg">
                 <div class="dialog">
@@ -42,5 +44,7 @@
             <cursos-selecionado id="cursos-selecionado"></cursos-selecionado>
           </div>
     </main>
-    <script src="{% static 'js/funciones.js' %}"></script>
+    <br><br><br>
+    <script src="{% static 'js/funciones.js' %}"></script>    
+
 {% endblock %}

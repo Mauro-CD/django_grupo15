@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block titulo %}Cursos{% endblock %}
+{% load static %}
+{% block class %} 
+<link rel="stylesheet" type="text/css" href="{% static 'css/cards-cursos.css' %}">
+<script src="{% static 'js/filtrobusqueda.js' %}"></script>
+{% endblock %}
+{% block encabezado %}
+<h1 style="font-size: 8vh;">Mi Aprendizaje</h1>
+<input type="text" id="buscar" name="buscar" placeholder="Buscar cursos..." >
+<button  onclick="search()" type="button" class="btn btn-primary btn-sm" >Buscar </button>
+{% endblock %}
+
+{% block contenido %}
+<h1>Mi Aprendizaje</h1>
+
+
+{% if cursos %}
+<div class="grid-container">
+    {% for curso_id, curso, habilitado in cursos %}
+        {% if curso.habilitado %}
+            <div class="card">
+                <img src="{{ curso.imagen }}" class="card-img-top" alt="Curso Image">
+                <div class="card-body">
+                    <h5 class="card-title" >{{ curso.titulo }}</h5>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#cursoModal{{ curso_id }}">Ver detalles</button>
+                    <!--<button href="{% url 'pago' %}" class="btn btn-success"><a href="{% url 'pago' %}" style="color: white;">Comprar</a></button>-->
+                    {% if habilitado %}
+                    <button class="btn btn-info" id="tituloCursoBuscar" onclick="redirigeVideoCurso('{{curso.titulo}}')">Ingresar</button>
+                    <!--<button class="btn btn-info" data-toggle="modal" data-target="#cursoModal{{ curso_id }}">Ingresar</button>-->
+                    {% else %}
+                    <button class="btn btn-secondary" data-toggle="modal" data-target="#cursoModal{{ curso_id }}">En Verificacion</button>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Modal para detalles-->
+            <div class="modal fade" id="cursoModal{{ curso_id }}" tabindex="-1" role="dialog" aria-labelledby="cursoModalLabel{{ curso_id }}" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="cursoModalLabel{{ curso_id }}">Detalles del Curso</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>ID Curso: {{ curso_id }}</p>
+                            <p>{{ curso.titulo }}</p>
+                            <p>Duración: {{ curso.duracion }}</p>
+                            <p>Descripción: {{ curso.descripcion }}</p>
+                            <p><img src="{{ curso.imagen }}" alt="Curso Image"></p>
+                            <p>Precio: $AR {{ curso.precio }}</p>
+                            <p>Docente ID: {{ curso.docente_id }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+{% else %}
+<p>No dispone de cursos inscriptos</p>
+{% endif %}
+<script>
+    function redirigeVideoCurso(titulo) {    
+    var searchQuery = titulo;   
+    var formattedQuery = searchQuery.replace(/\s/g, '+');
+    //Construyo la url del sitio busqueda del canal de youtube
+    var youtubeSearchURL = 'https://www.youtube.com/results?search_query=' + formattedQuery;
+    // Los resultados los muestro en ventana nueva
+    window.open(youtubeSearchURL, '_blank');
+    // Busca el id del primer video y lo reproduce
+    setTimeout(function () {
+    var videoID = document.querySelector('.yt-simple-endpoint.style-scope.ytd-video-renderer').href.split('v=')[1];
+    var youtubeVideoURL = 'https://www.youtube.com/watch?v=' + videoID;
+    window.open(youtubeVideoURL, '_blank');
+    }, 2000); // Para ajustar el delay
+    }
+  </script>
+<br><br><br><br>
+
+
+
+
+{% endblock %}

@@ -6,42 +6,46 @@
 
 {% block class %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/registracion.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'css/edit-course.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/edit-course-edit.css' %}">
 {% endblock %}
 
 {% block encabezado %}
-<h1>Modificacion de usuario</h1>
+<h1 style="font-size: 8vh;">Edición de docente</h1>
 {% endblock %}
 
 
 {% block contenido %}
-<a name="" id="" class="btn btn-primary" href="{% url 'docente_nuevo' %}" role="button"> <i class="fa-solid fa-circle-plus"></i> Nuevo</a>
-        <table >
-            <thead>
+<a name="" id="" class="btn btn-primary" href="{% url 'docente_nuevo' %}" role="button" > <i class="fa-solid fa-circle-plus"></i> Nuevo</a>
+    <br><br>
+    <div class="table-responsive">   
+        <table class="table" style="width: 100%;margin-left: auto;margin-right: auto;">
+            <thead >
                 <tr>
-                    <th scope="col">Legajo</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido</th>
-                    <th scope="col">mail</th>
-                    <th scope="col">Acciones</th>
+                    <th scope="col" style="width: auto;text-align: center;">Legajo</th>
+                    <th scope="col" style="text-align: center;">Nombre</th>
+                    <th scope="col" style="text-align: center;">Apellido</th>
+                    <th scope="col" style="text-align: center;">E Mail</th>
+                    <th scope="col" style="width: auto;text-align: center;">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 {% for docente in object_list  %}
                     <tr>
-                        <td>{{docente.legajo}}</td>
-                        <td>{{docente.first_name}}</td>
-                        <td>{{docente.last_name}}</td>
-                        <td>{{docente.email}}</td>
-                        <td>
-                        <a class="btn btn-primary" href="{{docente.modificar_docente}}" title="Editar">Editar</a>
-                        <!-- <a type="button" class="btn btn-danger">Eliminar</a> -->
-                        <a type="button" class="btn btn-danger" href="{{docente.baja_docente}}" title="Eliminar">Eliminar</a>
+                        <td style="text-align: center;width: auto;text-align: center; vertical-align: middle;">{{docente.legajo}}</td>
+                        <td >{{docente.first_name}}</td>
+                        <td >{{docente.last_name}}</td>
+                        <td >{{docente.email}}</td>
+                        <td style="width: auto;">
+                            <div style="display: flex; justify-content: center; gap: 8px; padding: 7px;">
+                                <a class="btn btn-primary" href="{{docente.modificar_docente}}" title="Editar" >Editar</a>
+                                <a class="btn btn-danger " href="{{docente.baja_docente}}" title="Eliminar" >Eliminar</a>
+                            </div>                        
                         </td>
                     </tr>
                 {% endfor %}
 
             </tbody>
         </table>
+    </div>
 
 {% endblock %}

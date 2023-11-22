@@ -27,6 +27,11 @@ class Docente(User):
     def modificar_docente(self):
         return reverse_lazy('modificar_docente', args=[self.id])
     
+    @staticmethod
+    def obtener_docentes():
+        docentes = Docente.objects.all()
+        lista_docentes = [(docente.id, docente) for docente in docentes]
+        return lista_docentes
 
 
 class Estudiante(User):
@@ -51,6 +56,7 @@ class Course(models.Model):
     titulo = models.CharField(max_length=255)
     duracion = models.CharField(max_length=255)
     descripcion = models.TextField()
+    imagen = models.CharField(max_length=255)#13nov agregado
     precio = models.DecimalField(max_digits=10, decimal_places=2)
     docente = models.ForeignKey(Docente, on_delete=models.CASCADE)
     habilitado = models.BooleanField(default=False)
@@ -74,6 +80,8 @@ class Inscripcion(models.Model):
     estudiante = models.ForeignKey(Estudiante, on_delete=models.CASCADE)
     curso = models.ForeignKey(Course, on_delete=models.CASCADE)
     fecha = models.DateField()
+    habilitado = models.BooleanField(default=False)
+    activo = models.BooleanField(default=True)
 
     def __str__(self):
         return f"{self.estudiante.matricula} {self.estudiante.username}- {self.curso.titulo} "
@@ -98,7 +106,7 @@ class Item(models.Model):
 class Foro(models.Model):
     titulo = models.CharField(max_length=100)
     contenido = models.TextField()
-    fecha = models.DateField()
+    fecha = models.DateTimeField()
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
 
 #### relacion uno a uno: Estudiante -> Direccion
@@ -125,3 +133,4 @@ class ContactMessage(models.Model):
 # class UserList(User):
 #     def __str__(self):
 #         return f"{self.username} {self.email} {self.is_active} {self.first_name} {self.last_name}"
+
