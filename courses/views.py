@@ -58,7 +58,7 @@ def abm_user(request):
   return render(request, 'abm_user.html', {'abm_user': abm_user})
 
 def signup(request):
-    # Gestiona la logica de registraciòn
+    # Gestiona la logica de registración
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -97,16 +97,6 @@ def registro(request):
                     user.save()
                     direccion = Direccion(usuario_id=user.id)
                     direccion.save()
-
-
-    #             Direccion(models.Model):
-    # calle = models.CharField(max_length=100)
-    # altura = models.IntegerField()
-    # ciudad = models.CharField(max_length=100)
-    # pais = models.CharField(max_length=100)
-    # usuario = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-
-
                     messages.success(request, 'Usuario registrado exitosamente.')
                     return redirect('login')  # Redirecciona a otra pàagina una vez que se registra
             else:

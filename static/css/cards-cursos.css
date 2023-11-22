@@ -18,6 +18,8 @@
     border: 1px solid #ddd;
     overflow: hidden;
     transition: box-shadow 0.3s;
+    width: 90%;
+    height: 90%;
 }
 
 .card:hover {

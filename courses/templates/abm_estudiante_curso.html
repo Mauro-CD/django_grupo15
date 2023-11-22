@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block encabezado %}
-<h1 style="font-size: 8vh;">Edición de usuario/Inscripciòn</h1>
+<h1 style="font-size: 8vh;">Edición de usuario/Inscripción</h1>
 {% endblock %}
 
 
@@ -22,11 +22,11 @@
 </form>
 
 
-<a name="" id="" class="btn btn-primary" href="{% url 'curso_estudiante_alta' %}" role="button"> <i class="fa-solid fa-circle-plus"></i> Pendientes</a>
+<!-- <a name="" id="" class="btn btn-primary" href="{% url 'curso_estudiante_alta' %}" role="button"> <i class="fa-solid fa-circle-plus"></i> Pendientes</a> -->
 <a name="" id="" class="btn btn-primary" href="{% url 'curso_estudiante_alta' %}" role="button"> <i class="fa-solid fa-circle-plus"></i> Nuevo</a>
 
 {% if estudiantes %}
-<table >
+<table class="table" style="width: 100%;margin-left: auto;margin-right: auto;"">
     <thead>
         <tr>
             <th scope="col" style="text-align: center;">Matricula</th>

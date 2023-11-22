@@ -118,32 +118,6 @@ class EstudianteForm(forms.ModelForm):
             'activo': forms.TextInput(attrs={'class':'form-control'})
         }
 
-    # username = forms.CharField(label="Usuario",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
-    # first_name = forms.IntegerField(label="Nombre",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
-    # last_name = forms.CharField(label="Apellido",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
-    # activo = forms.BooleanField(label="activo")
-
-    #     habilitado_choices = (
-    #     (True, 'Habilitado'),
-    #     (False, 'Deshabilitado')
-    # )
-
-    # username = forms.CharField(label="Usuario",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
-    # first_name = forms.IntegerField(label="Nombre",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
-    # last_name = forms.CharField(label="Apellido",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
-    # # activo = forms.ChoiceField(label="Estado",  choices=habilitado_choices )
-
-
-    # class Meta:
-    #     model = Estudiante
-    #     fields = ["matricula", "first_name",'last_name' ],
-    #     widgets = {
-    #         'matricula': forms.TextInput(attrs={'class':'form-control'}),
-    #         'first_name': forms.TextInput(attrs={'class':'form-control'}),
-    #         'last_name': forms.TextInput(attrs={'class':'form-control'}),
-    #         # 'activo' : forms.TextInput(attrs={'class':'form-control'})
-    #     }
-
 def obtener_estudiantes():
     lista_estudiante=[None,None]
     if table_exists('courses_estudiante'):
@@ -224,10 +198,8 @@ class CursosForm(forms.ModelForm):
     duracion = forms.CharField(label="Duracion",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
     descripcion = forms.CharField(label="Descripcion",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
     imagen=forms.CharField(label="Imagen",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo string url'}  ),required=True)#13nov agregado
-    # docente = forms.CharField(label="Docente",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
     precio = forms.IntegerField(label="Precio",   widget=forms.NumberInput(attrs={'class': 'formulario'}  ),required=True)
     habilitado = forms.ChoiceField(label="Estado",  choices=habilitado_choices )
-    # docente = forms.ChoiceField(label="Docente", choices=[(docente.id, docente ) for docente in Docente.objects.all()], widget=forms.Select, required=True)
     docente = forms.ChoiceField(label="Docente", choices=obtener_docentes(), widget=forms.Select, required=True)
 
     class Meta:
@@ -254,15 +226,6 @@ class CursosForm(forms.ModelForm):
         super(CursosForm, self).__init__(*args, **kwargs)
         self.fields['docente'].choices = obtener_docentes()
 
-    # def clean_docente(self):
-    #     if not Docente.objects.filter(id=self.cleaned_data['docente']).exists():
-    #         raise ValidationError("El docente no existe")
-    #     return self.cleaned_data['docente']
-    
-    # def clean_email(self):
-    #     if User.objects.filter(username=self.cleaned_data['email']).exists():
-    #         raise ValidationError("El usuario ya existe")
-    #     return self.cleaned_data['email']
 
 def obtener_cursos():
     lista_cursos=[None,None]
@@ -281,17 +244,8 @@ class CursoFiltroForm(forms.Form):
 ################################################# Inscripcion ################################################################### 
 
 class InscripcionForm(forms.ModelForm):
-    # habilitado_choices = (
-    #     (True, 'Habilitado'),
-    #     (False, 'Deshabilitado')
-    # )
 
     fecha = forms.DateField (label="Fecha", initial=date.today(), widget=forms.DateInput(attrs={'class': 'formulario disabled', 'readonly': 'readonly'}   ))
-    # estudiante = forms.CharField(label="Estudiante",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
-    # curso = forms.CharField(label="Curso",   widget=forms.TextInput(attrs={'class': 'formulario','placeholder': 'Solo letras'}  ),required=True)
-    # estudiantes = forms.CharField(label="Estudiantes",   choices=[(cursos.id, cursos ) for cursos in Course.objects.all()], widget=forms.Select, required=True)
-    # estudiante = forms.ChoiceField(label="Estudiantes", choices=[(estudiante.id, estudiante ) for estudiante in Estudiante.objects.all()], widget=forms.Select, required=True)
-    # curso = forms.ChoiceField(label="Curso", choices=[(curso.id, curso ) for curso in Course.objects.all()], widget=forms.Select, required=True)
     estudiante = forms.ChoiceField(label="Estudiantes", choices=obtener_estudiantes(), widget=forms.Select, required=True)
     curso = forms.ChoiceField(label="Curso", choices=obtener_cursos(), widget=forms.Select, required=True)
 
